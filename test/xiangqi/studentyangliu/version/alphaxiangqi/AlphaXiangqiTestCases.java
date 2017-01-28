@@ -12,3 +12,20 @@
  * @version Dec 26, 2016
  */
 package xiangqi.studentyangliu.version.alphaxiangqi;
+
+import org.junit.jupiter.api.Test;
+import xiangqi.XiangqiGameFactory;
+import xiangqi.common.XiangqiGameVersion;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+/**
+ * Test cases for Alpha Xiangqi
+ * @version Jan 28, 2016
+ */
+public class AlphaXiangqiTestCases {
+    @Test
+    public void factoryProducesAlphaXiangqiGame() {
+        assertNotNull(XiangqiGameFactory.makeXiangqiGame(XiangqiGameVersion.ALPHA_XQ));
+    }
+}

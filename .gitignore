@@ -1,5 +1,5 @@
 .idea
 .project
 .classpath
-.iml
+*.iml
 bin
