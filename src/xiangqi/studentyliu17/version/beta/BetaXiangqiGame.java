@@ -25,7 +25,7 @@ public class BetaXiangqiGame implements XiangqiGame{
      */
     @Override
     public MoveResult makeMove(XiangqiCoordinate source, XiangqiCoordinate destination) {
-        return null;
+        return MoveResult.OK;
     }
     
     /**
