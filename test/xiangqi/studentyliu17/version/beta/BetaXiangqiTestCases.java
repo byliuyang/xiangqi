@@ -33,6 +33,12 @@ public class BetaXiangqiTestCases {
     }
     
     @Test // 3
+        void getPieceAtReturnsRedAdvisor() {
+            assertPiece(1, 2, XiangqiColor.RED, XiangqiPieceType.ADVISOR);
+            assertPiece(1, 4, XiangqiColor.RED, XiangqiPieceType.ADVISOR);
+        }
+    
+    @Test // 3
     void redChariotValidFirstMove() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
     }
