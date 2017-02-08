@@ -28,9 +28,13 @@ public class BetaXiangqiTestCases {
     
     @Test // 2
     void getPieceAtReturnsRedChariot() {
-        final XiangqiPiece p = game.getPieceAt(makeCoordinate(1, 1), XiangqiColor.RED);
-        assertEquals(XiangqiPieceType.CHARIOT, p.getPieceType());
-        assertEquals(XiangqiColor.RED, p.getColor());
+        final XiangqiPiece p1 = game.getPieceAt(makeCoordinate(1, 1), XiangqiColor.RED);
+        assertEquals(XiangqiPieceType.CHARIOT, p1.getPieceType());
+        assertEquals(XiangqiColor.RED, p1.getColor());
+    
+        final XiangqiPiece p2 = game.getPieceAt(makeCoordinate(1, 5), XiangqiColor.RED);
+        assertEquals(XiangqiPieceType.CHARIOT, p2.getPieceType());
+        assertEquals(XiangqiColor.RED, p2.getColor());
     }
     
     @Test // 3
