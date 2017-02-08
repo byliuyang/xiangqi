@@ -9,6 +9,8 @@ import xiangqi.studentyliu17.version.XiangqiPieceImpl;
  * @version Jan 28, 2016
  */
 public class BetaXiangqiGame implements XiangqiGame {
+    private final int BOARD_WIDTH = 5;
+    private final int BOARD_HEIGHT = 5;
     /**
      * <p>
      * Make a move in the game. The XiangqiGame instance needs to keep track of the
@@ -60,8 +62,8 @@ public class BetaXiangqiGame implements XiangqiGame {
      */
     @Override
     public XiangqiPiece getPieceAt(XiangqiCoordinate where, XiangqiColor aspect) {
-        int file = where.getFile();
-        int rank = where.getRank();
+        int file = getFileRespectToRed(where, aspect);
+        int rank = getRankRespectToRed(where, aspect);
         
         XiangqiPieceType pieceType = XiangqiPieceType.NONE;
         XiangqiColor color = XiangqiColor.NONE;
@@ -99,5 +101,21 @@ public class BetaXiangqiGame implements XiangqiGame {
         }
         
         return XiangqiPieceImpl.makePiece(pieceType, color);
+    }
+    
+    private int getRankRespectToRed(XiangqiCoordinate where, XiangqiColor aspect) {
+        int rank = where.getRank();
+        if(aspect == XiangqiColor.RED)
+            return rank;
+        else
+            return BOARD_HEIGHT + 1 - rank;
+    }
+    
+    private int getFileRespectToRed(XiangqiCoordinate where, XiangqiColor aspect) {
+        int file = where.getFile();
+        if(aspect == XiangqiColor.BLACK)
+            return file;
+        else
+            return BOARD_WIDTH + 1 - file;
     }
 }

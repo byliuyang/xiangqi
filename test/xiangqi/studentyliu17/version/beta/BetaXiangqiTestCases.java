@@ -45,6 +45,9 @@ public class BetaXiangqiTestCases {
     void getPieceAtReturnsRedChariot() {
         assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
         assertPiece(1, 5, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
+    
+        assertPiece(5, 5, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
+        assertPiece(5, 5, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
     }
     
     @Test
@@ -52,44 +55,57 @@ public class BetaXiangqiTestCases {
     void getPieceAtReturnsRedAdvisor() {
         assertPiece(1, 2, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
         assertPiece(1, 4, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
+    
+        assertPiece(5, 2, XiangqiColor.BLACK, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
+        assertPiece(5, 4, XiangqiColor.BLACK, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
     }
     
     @Test
         // 5
     void getPieceAtReturnRedGeneral() {
         assertPiece(1, 3, XiangqiColor.RED, XiangqiPieceType.GENERAL, XiangqiColor.RED);
+        assertPiece(5, 3, XiangqiColor.BLACK, XiangqiPieceType.GENERAL, XiangqiColor.RED);
     }
     
     @Test
         // 6
     void getPieceAtReturnsRedSoldier() {
         assertPiece(2, 3, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.RED);
+        assertPiece(4, 3, XiangqiColor.BLACK, XiangqiPieceType.SOLDIER, XiangqiColor.RED);
     }
     
     @Test
-        // 3
+        // 7
     void getPieceAtReturnsBlackChariot() {
         assertPiece(5, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
         assertPiece(5, 5, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
+    
+        assertPiece(1, 1, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
+        assertPiece(1, 5, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
     }
     
     @Test
-        // 4
+        // 8
     void getPieceAtReturnsBlackAdvisor() {
         assertPiece(5, 2, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.BLACK);
         assertPiece(5, 4, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.BLACK);
+    
+        assertPiece(1, 2, XiangqiColor.BLACK, XiangqiPieceType.ADVISOR, XiangqiColor.BLACK);
+        assertPiece(1, 4, XiangqiColor.BLACK, XiangqiPieceType.ADVISOR, XiangqiColor.BLACK);
     }
     
     @Test
-        // 5
+        // 9
     void getPieceAtReturnsBlackGeneral() {
         assertPiece(5, 3, XiangqiColor.RED, XiangqiPieceType.GENERAL, XiangqiColor.BLACK);
+        assertPiece(1, 3, XiangqiColor.BLACK, XiangqiPieceType.GENERAL, XiangqiColor.BLACK);
     }
     
     @Test
-        // 6
+        // 10
     void getPieceAtReturnsBlackSoldier() {
         assertPiece(4, 3, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.BLACK);
+        assertPiece(2, 3, XiangqiColor.BLACK, XiangqiPieceType.SOLDIER, XiangqiColor.BLACK);
     }
     
     @Test
