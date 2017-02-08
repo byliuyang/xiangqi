@@ -1,6 +1,7 @@
 package xiangqi.studentyliu17.version.beta;
 
 import xiangqi.common.*;
+import xiangqi.studentyliu17.version.XiangqiPieceImpl;
 
 /**
  * Beta version of Xiangqi game
@@ -61,6 +62,6 @@ public class BetaXiangqiGame implements XiangqiGame {
      */
     @Override
     public XiangqiPiece getPieceAt(XiangqiCoordinate where, XiangqiColor aspect) {
-        return null;
+        return XiangqiPieceImpl.makePiece(XiangqiPieceType.CHARIOT, aspect);
     }
 }
