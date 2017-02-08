@@ -27,41 +27,69 @@ public class BetaXiangqiTestCases {
         assertNotNull(this.game);
     }
     
+    
     @Test
         // 2
-    void getPieceAtReturnsRedChariot() {
-        assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT);
-        assertPiece(1, 5, XiangqiColor.RED, XiangqiPieceType.CHARIOT);
+    void getPieceAtReturnsNoneNone() {
+        for (int rank = 2; rank < 5; rank++) {
+            for (int file = 1; file < 6; file++) {
+                if (file != 3)
+                    assertPiece(rank, file, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor
+                            .NONE);
+            }
+        }
     }
     
     @Test
         // 3
+    void getPieceAtReturnsRedChariot() {
+        assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
+        assertPiece(1, 5, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
+    }
+    
+    @Test
+        // 4
     void getPieceAtReturnsRedAdvisor() {
-        assertPiece(1, 2, XiangqiColor.RED, XiangqiPieceType.ADVISOR);
-        assertPiece(1, 4, XiangqiColor.RED, XiangqiPieceType.ADVISOR);
-    }
-    
-    @Test
-        // 4
-    void getPieceAtReturnsRedGeneral() {
-        assertPiece(1, 3, XiangqiColor.RED, XiangqiPieceType.GENERAL);
-    }
-    
-    @Test
-        // 4
-    void getPieceAtReturnsRedSoldier() {
-        assertPiece(2, 3, XiangqiColor.RED, XiangqiPieceType.SOLDIER);
+        assertPiece(1, 2, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
+        assertPiece(1, 4, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
     }
     
     @Test
         // 5
-    void getPieceAtReturnsNoneNone() {
-        for (int rank = 2; rank < 5; rank++) {
-            for(int file = 1; file < 6; file++) {
-               if(file != 3)
-                   assertPiece(rank, file, XiangqiColor.NONE, XiangqiPieceType.NONE);
-            }
-        }
+    void getPieceAtReturnRedGeneral() {
+        assertPiece(1, 3, XiangqiColor.RED, XiangqiPieceType.GENERAL, XiangqiColor.RED);
+    }
+    
+    @Test
+        // 6
+    void getPieceAtReturnsRedSoldier() {
+        assertPiece(2, 3, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.RED);
+    }
+    
+    @Test
+        // 3
+    void getPieceAtReturnsBlackChariot() {
+        assertPiece(5, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
+        assertPiece(5, 5, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
+    }
+    
+    @Test
+        // 4
+    void getPieceAtReturnsBlackAdvisor() {
+        assertPiece(5, 2, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.BLACK);
+        assertPiece(5, 4, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.BLACK);
+    }
+    
+    @Test
+        // 5
+    void getPieceAtReturnsBlackGeneral() {
+        assertPiece(5, 3, XiangqiColor.RED, XiangqiPieceType.GENERAL, XiangqiColor.BLACK);
+    }
+    
+    @Test
+        // 6
+    void getPieceAtReturnsBlackSoldier() {
+        assertPiece(4, 3, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.BLACK);
     }
     
     @Test
@@ -98,9 +126,10 @@ public class BetaXiangqiTestCases {
         return new TestCoordinate(rank, file);
     }
     
-    private void assertPiece(int rank, int file, XiangqiColor color, XiangqiPieceType pieceType) {
-        final XiangqiPiece p = game.getPieceAt(makeCoordinate(rank, file), color);
-        assertEquals(pieceType, p.getPieceType());
-        assertEquals(color, p.getColor());
+    private void assertPiece(int rank, int file, XiangqiColor aspect, XiangqiPieceType
+            expectedPieceType, XiangqiColor expectedColor) {
+        final XiangqiPiece p = game.getPieceAt(makeCoordinate(rank, file), aspect);
+        assertEquals(expectedPieceType, p.getPieceType());
+        assertEquals(expectedColor, p.getColor());
     }
 }
