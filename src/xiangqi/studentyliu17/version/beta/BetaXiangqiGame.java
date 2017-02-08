@@ -69,26 +69,30 @@ public class BetaXiangqiGame implements XiangqiGame {
         switch (file) {
             case 1:
             case 5:
-                if(rank == 1) {
+                if(rank == 1 || rank == 5) {
                     pieceType = XiangqiPieceType.CHARIOT;
-                    color = aspect;
+                    if (rank == 1) color = XiangqiColor.RED;
+                    else color = XiangqiColor.BLACK;
                 }
                 break;
             case 2:
             case 4:
-                if(rank == 1) {
+                if(rank == 1 || rank == 5)  {
                     pieceType = XiangqiPieceType.ADVISOR;
-                    color = aspect;
+                    if (rank == 1) color = XiangqiColor.RED;
+                    else color = XiangqiColor.BLACK;
                 }
                 break;
             case 3:
-                
-                if(rank == 1) {
+    
+                if(rank == 1 || rank == 5) {
                     pieceType = XiangqiPieceType.GENERAL;
-                    color = aspect;
-                } else if(rank == 2) {
+                    if (rank == 1) color = XiangqiColor.RED;
+                    else color = XiangqiColor.BLACK;
+                } else if(rank == 2 || rank == 4) {
                     pieceType = XiangqiPieceType.SOLDIER;
-                    color = aspect;
+                    if (rank == 2) color = XiangqiColor.RED;
+                    else color = XiangqiColor.BLACK;
                 }
             default:
                 break;
