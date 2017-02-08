@@ -11,6 +11,7 @@ import xiangqi.studentyliu17.version.XiangqiGameFactory;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 /**
  * Test cases for beta Xiangqi game
@@ -30,13 +31,21 @@ public class BetaXiangqiTestCases {
     
     @Test // 2
     void redChariotValidFirstMove() {
-        assertEquals(MoveResult.OK, this.game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
     }
     
     @Test // 3
     void blackChariotValidSecondMove() {
-        assertEquals(MoveResult.OK, this.game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
-        assertEquals(MoveResult.OK, this.game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
+    }
+    
+    @Test
+    void chariotTryToMoveToInvalidLocation() {
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 1),
+                                                            makeCoordinate(2,
+                                                                                           2)));
+        assertTrue(game.getMoveMessage().length() > 1);
     }
     
     private XiangqiCoordinate makeCoordinate(int rank, int file) {
