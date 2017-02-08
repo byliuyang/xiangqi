@@ -28,13 +28,8 @@ public class BetaXiangqiTestCases {
     
     @Test // 2
     void getPieceAtReturnsRedChariot() {
-        final XiangqiPiece p1 = game.getPieceAt(makeCoordinate(1, 1), XiangqiColor.RED);
-        assertEquals(XiangqiPieceType.CHARIOT, p1.getPieceType());
-        assertEquals(XiangqiColor.RED, p1.getColor());
-    
-        final XiangqiPiece p2 = game.getPieceAt(makeCoordinate(1, 5), XiangqiColor.RED);
-        assertEquals(XiangqiPieceType.CHARIOT, p2.getPieceType());
-        assertEquals(XiangqiColor.RED, p2.getColor());
+        assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT);
+        assertPiece(1, 5, XiangqiColor.RED, XiangqiPieceType.CHARIOT);
     }
     
     @Test // 3
@@ -71,5 +66,11 @@ public class BetaXiangqiTestCases {
     
     private XiangqiCoordinate makeCoordinate(int rank, int file) {
         return new TestCoordinate(rank, file);
+    }
+    
+    private void assertPiece(int rank, int file, XiangqiColor color, XiangqiPieceType pieceType) {
+        final XiangqiPiece p = game.getPieceAt(makeCoordinate(rank, file), color);
+        assertEquals(pieceType, p.getPieceType());
+        assertEquals(color, p.getColor());
     }
 }
