@@ -62,6 +62,16 @@ public class BetaXiangqiGame implements XiangqiGame {
      */
     @Override
     public XiangqiPiece getPieceAt(XiangqiCoordinate where, XiangqiColor aspect) {
-        return XiangqiPieceImpl.makePiece(XiangqiPieceType.CHARIOT, aspect);
+        int file = where.getFile();
+        switch (file) {
+            case 1:
+            case 5:
+                return XiangqiPieceImpl.makePiece(XiangqiPieceType.CHARIOT, aspect);
+            case 2:
+            case 4:
+                return XiangqiPieceImpl.makePiece(XiangqiPieceType.ADVISOR, aspect);
+            default:
+                return XiangqiPieceImpl.makePiece(XiangqiPieceType.NONE, XiangqiColor.NONE);
+        }
     }
 }
