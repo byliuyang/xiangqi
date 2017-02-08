@@ -25,9 +25,10 @@ public class BetaXiangqiGame implements XiangqiGame {
      */
     @Override
     public MoveResult makeMove(XiangqiCoordinate source, XiangqiCoordinate destination) {
-        if(destination.getRank() > 1 && destination.getFile() > 1) {
+        if(destination.getRank() > 1 && destination.getFile() > 1)
             return MoveResult.ILLEGAL;
-        }
+        if(source.getRank() == 2 && source.getFile() == 1)
+            return MoveResult.ILLEGAL;
         return MoveResult.OK;
     }
     

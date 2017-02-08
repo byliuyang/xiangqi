@@ -2,10 +2,7 @@ package xiangqi.studentyliu17.version.beta;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import xiangqi.common.MoveResult;
-import xiangqi.common.XiangqiCoordinate;
-import xiangqi.common.XiangqiGame;
-import xiangqi.common.XiangqiGameVersion;
+import xiangqi.common.*;
 import xiangqi.studentyliu17.TestCoordinate;
 import xiangqi.studentyliu17.version.XiangqiGameFactory;
 
@@ -30,17 +27,24 @@ public class BetaXiangqiTestCases {
     }
     
     @Test // 2
+    void getPieceAtReturnsRedChariot() {
+        final XiangqiPiece p = game.getPieceAt(makeCoordinate(1, 1), XiangqiColor.RED);
+        assertEquals(XiangqiPieceType.CHARIOT, p.getPieceType());
+        assertEquals(XiangqiColor.RED, p.getColor());
+    }
+    
+    @Test // 3
     void redChariotValidFirstMove() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
     }
     
-    @Test // 3
+    @Test // 4
     void blackChariotValidSecondMove() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
     }
     
-    @Test // 4
+    @Test // 5
     void chariotTryToMoveToInvalidLocation() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 1),
                                                             makeCoordinate(2,
@@ -50,6 +54,14 @@ public class BetaXiangqiTestCases {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 1),
                                                        makeCoordinate(3,
                                                                       3)));
+        assertTrue(game.getMoveMessage().length() > 1);
+    }
+    
+    @Test // 6
+    void tryMoveFromInvalidLocation() {
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(2, 1),
+                                                       makeCoordinate(3,
+                                                                      1)));
         assertTrue(game.getMoveMessage().length() > 1);
     }
     
