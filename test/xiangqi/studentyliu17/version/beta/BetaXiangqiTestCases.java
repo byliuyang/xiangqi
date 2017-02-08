@@ -42,11 +42,16 @@ public class BetaXiangqiTestCases {
     }
     
     @Test
-        // 3
+        // 4
     void getPieceAtReturnsRedGeneral() {
         assertPiece(1, 3, XiangqiColor.RED, XiangqiPieceType.GENERAL);
     }
     
+    @Test
+        // 4
+    void getPieceAtReturnsRedSoldier() {
+        assertPiece(2, 3, XiangqiColor.RED, XiangqiPieceType.SOLDIER);
+    }
     
     @Test
         // 3
