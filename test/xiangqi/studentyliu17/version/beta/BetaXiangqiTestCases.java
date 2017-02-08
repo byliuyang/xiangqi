@@ -28,8 +28,14 @@ public class BetaXiangqiTestCases {
         assertNotNull(this.game);
     }
     
-    @Test
+    @Test // 2
     void redChariotValidFirstMove() {
+        assertEquals(MoveResult.OK, this.game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
+    }
+    
+    @Test // 3
+    void blackChariotValidSecondMove() {
+        assertEquals(MoveResult.OK, this.game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
         assertEquals(MoveResult.OK, this.game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
     }
     
