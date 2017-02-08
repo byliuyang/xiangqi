@@ -11,12 +11,13 @@
  * your first file to this package, you can remove this file.
  * @version Dec 26, 2016
  */
-package xiangqi.studentyliu17;
+package xiangqi.studentyliu17.version.alpha;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import xiangqi.XiangqiGameFactory;
 import xiangqi.common.*;
+import xiangqi.studentyliu17.TestCoordinate;
+import xiangqi.studentyliu17.version.XiangqiGameFactory;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -33,38 +34,38 @@ public class AlphaXiangqiTestCases {
         game = XiangqiGameFactory.makeXiangqiGame(XiangqiGameVersion.ALPHA_XQ);
     }
     
-    @Test
+    @Test // 1
     public void factoryProducesAlphaXiangqiGame() {
         assertNotNull(game);
     }
     
-    @Test
+    @Test // 2
     void redMakesValidFirstMove() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(1, 2)));
     }
     
-    @Test
+    @Test // 3
     void blackMakesValidSecondMove() {
         game.makeMove(TestCoordinate.makeCoordinate(1, 1), makeCoordinate(1, 2));
         assertEquals(MoveResult.RED_WINS, game.makeMove(makeCoordinate(1, 1), makeCoordinate(1, 
                                                                                              2)));
     }
     
-    @Test
+    @Test // 4
     void tryToMoveToInvalidLocation() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 1), makeCoordinate(2,
                                                                                             1)));
         assertTrue(game.getMoveMessage().length() >= -1);
     }
     
-    @Test
+    @Test // 5
     void tryToMoveFromInvalidLocation() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(2, 1), makeCoordinate(1, 2
                                                                                             )));
         assertTrue(game.getMoveMessage().length() >= 1);
     }
     
-    @Test
+    @Test // 6
     void getPieceAtReturnsNoneNone() {
         final XiangqiPiece p = game.getPieceAt(makeCoordinate(1, 1), XiangqiColor.RED);
         assertEquals(XiangqiPieceType.NONE, p.getPieceType());

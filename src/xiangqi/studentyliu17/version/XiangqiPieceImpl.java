@@ -1,4 +1,4 @@
-package xiangqi.studentyliu17.version.alpha;
+package xiangqi.studentyliu17.version;
 
 import xiangqi.common.XiangqiColor;
 import xiangqi.common.XiangqiPiece;

@@ -1,32 +1,13 @@
-package xiangqi.studentyliu17.version.alpha;
+package xiangqi.studentyliu17.version.beta;
 
 import xiangqi.common.*;
-import xiangqi.studentyliu17.version.XiangqiPieceImpl;
-
-/*******************************************************************************
- * This files was developed for CS4233: Object-Oriented Analysis & Design.
- * The course was taken at Worcester Polytechnic Institute.
- *
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *
- * Copyright ©2016-2017 Gary F. Pollice
- *******************************************************************************/
 
 /**
- * Alpha version of Xiangqi game
+ * Beta version of Xiangqi game
  *
  * @version Jan 28, 2016
  */
-public class AlphaXiangqiGame implements XiangqiGame {
-    private int moveCount;
-    
-    public AlphaXiangqiGame() {
-        this.moveCount = 0;
-    }
-    
+public class BetaXiangqiGame implements XiangqiGame{
     /**
      * <p>
      * Make a move in the game. The XiangqiGame instance needs to keep track of the
@@ -44,9 +25,7 @@ public class AlphaXiangqiGame implements XiangqiGame {
      */
     @Override
     public MoveResult makeMove(XiangqiCoordinate source, XiangqiCoordinate destination) {
-        if(destination.getRank() > 1) return MoveResult.ILLEGAL;
-        if(source.getRank() > 1) return MoveResult.ILLEGAL;
-        return moveCount++ == 0 ? MoveResult.OK : MoveResult.RED_WINS;
+        return null;
     }
     
     /**
@@ -61,7 +40,7 @@ public class AlphaXiangqiGame implements XiangqiGame {
      */
     @Override
     public String getMoveMessage() {
-       return "Cannot move General out of fortress";
+        return null;
     }
     
     /**
@@ -78,6 +57,6 @@ public class AlphaXiangqiGame implements XiangqiGame {
      */
     @Override
     public XiangqiPiece getPieceAt(XiangqiCoordinate where, XiangqiColor aspect) {
-        return XiangqiPieceImpl.makePiece(XiangqiPieceType.NONE, XiangqiColor.NONE);
+        return null;
     }
 }

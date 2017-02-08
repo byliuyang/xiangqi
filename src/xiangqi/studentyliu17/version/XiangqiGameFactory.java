@@ -10,7 +10,7 @@
  * Copyright ©2016-2017 Gary F. Pollice
  *******************************************************************************/
 
-package xiangqi;
+package xiangqi.studentyliu17.version;
 
 import xiangqi.common.XiangqiGame;
 import xiangqi.common.XiangqiGameVersion;
