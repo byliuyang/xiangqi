@@ -4,33 +4,6 @@
  * accompanying materials are made available under the terms of the Eclipse Public License
  * v1.0 which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html Copyright ©2016-2017 Gary F. Pollice
- *
- * When you have changed the name of this package to the reflect your initials, and added
- * your first file to this package, you can remove this file.
- *
- * When you have changed the name of this package to the reflect your initials, and added
- * your first file to this package, you can remove this file.
- *
- * When you have changed the name of this package to the reflect your initials, and added
- * your first file to this package, you can remove this file.
- *
- * When you have changed the name of this package to the reflect your initials, and added
- * your first file to this package, you can remove this file.
- *
- * When you have changed the name of this package to the reflect your initials, and added
- * your first file to this package, you can remove this file.
- *
- * When you have changed the name of this package to the reflect your initials, and added
- * your first file to this package, you can remove this file.
- *
- * When you have changed the name of this package to the reflect your initials, and added
- * your first file to this package, you can remove this file.
- *
- * When you have changed the name of this package to the reflect your initials, and added
- * your first file to this package, you can remove this file.
- *
- * When you have changed the name of this package to the reflect your initials, and added
- * your first file to this package, you can remove this file.
  */
 
 /**
