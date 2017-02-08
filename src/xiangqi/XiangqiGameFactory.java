@@ -14,7 +14,7 @@ package xiangqi;
 
 import xiangqi.common.XiangqiGame;
 import xiangqi.common.XiangqiGameVersion;
-import xiangqi.studentyangliu.version.alphaxiangqi.AlphaXiangqiGame;
+import xiangqi.studentyliu17.version.alpha.AlphaXiangqiGame;
 
 /**
  * A simple factory object that creates the appropriate instance of a XiangqiGame.

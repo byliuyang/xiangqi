@@ -11,4 +11,4 @@
  * your first file to this package, you can remove this file.
  * @version Dec 26, 2016
  */
-package xiangqi.studentyangliu.version.alphaxiangqi;
+package xiangqi.studentyliu17;

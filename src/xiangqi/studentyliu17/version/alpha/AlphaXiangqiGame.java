@@ -1,4 +1,4 @@
-package xiangqi.studentyangliu.version.alphaxiangqi;
+package xiangqi.studentyliu17.version.alpha;
 
 import xiangqi.common.*;
 
@@ -16,9 +16,16 @@ import xiangqi.common.*;
 
 /**
  * Description
+ *
  * @version Jan 28, 2016
  */
-public class AlphaXiangqiGame implements XiangqiGame{
+public class AlphaXiangqiGame implements XiangqiGame {
+    private int moveCount;
+    
+    public AlphaXiangqiGame() {
+        this.moveCount = 0;
+    }
+    
     /**
      * <p>
      * Make a move in the game. The XiangqiGame instance needs to keep track of the
@@ -36,7 +43,9 @@ public class AlphaXiangqiGame implements XiangqiGame{
      */
     @Override
     public MoveResult makeMove(XiangqiCoordinate source, XiangqiCoordinate destination) {
-        return null;
+        if(destination.getRank() > 1) return MoveResult.ILLEGAL;
+        if(source.getRank() > 1) return MoveResult.ILLEGAL;
+        return moveCount++ == 0 ? MoveResult.OK : MoveResult.RED_WINS;
     }
     
     /**
@@ -51,7 +60,7 @@ public class AlphaXiangqiGame implements XiangqiGame{
      */
     @Override
     public String getMoveMessage() {
-        return null;
+       return "Cannot move General out of fortress";
     }
     
     /**
@@ -68,7 +77,7 @@ public class AlphaXiangqiGame implements XiangqiGame{
      */
     @Override
     public XiangqiPiece getPieceAt(XiangqiCoordinate where, XiangqiColor aspect) {
-        return null;
+        return XiangqiPieceImpl.makePiece(XiangqiPieceType.NONE, XiangqiColor.NONE);
     }
     
     /**
