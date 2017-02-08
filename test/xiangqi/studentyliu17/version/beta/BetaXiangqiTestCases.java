@@ -40,16 +40,11 @@ public class BetaXiangqiTestCases {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
     }
     
-    @Test // 4
+    @Test
     void chariotTryToMoveToInvalidLocation() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 1),
                                                             makeCoordinate(2,
                                                                                            2)));
-        assertTrue(game.getMoveMessage().length() > 1);
-    
-        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 1),
-                                                       makeCoordinate(3,
-                                                                      3)));
         assertTrue(game.getMoveMessage().length() > 1);
     }
     

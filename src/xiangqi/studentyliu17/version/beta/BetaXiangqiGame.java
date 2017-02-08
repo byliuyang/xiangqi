@@ -7,7 +7,7 @@ import xiangqi.common.*;
  *
  * @version Jan 28, 2016
  */
-public class BetaXiangqiGame implements XiangqiGame {
+public class BetaXiangqiGame implements XiangqiGame{
     /**
      * <p>
      * Make a move in the game. The XiangqiGame instance needs to keep track of the
@@ -25,9 +25,6 @@ public class BetaXiangqiGame implements XiangqiGame {
      */
     @Override
     public MoveResult makeMove(XiangqiCoordinate source, XiangqiCoordinate destination) {
-        if(destination.getRank() > 1 && destination.getFile() > 1) {
-            return MoveResult.ILLEGAL;
-        }
         return MoveResult.OK;
     }
     
@@ -43,7 +40,7 @@ public class BetaXiangqiGame implements XiangqiGame {
      */
     @Override
     public String getMoveMessage() {
-        return "Invalid movement";
+        return null;
     }
     
     /**
