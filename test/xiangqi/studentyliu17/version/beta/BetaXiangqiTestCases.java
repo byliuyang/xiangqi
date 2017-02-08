@@ -109,20 +109,20 @@ public class BetaXiangqiTestCases {
     }
     
     @Test
-        // 3
+        // 11
     void redChariotValidFirstMove() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
     }
     
     @Test
-        // 4
+        // 12
     void blackChariotValidSecondMove() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
     }
     
     @Test
-        // 5
+        // 13
     void chariotTryToMoveToInvalidLocation() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 1), makeCoordinate(2, 2)));
         assertTrue(game.getMoveMessage().length() > 1);
@@ -132,7 +132,14 @@ public class BetaXiangqiTestCases {
     }
     
     @Test
-        // 6
+        // 14
+    void redChariotTryToMoveToValidLocation() {
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
+        assertPiece(3, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
+    }
+    
+    @Test
+        // 14
     void tryMoveFromInvalidLocation() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(2, 1), makeCoordinate(3, 1)));
         assertTrue(game.getMoveMessage().length() > 1);
