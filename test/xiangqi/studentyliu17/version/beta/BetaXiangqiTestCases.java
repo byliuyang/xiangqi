@@ -54,6 +54,17 @@ public class BetaXiangqiTestCases {
     }
     
     @Test
+        // 5
+    void getPieceAtReturnsNoneNone() {
+        for (int rank = 2; rank < 5; rank++) {
+            for(int file = 1; file < 6; file++) {
+               if(file != 3)
+                   assertPiece(rank, file, XiangqiColor.NONE, XiangqiPieceType.NONE);
+            }
+        }
+    }
+    
+    @Test
         // 3
     void redChariotValidFirstMove() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
