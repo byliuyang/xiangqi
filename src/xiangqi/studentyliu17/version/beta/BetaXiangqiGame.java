@@ -61,22 +61,39 @@ public class BetaXiangqiGame implements XiangqiGame {
     @Override
     public XiangqiPiece getPieceAt(XiangqiCoordinate where, XiangqiColor aspect) {
         int file = where.getFile();
+        int rank = where.getRank();
+        
+        XiangqiPieceType pieceType = XiangqiPieceType.NONE;
+        XiangqiColor color = XiangqiColor.NONE;
         
         switch (file) {
             case 1:
             case 5:
-                return XiangqiPieceImpl.makePiece(XiangqiPieceType.CHARIOT, aspect);
+                if(rank == 1) {
+                    pieceType = XiangqiPieceType.CHARIOT;
+                    color = aspect;
+                }
+                break;
             case 2:
             case 4:
-                return XiangqiPieceImpl.makePiece(XiangqiPieceType.ADVISOR, aspect);
+                if(rank == 1) {
+                    pieceType = XiangqiPieceType.ADVISOR;
+                    color = aspect;
+                }
+                break;
             case 3:
-                int rank = where.getRank();
-                if(rank == 1)
-                    return XiangqiPieceImpl.makePiece(XiangqiPieceType.GENERAL, aspect);
-                else if(rank == 2)
-                    return XiangqiPieceImpl.makePiece(XiangqiPieceType.SOLDIER, aspect);
+                
+                if(rank == 1) {
+                    pieceType = XiangqiPieceType.GENERAL;
+                    color = aspect;
+                } else if(rank == 2) {
+                    pieceType = XiangqiPieceType.SOLDIER;
+                    color = aspect;
+                }
             default:
-                return XiangqiPieceImpl.makePiece(XiangqiPieceType.NONE, XiangqiColor.NONE);
+                break;
         }
+        
+        return XiangqiPieceImpl.makePiece(pieceType, color);
     }
 }
