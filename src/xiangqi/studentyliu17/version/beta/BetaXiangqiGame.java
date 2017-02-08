@@ -26,10 +26,8 @@ public class BetaXiangqiGame implements XiangqiGame {
      */
     @Override
     public MoveResult makeMove(XiangqiCoordinate source, XiangqiCoordinate destination) {
-        if(destination.getRank() > 1 && destination.getFile() > 1)
-            return MoveResult.ILLEGAL;
-        if(source.getRank() == 2 && source.getFile() == 1)
-            return MoveResult.ILLEGAL;
+        if (destination.getRank() > 1 && destination.getFile() > 1) return MoveResult.ILLEGAL;
+        if (source.getRank() == 2 && source.getFile() == 1) return MoveResult.ILLEGAL;
         return MoveResult.OK;
     }
     
@@ -70,6 +68,8 @@ public class BetaXiangqiGame implements XiangqiGame {
             case 2:
             case 4:
                 return XiangqiPieceImpl.makePiece(XiangqiPieceType.ADVISOR, aspect);
+            case 3:
+                return XiangqiPieceImpl.makePiece(XiangqiPieceType.GENERAL, aspect);
             default:
                 return XiangqiPieceImpl.makePiece(XiangqiPieceType.NONE, XiangqiColor.NONE);
         }
