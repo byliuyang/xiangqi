@@ -152,21 +152,48 @@ public class BetaXiangqiGame implements XiangqiGame {
         if (!validators.containsKey(pieceType)) return true;
         List<Validator> pieceValidators = validators.get(pieceType);
         
-//        int numPiecesInBetween =
+        int numPiecesInBetween = getNumPiecesInBetween(source, dest);
         
         return pieceValidators.stream().allMatch((Validator validator) -> validator.validate
-                (source, dest, null));
+                (source, dest, numPiecesInBetween));
+    }
+    
+    private int getNumPiecesInBetween(CoordinateImpl source, CoordinateImpl dest) {
+        int sourceFile = getFileRespectToRed(source, currentPlayer);
+        int sourceRank = getRankRespectToRed(source, currentPlayer);
+        
+        int destFile = getFileRespectToRed(dest, currentPlayer);
+        int destRank = getRankRespectToRed(dest, currentPlayer);
+        
+        int smallerRank = Math.min(sourceRank, destRank);
+        int greaterRank = Math.max(sourceRank, destRank);
+        int smallerFile = Math.min(sourceFile, destFile);
+        int greaterFile = Math.max(sourceFile, destFile);
+        
+        int numInBetween = 0;
+        if(sourceRank == destRank) {
+            for (int file = smallerFile + 1; file < greaterFile; file++) {
+                if(board[sourceRank - 1][file - 1] != null)
+                    numInBetween++;
+            }
+        } else if(sourceFile == destFile) {
+            for (int rank = smallerRank + 1; rank < greaterRank; rank++) {
+                if(board[rank - 1][sourceFile - 1] != null)
+                    numInBetween++;
+            }
+        }
+        return numInBetween;
     }
     
     private int getRankRespectToRed(XiangqiCoordinate where, XiangqiColor aspect) {
         int rank = where.getRank();
-        if (aspect == XiangqiColor.RED) return rank;
+        if (aspect == RED) return rank;
         else return BOARD_HEIGHT + 1 - rank;
     }
     
     private int getFileRespectToRed(XiangqiCoordinate where, XiangqiColor aspect) {
         int file = where.getFile();
-        if (aspect == BLACK) return file;
+        if (aspect == RED) return file;
         else return BOARD_WIDTH + 1 - file;
     }
 }

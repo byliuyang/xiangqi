@@ -27,7 +27,6 @@ public class BetaXiangqiTestCases {
         assertNotNull(this.game);
     }
     
-    
     @Test
         // 2
     void getPieceAtReturnsNoneNone() {

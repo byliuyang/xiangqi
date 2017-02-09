@@ -5,5 +5,5 @@ package xiangqi.studentyliu17.version.beta;
  */
 @FunctionalInterface
 public interface Validator {
-    boolean validate(CoordinateImpl c1, CoordinateImpl c2, Object... arguments);
+    boolean validate(CoordinateImpl c1, CoordinateImpl c2, int numberPiecesInBetween);
 }
