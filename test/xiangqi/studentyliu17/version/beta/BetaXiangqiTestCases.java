@@ -201,19 +201,28 @@ public class BetaXiangqiTestCases {
         // 21
     void redAdvisorTryToMoveTwoSpace() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 2), makeCoordinate(2,
-                                                                                            1)));
+                                                                                       1)));
         assertPiece(2, 1, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
         assertPiece(1, 2, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
-    
+        
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(2,
                                                                                        1)));
         assertPiece(2, 1, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
         assertPiece(1, 1, XiangqiColor.BLACK, XiangqiPieceType.NONE, XiangqiColor.NONE);
-    
+        
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(2, 1), makeCoordinate(4,
-                                                                                       3)));
+                                                                                            3)));
         assertPiece(4, 3, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.BLACK);
         assertPiece(2, 1, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
+    }
+    
+    @Test
+        // 21
+    void redGeneralTryToMoveDiagonal() {
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 3), makeCoordinate(2,
+                                                                                       2)));
+        assertPiece(2, 2, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+        assertPiece(1, 3, XiangqiColor.RED, XiangqiPieceType.GENERAL, XiangqiColor.RED);
     }
     
     @Test
