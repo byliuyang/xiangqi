@@ -19,7 +19,7 @@ public class ValidatorFactory {
                                                             destColor) -> c2.isDiagonal(c1);
     private static Validator adjacentValidator   = (CoordinateImpl c1, CoordinateImpl c2, int
             numPiecesInBetween, XiangqiColor sourceColor, XiangqiColor destColor) ->
-            c2.distanceTo(c1) == 1 || (c2.isDiagonal(c1) && c2.distanceTo(c2) == 2);
+            c2.distanceTo(c1) == 1 || (c2.isDiagonal(c1) && c2.distanceTo(c1) == 2);
     
     private static Validator differentCoordinateValidator = (CoordinateImpl c1, CoordinateImpl
             c2, int numPiecesInBetween, XiangqiColor sourceColor, XiangqiColor destColor) ->
@@ -49,6 +49,7 @@ public class ValidatorFactory {
                 validators.add(differentColorValidator);
                 validators.add(differentCoordinateValidator);
                 validators.add(diagonalValidator);
+                validators.add(adjacentValidator);
                 break;
             default:
                 System.out.println("Not yet implemented!");
