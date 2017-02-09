@@ -294,11 +294,11 @@ public class BetaXiangqiTestCases {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(2, 3), makeCoordinate(3, 3)));
         assertPiece(3, 3, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.RED);
         assertPiece(2, 3, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
-    
+        
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(2, 1)));
         assertPiece(2, 1, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
         assertPiece(1, 1, XiangqiColor.BLACK, XiangqiPieceType.NONE, XiangqiColor.NONE);
-    
+        
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(3, 3), makeCoordinate(2, 3)));
         assertPiece(2, 3, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
         assertPiece(3, 3, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.RED);
@@ -326,6 +326,39 @@ public class BetaXiangqiTestCases {
     void tryMoveToOriginalLocation() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(2, 3), makeCoordinate(2, 3)));
         assertPiece(2, 3, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.RED);
+    }
+    
+    @Test
+        // 30
+    void blackIsUnderCheckmate() {
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 5), makeCoordinate(5, 5)));
+        assertPiece(5, 5, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
+        assertPiece(1, 5, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+    
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(2, 3), makeCoordinate(3, 3)));
+        assertPiece(3, 3, XiangqiColor.BLACK, XiangqiPieceType.SOLDIER, XiangqiColor.BLACK);
+        assertPiece(2, 3, XiangqiColor.BLACK, XiangqiPieceType.NONE, XiangqiColor.NONE);
+    
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(2, 3), makeCoordinate(3, 3)));
+        assertPiece(3, 3, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.RED);
+        assertPiece(2, 3, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+    
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 4), makeCoordinate(2, 3)));
+        assertPiece(2, 3, XiangqiColor.BLACK, XiangqiPieceType.ADVISOR, XiangqiColor.BLACK);
+        assertPiece(1, 4, XiangqiColor.BLACK, XiangqiPieceType.NONE, XiangqiColor.NONE);
+    
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(5, 1)));
+        assertPiece(5, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
+        assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+    
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(2, 3), makeCoordinate(1, 4)));
+        assertPiece(1, 4, XiangqiColor.BLACK, XiangqiPieceType.ADVISOR, XiangqiColor.BLACK);
+        assertPiece(2, 3, XiangqiColor.BLACK, XiangqiPieceType.NONE, XiangqiColor.NONE);
+    
+        assertEquals(MoveResult.RED_WINS, game.makeMove(makeCoordinate(3, 3), makeCoordinate(4, 3)));
+        assertPiece(4, 3, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.RED);
+        assertPiece(3, 3, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+        
     }
     
     @Test
