@@ -67,6 +67,7 @@ public class ValidatorFactory {
                 validators.add(differentCoordinateValidator);
                 validators.add(verticalValidator);
                 validators.add(adjacentValidator);
+                break;
             default:
                 System.out.println("Not yet implemented!");
         }
