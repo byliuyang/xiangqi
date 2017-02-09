@@ -71,6 +71,17 @@ public class CoordinateImpl implements XiangqiCoordinate {
     }
     
     /**
+     * Return true if this coordinate is in front of other coordinate
+     *
+     * @param coordinate The other coordinate
+     *
+     * @return true if this coordinate is in front of other coordinate, false otherwise
+     */
+    public boolean isInFrontOf(CoordinateImpl coordinate) {
+        return rank > coordinate.getRank();
+    }
+    
+    /**
      * Check whether rank and file is in the given range
      *
      * @param fromRank The lower bound of rank

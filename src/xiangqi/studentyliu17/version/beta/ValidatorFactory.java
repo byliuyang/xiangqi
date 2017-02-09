@@ -39,6 +39,11 @@ public class ValidatorFactory {
                                                                  sourceColor, XiangqiColor
                                                                  destColor) -> c2.isVertical(c1);
     
+    private static Validator moveForwardValidator = (CoordinateImpl c1, CoordinateImpl c2,
+                                                  int numPiecesInBetween, XiangqiColor
+                                                          sourceColor, XiangqiColor
+                                                          destColor) -> c2.isInFrontOf(c1);
+    
     public static List<Validator> makeValidators(XiangqiPieceType pieceType) {
         
         List<Validator> validators = new LinkedList<>();
@@ -67,6 +72,7 @@ public class ValidatorFactory {
                 validators.add(differentCoordinateValidator);
                 validators.add(verticalValidator);
                 validators.add(adjacentValidator);
+                validators.add(moveForwardValidator);
                 break;
             default:
                 System.out.println("Not yet implemented!");
