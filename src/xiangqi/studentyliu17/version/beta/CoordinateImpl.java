@@ -49,6 +49,17 @@ public class CoordinateImpl implements XiangqiCoordinate {
     }
     
     /**
+     * Check whether the other coordinate is vertical to this coordinate
+     *
+     * @param coordinate The other coordinate
+     *
+     * @return true if the other coordinate is vertical to this coordinate, false otherwise
+     */
+    public boolean isVertical(CoordinateImpl coordinate) {
+        return coordinate.file == file;
+    }
+    
+    /**
      * Return distance between this and the other coordinate
      *
      * @param coordinate The other coordinate

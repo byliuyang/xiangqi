@@ -34,6 +34,11 @@ public class ValidatorFactory {
                                                                  destColor) -> numPiecesInBetween
                                                                                == 0;
     
+    private static Validator verticalValidator = (CoordinateImpl c1, CoordinateImpl c2,
+                                                         int numPiecesInBetween, XiangqiColor
+                                                                 sourceColor, XiangqiColor
+                                                                 destColor) -> c2.isVertical(c1);
+    
     public static List<Validator> makeValidators(XiangqiPieceType pieceType) {
         
         List<Validator> validators = new LinkedList<>();
@@ -57,6 +62,11 @@ public class ValidatorFactory {
                 validators.add(makeRangeValidator(1, 1, 2, 4));
                 validators.add(adjacentValidator);
                 break;
+            case SOLDIER:
+                validators.add(differentColorValidator);
+                validators.add(differentCoordinateValidator);
+                validators.add(verticalValidator);
+                validators.add(adjacentValidator);
             default:
                 System.out.println("Not yet implemented!");
         }
