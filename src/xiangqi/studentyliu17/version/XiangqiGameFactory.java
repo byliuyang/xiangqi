@@ -31,13 +31,19 @@ public class XiangqiGameFactory {
      * @return the instance of the requested game
      */
     public static XiangqiGame makeXiangqiGame(XiangqiGameVersion version) {
+        XiangqiGame game = null;
         switch (version) {
             case ALPHA_XQ:
-                return new AlphaXiangqiGame();
+                game = new AlphaXiangqiGame();
+                break;
             case BETA_XQ:
-                return new BetaXiangqiGame();
+                game = new BetaXiangqiGame();
+                game.initialize();
+                break;
             default:
-                return null;
+                break;
         }
+        
+        return game;
     }
 }

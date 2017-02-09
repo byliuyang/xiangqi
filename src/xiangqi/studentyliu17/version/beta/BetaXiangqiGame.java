@@ -3,14 +3,21 @@ package xiangqi.studentyliu17.version.beta;
 import xiangqi.common.*;
 import xiangqi.studentyliu17.version.XiangqiPieceImpl;
 
+import static xiangqi.common.XiangqiColor.BLACK;
+import static xiangqi.common.XiangqiColor.RED;
+import static xiangqi.common.XiangqiPieceType.*;
+
 /**
  * Beta version of Xiangqi game
  *
  * @version Jan 28, 2016
  */
 public class BetaXiangqiGame implements XiangqiGame {
-    private final int BOARD_WIDTH = 5;
+    private final int BOARD_WIDTH  = 5;
     private final int BOARD_HEIGHT = 5;
+    private XiangqiColor     currentPlayer;
+    private XiangqiPiece[][] board;
+    
     /**
      * <p>
      * Make a move in the game. The XiangqiGame instance needs to keep track of the
@@ -30,7 +37,26 @@ public class BetaXiangqiGame implements XiangqiGame {
     public MoveResult makeMove(XiangqiCoordinate source, XiangqiCoordinate destination) {
         if (destination.getRank() > 1 && destination.getFile() > 1) return MoveResult.ILLEGAL;
         if (source.getRank() == 2 && source.getFile() == 1) return MoveResult.ILLEGAL;
+    
+        movePiece(source, destination);
+        switchPlayer();
+        
         return MoveResult.OK;
+    }
+    
+    private void movePiece(XiangqiCoordinate source, XiangqiCoordinate destination) {
+        int sourceFile = getFileRespectToRed(source, currentPlayer);
+        int sourceRank = getRankRespectToRed(source, currentPlayer);
+    
+        int destFile = getFileRespectToRed(destination, currentPlayer);
+        int destRank = getRankRespectToRed(destination, currentPlayer);
+    
+        board[destRank - 1][destFile - 1] = board[sourceRank - 1][sourceFile - 1];
+        board[sourceRank - 1][sourceFile - 1] = XiangqiPieceImpl.makePiece(NONE, XiangqiColor.NONE);
+    }
+    
+    private void switchPlayer() {
+        currentPlayer = currentPlayer == XiangqiColor.RED ? XiangqiColor.BLACK : XiangqiColor.RED;
     }
     
     /**
@@ -65,57 +91,62 @@ public class BetaXiangqiGame implements XiangqiGame {
         int file = getFileRespectToRed(where, aspect);
         int rank = getRankRespectToRed(where, aspect);
         
-        XiangqiPieceType pieceType = XiangqiPieceType.NONE;
-        XiangqiColor color = XiangqiColor.NONE;
-        
-        switch (file) {
-            case 1:
-            case 5:
-                if(rank == 1 || rank == 5) {
-                    pieceType = XiangqiPieceType.CHARIOT;
-                    if (rank == 1) color = XiangqiColor.RED;
-                    else color = XiangqiColor.BLACK;
-                }
-                break;
-            case 2:
-            case 4:
-                if(rank == 1 || rank == 5)  {
-                    pieceType = XiangqiPieceType.ADVISOR;
-                    if (rank == 1) color = XiangqiColor.RED;
-                    else color = XiangqiColor.BLACK;
-                }
-                break;
-            case 3:
+        return board[rank - 1][file - 1];
+    }
     
-                if(rank == 1 || rank == 5) {
-                    pieceType = XiangqiPieceType.GENERAL;
-                    if (rank == 1) color = XiangqiColor.RED;
-                    else color = XiangqiColor.BLACK;
-                } else if(rank == 2 || rank == 4) {
-                    pieceType = XiangqiPieceType.SOLDIER;
-                    if (rank == 2) color = XiangqiColor.RED;
-                    else color = XiangqiColor.BLACK;
-                }
-            default:
-                break;
-        }
+    /**
+     * In some games, it may be possible to performe some initialization before the
+     * game begins. The default method does nothing. This can be overridden by the
+     * instances that require initialization.
+     *
+     * @param args an array of objects that are needed for initialization
+     */
+    @Override
+    public void initialize(Object... args) {
+        board = new XiangqiPieceImpl[5][5];
+        currentPlayer = XiangqiColor.RED;
         
-        return XiangqiPieceImpl.makePiece(pieceType, color);
+        setupRedPieces();
+        setupBlackPieces();
+        setupEmptySpaces();
+    }
+    
+    private void setupRedPieces() {
+        board[0][0] = XiangqiPieceImpl.makePiece(CHARIOT, RED);
+        board[0][1] = XiangqiPieceImpl.makePiece(ADVISOR, RED);
+        board[0][2] = XiangqiPieceImpl.makePiece(GENERAL, RED);
+        board[0][3] = XiangqiPieceImpl.makePiece(ADVISOR, RED);
+        board[0][4] = XiangqiPieceImpl.makePiece(CHARIOT, RED);
+        board[1][2] = XiangqiPieceImpl.makePiece(SOLDIER, RED);
+    }
+    
+    private void setupBlackPieces() {
+        board[4][0] = XiangqiPieceImpl.makePiece(CHARIOT, BLACK);
+        board[4][1] = XiangqiPieceImpl.makePiece(ADVISOR, BLACK);
+        board[4][2] = XiangqiPieceImpl.makePiece(GENERAL, BLACK);
+        board[4][3] = XiangqiPieceImpl.makePiece(ADVISOR, BLACK);
+        board[4][4] = XiangqiPieceImpl.makePiece(CHARIOT, BLACK);
+        board[3][2] = XiangqiPieceImpl.makePiece(SOLDIER, BLACK);
+    }
+    
+    private void setupEmptySpaces() {
+        for (int rank = 2; rank < 5; rank++) {
+            for (int file = 1; file < 6; file++) {
+                if (file != 3)
+                    board[rank - 1][file - 1] = XiangqiPieceImpl.makePiece(NONE, XiangqiColor.NONE);
+            }
+        }
     }
     
     private int getRankRespectToRed(XiangqiCoordinate where, XiangqiColor aspect) {
         int rank = where.getRank();
-        if(aspect == XiangqiColor.RED)
-            return rank;
-        else
-            return BOARD_HEIGHT + 1 - rank;
+        if (aspect == XiangqiColor.RED) return rank;
+        else return BOARD_HEIGHT + 1 - rank;
     }
     
     private int getFileRespectToRed(XiangqiCoordinate where, XiangqiColor aspect) {
         int file = where.getFile();
-        if(aspect == XiangqiColor.BLACK)
-            return file;
-        else
-            return BOARD_WIDTH + 1 - file;
+        if (aspect == BLACK) return file;
+        else return BOARD_WIDTH + 1 - file;
     }
 }

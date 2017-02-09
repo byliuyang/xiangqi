@@ -136,6 +136,7 @@ public class BetaXiangqiTestCases {
     void redChariotTryToMoveToValidLocation() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
         assertPiece(3, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
+        assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
     }
     
     @Test
