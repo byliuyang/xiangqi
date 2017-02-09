@@ -137,6 +137,7 @@ public class BetaXiangqiGame implements XiangqiGame {
     private void setupValidators() {
         validators = new Hashtable<>();
         validators.put(CHARIOT, ValidatorFactory.makeValidators(CHARIOT));
+        validators.put(ADVISOR, ValidatorFactory.makeValidators(ADVISOR));
     }
     
     private boolean isValidMove(XiangqiCoordinate xiangqiSource, XiangqiCoordinate xiangqiDest) {
@@ -155,7 +156,6 @@ public class BetaXiangqiGame implements XiangqiGame {
         int numPiecesInBetween = getNumPiecesInBetween(source, dest);
         
         XiangqiColor sourcePieceColor = sourcePiece.getColor();
-        
         
         XiangqiPiece destPiece = getPieceAt(dest, currentPlayer);
         XiangqiColor destPieceColor = destPiece.getColor();

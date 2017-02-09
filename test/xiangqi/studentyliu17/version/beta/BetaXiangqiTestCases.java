@@ -152,6 +152,22 @@ public class BetaXiangqiTestCases {
     
     @Test
         // 16
+    void redAdvisorTryToMoveToValidLocation() {
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 2), makeCoordinate(2, 1)));
+        assertPiece(2, 1, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
+        assertPiece(1, 2, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+    }
+    
+    @Test
+        // 17
+    void redAdvisorTryToMoveToInValidLocation() {
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 2), makeCoordinate(2, 2)));
+        assertPiece(2, 2, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+        assertPiece(1, 2, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
+    }
+    
+    @Test
+        // 18
     void redChariotTryToJumpOverAPiece() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
         assertPiece(3, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
@@ -165,27 +181,11 @@ public class BetaXiangqiTestCases {
     }
     
     @Test
-        // 17
+        // 19
     void redChariotTryToCaptureRedAdvisor() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 1), makeCoordinate(1, 2)));
         assertPiece(1, 2, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
         assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
-    }
-    
-    @Test
-        // 18
-    void redAdvisorTryToMoveToValidLocation() {
-        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 2), makeCoordinate(2, 3)));
-        assertPiece(2, 3, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
-        assertPiece(1, 2, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
-    }
-    
-    @Test
-        // 19
-    void redAdvisorTryToMoveToInValidLocation() {
-        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 2), makeCoordinate(2, 2)));
-        assertPiece(2, 2, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
-        assertPiece(1, 2, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
     }
     
     @Test
