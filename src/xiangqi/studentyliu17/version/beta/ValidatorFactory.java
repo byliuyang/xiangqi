@@ -51,6 +51,11 @@ public class ValidatorFactory {
                 validators.add(diagonalValidator);
                 validators.add(adjacentValidator);
                 break;
+            case GENERAL:
+                validators.add(differentColorValidator);
+                validators.add(differentCoordinateValidator);
+                validators.add(orthogonalValidator);
+                validators.add(adjacentValidator);
             default:
                 System.out.println("Not yet implemented!");
         }

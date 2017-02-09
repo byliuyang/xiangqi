@@ -138,6 +138,7 @@ public class BetaXiangqiGame implements XiangqiGame {
         validators = new Hashtable<>();
         validators.put(CHARIOT, ValidatorFactory.makeValidators(CHARIOT));
         validators.put(ADVISOR, ValidatorFactory.makeValidators(ADVISOR));
+        validators.put(GENERAL, ValidatorFactory.makeValidators(GENERAL));
     }
     
     private boolean isValidMove(XiangqiCoordinate xiangqiSource, XiangqiCoordinate xiangqiDest) {
