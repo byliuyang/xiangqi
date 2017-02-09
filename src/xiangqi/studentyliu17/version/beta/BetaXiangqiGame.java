@@ -145,17 +145,23 @@ public class BetaXiangqiGame implements XiangqiGame {
         CoordinateImpl dest = CoordinateImpl.makeCoordinate(xiangqiDest.getRank(), xiangqiDest
                 .getFile());
         
-        XiangqiPiece piece = getPieceAt(source, currentPlayer);
-        if (piece.getColor() != currentPlayer) return false;
-        XiangqiPieceType pieceType = piece.getPieceType();
+        XiangqiPiece sourcePiece = getPieceAt(source, currentPlayer);
+        if (sourcePiece.getColor() != currentPlayer) return false;
+        XiangqiPieceType sourcePieceType = sourcePiece.getPieceType();
         
-        if (!validators.containsKey(pieceType)) return true;
-        List<Validator> pieceValidators = validators.get(pieceType);
+        if (!validators.containsKey(sourcePieceType)) return true;
+        List<Validator> pieceValidators = validators.get(sourcePieceType);
         
         int numPiecesInBetween = getNumPiecesInBetween(source, dest);
         
+        XiangqiColor sourcePieceColor = sourcePiece.getColor();
+        
+        
+        XiangqiPiece destPiece = getPieceAt(dest, currentPlayer);
+        XiangqiColor destPieceColor = destPiece.getColor();
+        
         return pieceValidators.stream().allMatch((Validator validator) -> validator.validate
-                (source, dest, numPiecesInBetween));
+                (source, dest, numPiecesInBetween, sourcePieceColor, destPieceColor));
     }
     
     private int getNumPiecesInBetween(CoordinateImpl source, CoordinateImpl dest) {
@@ -171,15 +177,13 @@ public class BetaXiangqiGame implements XiangqiGame {
         int greaterFile = Math.max(sourceFile, destFile);
         
         int numInBetween = 0;
-        if(sourceRank == destRank) {
+        if (sourceRank == destRank) {
             for (int file = smallerFile + 1; file < greaterFile; file++) {
-                if(board[sourceRank - 1][file - 1] != null)
-                    numInBetween++;
+                if (board[sourceRank - 1][file - 1] != null) numInBetween++;
             }
-        } else if(sourceFile == destFile) {
+        } else if (sourceFile == destFile) {
             for (int rank = smallerRank + 1; rank < greaterRank; rank++) {
-                if(board[rank - 1][sourceFile - 1] != null)
-                    numInBetween++;
+                if (board[rank - 1][sourceFile - 1] != null) numInBetween++;
             }
         }
         return numInBetween;
