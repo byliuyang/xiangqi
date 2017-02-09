@@ -153,6 +153,20 @@ public class BetaXiangqiTestCases {
     
     @Test
         // 16
+    void redChariotTryToJumpOverAPiece() {
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3, 1)));
+        assertPiece(3, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
+        assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+        
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 4), makeCoordinate(2, 5)));
+        assertPiece(2, 5, XiangqiColor.BLACK, XiangqiPieceType.ADVISOR, XiangqiColor.BLACK);
+        assertPiece(1, 4, XiangqiColor.BLACK, XiangqiPieceType.NONE, XiangqiColor.NONE);
+        
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(3, 1), makeCoordinate(5, 1)));
+    }
+    
+    @Test
+        // 16
     void tryMoveFromInvalidLocation() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(2, 1), makeCoordinate(3, 1)));
         assertTrue(game.getMoveMessage().length() > 1);
