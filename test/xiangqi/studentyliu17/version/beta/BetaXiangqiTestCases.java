@@ -262,6 +262,14 @@ public class BetaXiangqiTestCases {
     }
     
     @Test
+        // 24
+    void redGeneralTryToCaptureRedPiece() {
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 3), makeCoordinate(1,2)));
+        assertPiece(1, 2, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
+        assertPiece(1, 3, XiangqiColor.RED, XiangqiPieceType.GENERAL, XiangqiColor.RED);
+    }
+    
+    @Test
         // 16
     void tryMoveFromInvalidLocation() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(2, 1), makeCoordinate(3, 1)));
