@@ -4,26 +4,27 @@ import xiangqi.common.XiangqiPieceType;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.function.BiPredicate;
 
 /**
- * Created by harryliu on 2/8/17.
+ * Validator factory
  */
 public class ValidatorFactory {
-    private static BiPredicate<CoordinateImpl, CoordinateImpl> orthogonalValidator =
-            (CoordinateImpl c1, CoordinateImpl c2) -> c2.isOrthogonal(c1);
-    private static BiPredicate<CoordinateImpl, CoordinateImpl> diagonalValidator   =
-            (CoordinateImpl c1, CoordinateImpl c2) -> c2.isDiagonal(c1);
-    private static BiPredicate<CoordinateImpl, CoordinateImpl> adjacentValidator   =
-            (CoordinateImpl c1, CoordinateImpl c2) -> c2.distanceTo(c1) == 1;
+    private static Validator orthogonalValidator = (CoordinateImpl c1, CoordinateImpl c2,
+                                                    Object... arguments
+                                                    ) ->
+            c2.isOrthogonal(c1);
+    private static Validator diagonalValidator   = (CoordinateImpl c1, CoordinateImpl c2, Object... arguments) ->
+            c2.isDiagonal(c1);
+    private static Validator adjacentValidator   = (CoordinateImpl c1, CoordinateImpl c2, Object... arguments) ->
+            c2.distanceTo(c1) == 1;
     
-    private static BiPredicate<CoordinateImpl, CoordinateImpl> differentCoordinateValidator =
-            (CoordinateImpl c1, CoordinateImpl c2) -> !c2.equals(c1);
+    private static Validator differentCoordinateValidator = (CoordinateImpl c1, CoordinateImpl
+            c2, Object... arguments) -> !c2.equals(c1);
     
-    public static List<BiPredicate<CoordinateImpl, CoordinateImpl>> makeValidators
+    public static List<Validator> makeValidators
             (XiangqiPieceType pieceType) {
         
-        List<BiPredicate<CoordinateImpl, CoordinateImpl>> validators = new LinkedList<>();
+        List<Validator> validators = new LinkedList<>();
         switch (pieceType) {
             case CHARIOT:
                 validators.add(differentCoordinateValidator);
@@ -35,10 +36,9 @@ public class ValidatorFactory {
         return validators;
     }
     
-    private static BiPredicate<CoordinateImpl, CoordinateImpl> makeRangeValidator(int fromRank,
-                                                                                  int toRank, int
-                                                                                          fromFile, int toFile) {
-        return (CoordinateImpl c1, CoordinateImpl c2) -> c2.isInRange(fromRank, toRank, fromFile,
-                                                                      toFile);
+    private static Validator makeRangeValidator(int fromRank, int toRank, int fromFile, int
+            toFile) {
+        return (CoordinateImpl c1, CoordinateImpl c2, Object... arguments) -> c2.isInRange
+                (fromRank, toRank, fromFile, toFile);
     }
 }

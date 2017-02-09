@@ -45,7 +45,7 @@ public class BetaXiangqiTestCases {
     void getPieceAtReturnsRedChariot() {
         assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
         assertPiece(1, 5, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
-    
+        
         assertPiece(5, 5, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
         assertPiece(5, 5, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
     }
@@ -55,7 +55,7 @@ public class BetaXiangqiTestCases {
     void getPieceAtReturnsRedAdvisor() {
         assertPiece(1, 2, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
         assertPiece(1, 4, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
-    
+        
         assertPiece(5, 2, XiangqiColor.BLACK, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
         assertPiece(5, 4, XiangqiColor.BLACK, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
     }
@@ -79,7 +79,7 @@ public class BetaXiangqiTestCases {
     void getPieceAtReturnsBlackChariot() {
         assertPiece(5, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
         assertPiece(5, 5, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
-    
+        
         assertPiece(1, 1, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
         assertPiece(1, 5, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
     }
@@ -89,7 +89,7 @@ public class BetaXiangqiTestCases {
     void getPieceAtReturnsBlackAdvisor() {
         assertPiece(5, 2, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.BLACK);
         assertPiece(5, 4, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.BLACK);
-    
+        
         assertPiece(1, 2, XiangqiColor.BLACK, XiangqiPieceType.ADVISOR, XiangqiColor.BLACK);
         assertPiece(1, 4, XiangqiColor.BLACK, XiangqiPieceType.ADVISOR, XiangqiColor.BLACK);
     }

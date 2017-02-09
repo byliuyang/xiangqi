@@ -6,7 +6,6 @@ import xiangqi.studentyliu17.version.XiangqiPieceImpl;
 
 import java.util.Hashtable;
 import java.util.List;
-import java.util.function.BiPredicate;
 
 import static xiangqi.common.XiangqiColor.BLACK;
 import static xiangqi.common.XiangqiColor.RED;
@@ -20,10 +19,9 @@ import static xiangqi.common.XiangqiPieceType.*;
 public class BetaXiangqiGame implements XiangqiGame {
     private final int BOARD_WIDTH  = 5;
     private final int BOARD_HEIGHT = 5;
-    private XiangqiColor
-                                                                                           currentPlayer;
-    private XiangqiPiece[][]                                                               board;
-    private Hashtable<XiangqiPieceType, List<BiPredicate<CoordinateImpl, CoordinateImpl>>> validators;
+    private XiangqiColor                                 currentPlayer;
+    private XiangqiPiece[][]                             board;
+    private Hashtable<XiangqiPieceType, List<Validator>> validators;
     
     /**
      * <p>
@@ -42,7 +40,7 @@ public class BetaXiangqiGame implements XiangqiGame {
      */
     @Override
     public MoveResult makeMove(XiangqiCoordinate source, XiangqiCoordinate destination) {
-        if(!isValidMove(source, destination)) return MoveResult.ILLEGAL;
+        if (!isValidMove(source, destination)) return MoveResult.ILLEGAL;
         
         movePiece(source, destination);
         switchPlayer();
@@ -144,20 +142,20 @@ public class BetaXiangqiGame implements XiangqiGame {
     private boolean isValidMove(XiangqiCoordinate xiangqiSource, XiangqiCoordinate xiangqiDest) {
         CoordinateImpl source = CoordinateImpl.makeCoordinate(xiangqiSource.getRank(),
                                                               xiangqiSource.getFile());
-        CoordinateImpl dest = CoordinateImpl.makeCoordinate(xiangqiDest.getRank(),
-                                                            xiangqiDest.getFile());
+        CoordinateImpl dest = CoordinateImpl.makeCoordinate(xiangqiDest.getRank(), xiangqiDest
+                .getFile());
         
         XiangqiPiece piece = getPieceAt(source, currentPlayer);
         if (piece.getColor() != currentPlayer) return false;
         XiangqiPieceType pieceType = piece.getPieceType();
         
         if (!validators.containsKey(pieceType)) return true;
-        List<BiPredicate<CoordinateImpl, CoordinateImpl>> pieceValidators = validators.get
-                (pieceType);
+        List<Validator> pieceValidators = validators.get(pieceType);
         
-        return pieceValidators.stream().allMatch((BiPredicate<CoordinateImpl, CoordinateImpl>
-                                                          validator) -> validator.test(source,
-                                                                                       dest));
+//        int numPiecesInBetween =
+        
+        return pieceValidators.stream().allMatch((Validator validator) -> validator.validate
+                (source, dest, null));
     }
     
     private int getRankRespectToRed(XiangqiCoordinate where, XiangqiColor aspect) {
