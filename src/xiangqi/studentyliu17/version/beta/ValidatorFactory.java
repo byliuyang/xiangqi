@@ -13,10 +13,9 @@ public class ValidatorFactory {
     private static Validator orthogonalValidator = (CoordinateImpl c1, CoordinateImpl c2, int
             numPiecesInBetween, XiangqiColor sourceColor, XiangqiColor destColor) ->
             c2.isOrthogonal(c1);
-    private static Validator diagonalValidator   = (CoordinateImpl c1, CoordinateImpl c2,
-                                                    int numPiecesInBetween, XiangqiColor
-                                                            sourceColor, XiangqiColor
-                                                            destColor) -> c2.isDiagonal(c1);
+    private static Validator diagonalValidator   = (CoordinateImpl c1, CoordinateImpl c2, int
+            numPiecesInBetween, XiangqiColor sourceColor, XiangqiColor destColor) ->
+            c2.isDiagonal(c1);
     private static Validator adjacentValidator   = (CoordinateImpl c1, CoordinateImpl c2, int
             numPiecesInBetween, XiangqiColor sourceColor, XiangqiColor destColor) ->
             c2.distanceTo(c1) == 1 || (c2.isDiagonal(c1) && c2.distanceTo(c1) == 2);
@@ -25,15 +24,15 @@ public class ValidatorFactory {
             c2, int numPiecesInBetween, XiangqiColor sourceColor, XiangqiColor destColor) ->
             !c2.equals(c1);
     
-    private static Validator differentColorValidator = (CoordinateImpl c1, CoordinateImpl
-            c2, int numPiecesInBetween, XiangqiColor sourceColor, XiangqiColor destColor) ->
-            sourceColor != destColor;
+    private static Validator differentColorValidator = (CoordinateImpl c1, CoordinateImpl c2, int
+            numPiecesInBetween, XiangqiColor sourceColor, XiangqiColor destColor) -> sourceColor
+                                                                                     != destColor;
     
     private static Validator jumpOverNoPieceValidator = (CoordinateImpl c1, CoordinateImpl c2,
                                                          int numPiecesInBetween, XiangqiColor
                                                                  sourceColor, XiangqiColor
-                                                                 destColor) ->
-            numPiecesInBetween == 0;
+                                                                 destColor) -> numPiecesInBetween
+                                                                               == 0;
     
     public static List<Validator> makeValidators(XiangqiPieceType pieceType) {
         
@@ -55,7 +54,9 @@ public class ValidatorFactory {
                 validators.add(differentColorValidator);
                 validators.add(differentCoordinateValidator);
                 validators.add(orthogonalValidator);
+                validators.add(makeRangeValidator(1, 1, 2, 4));
                 validators.add(adjacentValidator);
+                break;
             default:
                 System.out.println("Not yet implemented!");
         }
