@@ -16,6 +16,7 @@ import xiangqi.common.XiangqiGame;
 import xiangqi.common.XiangqiGameVersion;
 import xiangqi.studentyliu17.version.alpha.AlphaXiangqiGame;
 import xiangqi.studentyliu17.version.beta.BetaXiangqiGame;
+import xiangqi.studentyliu17.version.gamma.GammaXiangqiGame;
 
 /**
  * A simple factory object that creates the appropriate instance of a XiangqiGame.
@@ -40,6 +41,9 @@ public class XiangqiGameFactory {
                 game = new BetaXiangqiGame();
                 game.initialize();
                 break;
+            case GAMMA_XQ:
+                game = new GammaXiangqiGame();
+                game.initialize();
             default:
                 break;
         }
