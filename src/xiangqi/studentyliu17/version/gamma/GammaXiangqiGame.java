@@ -1,6 +1,7 @@
 package xiangqi.studentyliu17.version.gamma;
 
 import xiangqi.common.*;
+import xiangqi.studentyliu17.version.XiangqiPieceImpl;
 
 /***************************************************************************************************
  * Gamma Xiàngqí is the first version that uses the standard board, including the river and the
@@ -65,7 +66,7 @@ public class GammaXiangqiGame implements XiangqiGame {
      */
     @Override
     public XiangqiPiece getPieceAt(XiangqiCoordinate where, XiangqiColor aspect) {
-        return null;
+        return XiangqiPieceImpl.makePiece(XiangqiPieceType.NONE, XiangqiColor.NONE);
     }
     
     /**

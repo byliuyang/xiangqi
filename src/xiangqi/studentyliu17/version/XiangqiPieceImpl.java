@@ -5,7 +5,8 @@ import xiangqi.common.XiangqiPiece;
 import xiangqi.common.XiangqiPieceType;
 
 /**
- * Created by harryliu on 2/1/17.
+ * This class implements XiangqiPiece interface and provides factory methods
+ * @version Feb 11, 2016
  */
 public class XiangqiPieceImpl implements XiangqiPiece {
     private final XiangqiColor color;
