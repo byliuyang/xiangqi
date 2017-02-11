@@ -22,6 +22,7 @@ public class BetaXiangqiGame implements XiangqiGame {
     private XiangqiColor                                 currentPlayer;
     private XiangqiPiece[][]                             board;
     private Hashtable<XiangqiPieceType, List<Validator>> validators;
+    private int turns;
     
     /**
      * <p>
@@ -40,23 +41,42 @@ public class BetaXiangqiGame implements XiangqiGame {
      */
     @Override
     public MoveResult makeMove(XiangqiCoordinate source, XiangqiCoordinate destination) {
-        if (!isValidMove(source, destination)) return MoveResult.ILLEGAL;
+        if (!isValidMove(source, destination, currentPlayer)) return MoveResult.ILLEGAL;
         
-        movePiece(source, destination);
+        movePiece(source, destination, currentPlayer);
+        if(currentPlayer == BLACK) turns++;
         switchPlayer();
+        
+        if (isGeneralCheckmated(RED)) return MoveResult.BLACK_WINS;
+        else if (isGeneralCheckmated(BLACK)) return MoveResult.RED_WINS;
+        else if(isDraw()) return MoveResult.DRAW;
         
         return MoveResult.OK;
     }
     
-    private void movePiece(XiangqiCoordinate source, XiangqiCoordinate destination) {
-        int sourceFile = getFileRespectToRed(source, currentPlayer);
-        int sourceRank = getRankRespectToRed(source, currentPlayer);
+    private boolean isDraw() {
+        return turns >= 10;
+    }
+    
+    private void movePiece(XiangqiCoordinate source, XiangqiCoordinate destination, XiangqiColor
+            player) {
+        int sourceFile = getFileRespectToRed(source, player);
+        int sourceRank = getRankRespectToRed(source, player);
         
-        int destFile = getFileRespectToRed(destination, currentPlayer);
-        int destRank = getRankRespectToRed(destination, currentPlayer);
+        int destFile = getFileRespectToRed(destination, player);
+        int destRank = getRankRespectToRed(destination, player);
         
         board[destRank - 1][destFile - 1] = board[sourceRank - 1][sourceFile - 1];
         board[sourceRank - 1][sourceFile - 1] = null;
+    }
+    
+    private void putPiece(XiangqiPiece piece, XiangqiCoordinate destination, XiangqiColor
+            player) {
+        
+        int destFile = getFileRespectToRed(destination, player);
+        int destRank = getRankRespectToRed(destination, player);
+        
+        board[destRank - 1][destFile - 1] = piece;
     }
     
     private void switchPlayer() {
@@ -110,6 +130,7 @@ public class BetaXiangqiGame implements XiangqiGame {
     public void initialize(Object... args) {
         board = new XiangqiPieceImpl[5][5];
         currentPlayer = XiangqiColor.RED;
+        turns = 0;
         
         setupRedPieces();
         setupBlackPieces();
@@ -142,36 +163,38 @@ public class BetaXiangqiGame implements XiangqiGame {
         validators.put(SOLDIER, ValidatorFactory.makeValidators(SOLDIER));
     }
     
-    private boolean isValidMove(XiangqiCoordinate xiangqiSource, XiangqiCoordinate xiangqiDest) {
+    private boolean isValidMove(XiangqiCoordinate xiangqiSource, XiangqiCoordinate xiangqiDest,
+                                XiangqiColor player) {
         CoordinateImpl source = CoordinateImpl.makeCoordinate(xiangqiSource.getRank(),
                                                               xiangqiSource.getFile());
         CoordinateImpl dest = CoordinateImpl.makeCoordinate(xiangqiDest.getRank(), xiangqiDest
                 .getFile());
         
-        XiangqiPiece sourcePiece = getPieceAt(source, currentPlayer);
-        if (sourcePiece.getColor() != currentPlayer) return false;
+        XiangqiPiece sourcePiece = getPieceAt(source, player);
+        if (sourcePiece.getColor() != player) return false;
         XiangqiPieceType sourcePieceType = sourcePiece.getPieceType();
         
         if (!validators.containsKey(sourcePieceType)) return true;
         List<Validator> pieceValidators = validators.get(sourcePieceType);
         
-        int numPiecesInBetween = getNumPiecesInBetween(source, dest);
+        int numPiecesInBetween = getNumPiecesInBetween(source, dest, player);
         
         XiangqiColor sourcePieceColor = sourcePiece.getColor();
         
-        XiangqiPiece destPiece = getPieceAt(dest, currentPlayer);
+        XiangqiPiece destPiece = getPieceAt(dest, player);
         XiangqiColor destPieceColor = destPiece.getColor();
         
         return pieceValidators.stream().allMatch((Validator validator) -> validator.validate
                 (source, dest, numPiecesInBetween, sourcePieceColor, destPieceColor));
     }
     
-    private int getNumPiecesInBetween(CoordinateImpl source, CoordinateImpl dest) {
-        int sourceFile = getFileRespectToRed(source, currentPlayer);
-        int sourceRank = getRankRespectToRed(source, currentPlayer);
+    private int getNumPiecesInBetween(CoordinateImpl source, CoordinateImpl dest, XiangqiColor
+            player) {
+        int sourceFile = getFileRespectToRed(source, player);
+        int sourceRank = getRankRespectToRed(source, player);
         
-        int destFile = getFileRespectToRed(dest, currentPlayer);
-        int destRank = getRankRespectToRed(dest, currentPlayer);
+        int destFile = getFileRespectToRed(dest, player);
+        int destRank = getRankRespectToRed(dest, player);
         
         int smallerRank = Math.min(sourceRank, destRank);
         int greaterRank = Math.max(sourceRank, destRank);
@@ -201,5 +224,113 @@ public class BetaXiangqiGame implements XiangqiGame {
         int file = where.getFile();
         if (aspect == RED) return file;
         else return BOARD_WIDTH + 1 - file;
+    }
+    
+    private boolean isGeneralUnderAttack(XiangqiColor color, CoordinateImpl generalLocation) {
+        
+        for (int rank = 1; rank <= BOARD_HEIGHT; rank++) {
+            for (int file = 1; file <= BOARD_WIDTH; file++) {
+                XiangqiPiece piece = board[rank - 1][file - 1];
+                if (piece != null && piece.getColor() != color) {
+                    CoordinateImpl pieceLocation = CoordinateImpl.makeCoordinate(rank, file, RED,
+                                                                                 piece.getColor(),
+                                                                                 BOARD_WIDTH,
+                                                                                 BOARD_HEIGHT);
+                    if (canAttack(pieceLocation, generalLocation, piece, color)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    private boolean canAttack(CoordinateImpl from, CoordinateImpl to, XiangqiPiece  piece,
+                              XiangqiColor generalColor) {
+        XiangqiColor player = piece.getColor();
+        CoordinateImpl generalLocRespectToPiece = CoordinateImpl.makeCoordinate
+                (to.getRank(), to.getFile(), generalColor , player, BOARD_WIDTH, BOARD_HEIGHT);
+        return isValidMove(from, generalLocRespectToPiece, player);
+    }
+    
+    private CoordinateImpl getGeneralLocation(XiangqiColor color) {
+        for (int rank = 1; rank <= BOARD_HEIGHT; rank++) {
+            for (int file = 1; file <= BOARD_WIDTH; file++) {
+                XiangqiPiece piece = board[rank - 1][file - 1];
+                if (piece != null && piece.getColor() == color && piece.getPieceType() == GENERAL)
+                    return CoordinateImpl.makeCoordinate(rank, file, RED, color,
+                                                         BOARD_WIDTH, BOARD_HEIGHT);
+            }
+        }
+        
+        return null;
+    }
+    
+    private boolean isGeneralCheckmated(XiangqiColor color) {
+        CoordinateImpl generalLocation = getGeneralLocation(color);
+        if (generalLocation == null) return false;
+    
+        return isGeneralUnderAttack(color, generalLocation) && !canGeneralMoveOutOfCheck(color, generalLocation) &&
+               !checkCanBeBlocked(color, generalLocation);
+    }
+    
+    private boolean canGeneralMoveOutOfCheck(XiangqiColor color, CoordinateImpl generalLocation) {
+        for (int rank = 1; rank <= BOARD_HEIGHT; rank++) {
+            for (int file = 1; file <= BOARD_WIDTH; file++) {
+                CoordinateImpl newLocation = CoordinateImpl.makeCoordinate(rank, file, RED,
+                                                                           color, BOARD_WIDTH,
+                                                                           BOARD_HEIGHT);
+                if (isValidMove(generalLocation, newLocation, color)) {
+                    XiangqiPiece oldPiece = getPieceAt(newLocation, color);
+                    if(oldPiece.getPieceType() == XiangqiPieceType.NONE) oldPiece = null;
+                    movePiece(generalLocation, newLocation, color);
+                    boolean isUnderAttack = isGeneralUnderAttack(color, newLocation);
+                    movePiece(newLocation, generalLocation, color);
+                    putPiece(oldPiece, newLocation, color);
+                    
+                    if (!isUnderAttack) return true;
+                }
+            }
+        }
+        
+        return false;
+    }
+    
+    private boolean checkCanBeBlocked(XiangqiColor color, CoordinateImpl generalLocation) {
+        for (int rank = 1; rank <= BOARD_HEIGHT; rank++) {
+            for (int file = 1; file <= BOARD_WIDTH; file++) {
+                XiangqiPiece piece = board[rank - 1][file - 1];
+                
+                if (piece != null && piece.getColor() == color) {
+                    XiangqiColor player = piece.getColor();
+                    CoordinateImpl pieceLocation = CoordinateImpl.makeCoordinate(rank, file, RED,
+                                                                                 player
+                            , BOARD_WIDTH, BOARD_HEIGHT);
+                    for (int newRank = 1; newRank <= BOARD_HEIGHT; newRank++) {
+                        for (int newFile = 1; newFile <= BOARD_WIDTH; newFile++) {
+                            CoordinateImpl newLocation = CoordinateImpl.makeCoordinate(newRank,
+                                                                                       newFile,
+                                                                                     RED,
+                                                                                       player
+                                    , BOARD_WIDTH, BOARD_HEIGHT);
+                            if(isValidMove(pieceLocation, newLocation, player)) {
+                                XiangqiPiece oldPiece = getPieceAt(newLocation, player);
+                                if(oldPiece.getPieceType() == XiangqiPieceType.NONE) oldPiece =
+                                        null;
+                                movePiece(pieceLocation, newLocation, player);
+                                boolean isUnderAttack = isGeneralUnderAttack(color, generalLocation);
+                                movePiece(newLocation, pieceLocation, player);
+                                putPiece(oldPiece, newLocation, player);
+                                
+                                if (!isUnderAttack) return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        
+        return false;
     }
 }

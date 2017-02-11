@@ -1,5 +1,6 @@
 package xiangqi.studentyliu17.version.beta;
 
+import xiangqi.common.XiangqiColor;
 import xiangqi.common.XiangqiCoordinate;
 
 /**
@@ -24,6 +25,28 @@ public class CoordinateImpl implements XiangqiCoordinate {
      */
     public static CoordinateImpl makeCoordinate(int rank, int file) {
         return new CoordinateImpl(rank, file);
+    }
+    
+    /**
+     /**
+     * Creation method for coordinates
+     *
+     * @param rank The rank of the coordinate
+     * @param file The file of the coordinate
+     * @param fromColor
+     * @param toColor
+     * @param boardWidth
+     * @param boardHeight
+     * @return The CoordinateImpl instance
+     */
+    public static CoordinateImpl makeCoordinate(int rank, int file, XiangqiColor fromColor,
+                                                XiangqiColor toColor, int boardWidth, int
+                                                        boardHeight) {
+        
+        return fromColor == toColor ? makeCoordinate(rank, file) : makeCoordinate(boardHeight + 1
+                                                                                  - rank,
+                                                                                  boardWidth + 1
+                                                                                  - file);
     }
     
     /**

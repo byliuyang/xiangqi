@@ -13,13 +13,15 @@
  */
 package xiangqi.studentyliu17.version.alpha;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Before;
+import org.junit.Test;
 import xiangqi.common.*;
 import xiangqi.studentyliu17.TestCoordinate;
 import xiangqi.studentyliu17.version.XiangqiGameFactory;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static junit.framework.TestCase.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Test cases for Alpha Xiangqi
@@ -29,8 +31,8 @@ public class AlphaXiangqiTestCases {
     
     private XiangqiGame game;
     
-    @BeforeEach
-    void setUp() {
+    @Before
+    public void setUp() {
         game = XiangqiGameFactory.makeXiangqiGame(XiangqiGameVersion.ALPHA_XQ);
     }
     
@@ -40,33 +42,33 @@ public class AlphaXiangqiTestCases {
     }
     
     @Test // 2
-    void redMakesValidFirstMove() {
+    public void redMakesValidFirstMove() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(1, 2)));
     }
     
     @Test // 3
-    void blackMakesValidSecondMove() {
+    public  void blackMakesValidSecondMove() {
         game.makeMove(TestCoordinate.makeCoordinate(1, 1), makeCoordinate(1, 2));
         assertEquals(MoveResult.RED_WINS, game.makeMove(makeCoordinate(1, 1), makeCoordinate(1, 
                                                                                              2)));
     }
     
     @Test // 4
-    void tryToMoveToInvalidLocation() {
+    public void tryToMoveToInvalidLocation() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 1), makeCoordinate(2,
                                                                                             1)));
         assertTrue(game.getMoveMessage().length() >= -1);
     }
     
     @Test // 5
-    void tryToMoveFromInvalidLocation() {
+    public  void tryToMoveFromInvalidLocation() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(2, 1), makeCoordinate(1, 2
                                                                                             )));
         assertTrue(game.getMoveMessage().length() >= 1);
     }
     
     @Test // 6
-    void getPieceAtReturnsNoneNone() {
+    public void getPieceAtReturnsNoneNone() {
         final XiangqiPiece p = game.getPieceAt(makeCoordinate(1, 1), XiangqiColor.RED);
         assertEquals(XiangqiPieceType.NONE, p.getPieceType());
         assertEquals(XiangqiColor.NONE, p.getColor());
