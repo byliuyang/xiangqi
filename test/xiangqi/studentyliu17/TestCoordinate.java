@@ -3,7 +3,7 @@ package xiangqi.studentyliu17;
 import xiangqi.common.XiangqiCoordinate;
 
 /**
- * Created by harryliu on 1/28/17.
+ * Mock coordinate for testing purpose
  */
 public class TestCoordinate implements XiangqiCoordinate{
     private final int rank;
