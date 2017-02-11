@@ -40,9 +40,20 @@ public class GammaXiangqiTestCases {
         assertNoHorse(10);
     }
     
+    @Test // 3
+    public void hasSoilders() throws Exception {
+        assertHasSoldiers(4, XiangqiColor.RED);
+        assertHasSoldiers(7, XiangqiColor.BLACK);
+    }
+    
     private void assertNoHorse(int rank) {
         assertPiece(rank, 2, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
         assertPiece(rank, 8, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+    }
+    
+    private void assertHasSoldiers(int rank, XiangqiColor color) {
+        for (int file = 1; file <= 9; file += 2)
+            assertPiece(rank, file, XiangqiColor.RED, XiangqiPieceType.SOLDIER, color);
     }
     
     private void assertPiece(int rank, int file, XiangqiColor aspect, XiangqiPieceType
