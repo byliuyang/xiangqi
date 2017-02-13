@@ -28,7 +28,7 @@ public class GammaXiangqiTestCases {
     }
     
     @Test // 2
-    public void getPieceAtEmptyLocation() throws Exception {
+    public void getPieceAtEmptyLocation() {
         for (int rank = 2; rank <= 9; rank++) {
             for (int file = 1; file <= 9; file++) {
                 if ((rank == 4 || rank == 7) && file % 2 != 0) continue;
@@ -41,9 +41,19 @@ public class GammaXiangqiTestCases {
     }
     
     @Test // 3
-    public void hasSoilders() throws Exception {
+    public void hasSoilders() {
         assertHasSoldiers(4, XiangqiColor.RED);
         assertHasSoldiers(7, XiangqiColor.BLACK);
+    }
+    
+    @Test // 4
+    public void redHasChariots() {
+        assertHasChariots(1, XiangqiColor.RED);
+    }
+    
+    private void assertHasChariots(int rank, XiangqiColor color) {
+        assertPiece(rank, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, color);
+        assertPiece(rank, 9, XiangqiColor.RED, XiangqiPieceType.CHARIOT, color);
     }
     
     private void assertNoHorse(int rank) {
