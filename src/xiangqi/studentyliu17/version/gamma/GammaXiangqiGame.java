@@ -66,6 +66,10 @@ public class GammaXiangqiGame implements XiangqiGame {
      */
     @Override
     public XiangqiPiece getPieceAt(XiangqiCoordinate where, XiangqiColor aspect) {
+        int rank = where.getRank();
+        int file = where.getFile();
+        if((rank == 4 || rank == 7) && file % 2 != 0) return XiangqiPieceImpl.makePiece
+                (XiangqiPieceType.SOLDIER, rank == 4 ? XiangqiColor.RED : XiangqiColor.BLACK);
         return XiangqiPieceImpl.makePiece(XiangqiPieceType.NONE, XiangqiColor.NONE);
     }
     
