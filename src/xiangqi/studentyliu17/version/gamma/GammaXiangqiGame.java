@@ -71,8 +71,12 @@ public class GammaXiangqiGame implements XiangqiGame {
         if((rank == 4 || rank == 7) && file % 2 != 0) return XiangqiPieceImpl.makePiece
                 (XiangqiPieceType.SOLDIER, rank == 4 ? XiangqiColor.RED : XiangqiColor.BLACK);
         if(file == 1 || file == 9) {
-            if(rank == 1) return XiangqiPieceImpl.makePiece(XiangqiPieceType.CHARIOT,
+            if (rank == 1 )
+                return XiangqiPieceImpl.makePiece(XiangqiPieceType.CHARIOT,
                                                             XiangqiColor.RED);
+            else if(rank == 10)
+                return XiangqiPieceImpl.makePiece(XiangqiPieceType.CHARIOT,
+                                           XiangqiColor.BLACK);
         }
         return XiangqiPieceImpl.makePiece(XiangqiPieceType.NONE, XiangqiColor.NONE);
     }
