@@ -51,6 +51,11 @@ public class GammaXiangqiTestCases {
         assertHasChariots(1, XiangqiColor.RED);
     }
     
+    @Test // 5
+    public void blackHasChariots() {
+        assertHasChariots(10, XiangqiColor.BLACK);
+    }
+    
     private void assertHasChariots(int rank, XiangqiColor color) {
         assertPiece(rank, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, color);
         assertPiece(rank, 9, XiangqiColor.RED, XiangqiPieceType.CHARIOT, color);
