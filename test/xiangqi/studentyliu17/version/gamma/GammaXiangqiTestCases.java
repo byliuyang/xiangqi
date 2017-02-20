@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import xiangqi.common.*;
 import xiangqi.studentyliu17.TestCoordinate;
-import xiangqi.studentyliu17.version.XiangqiGameFactory;
+import xiangqi.XiangqiGameFactory;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;

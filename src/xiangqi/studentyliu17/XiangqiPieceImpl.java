@@ -1,4 +1,4 @@
-package xiangqi.studentyliu17.version;
+package xiangqi.studentyliu17;
 
 import xiangqi.common.XiangqiColor;
 import xiangqi.common.XiangqiPiece;
@@ -6,17 +6,26 @@ import xiangqi.common.XiangqiPieceType;
 
 /**
  * This class implements XiangqiPiece interface and provides factory methods
- * @version Feb 11, 2016
+ * 
+ * @version Jan 28, 2017
  */
 public class XiangqiPieceImpl implements XiangqiPiece {
-    private final XiangqiColor color;
-    private final XiangqiPieceType pieceType;
+    private final XiangqiColor color; // The color of xiangqi piece
+    private final XiangqiPieceType pieceType; // The type of xiangqi piece
     
+    /**
+     * Creation method for XiangqiPiece
+     * 
+     * @param pieceType The type of xiangqi piece
+     * @param color The color of the xiangqi piece
+     * 
+     * @return XiangqiPiece with given type and color
+     */
     public static XiangqiPiece makePiece(XiangqiPieceType pieceType, XiangqiColor color) {
         return new XiangqiPieceImpl(pieceType, color);
     }
     
-    public XiangqiPieceImpl(XiangqiPieceType pieceType, XiangqiColor color) {
+    private XiangqiPieceImpl(XiangqiPieceType pieceType, XiangqiColor color) {
         this.color = color;
         this.pieceType = pieceType;
     }

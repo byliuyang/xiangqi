@@ -10,7 +10,7 @@
  * Copyright ©2016-2017 Gary F. Pollice
  *******************************************************************************/
 
-package xiangqi.studentyliu17.version;
+package xiangqi;
 
 import xiangqi.common.XiangqiGame;
 import xiangqi.common.XiangqiGameVersion;
@@ -44,7 +44,6 @@ public class XiangqiGameFactory {
             case GAMMA_XQ:
                 game = new GammaXiangqiGame();
                 game.initialize();
-            default:
                 break;
         }
         

@@ -1,7 +1,7 @@
 package xiangqi.studentyliu17.version.gamma;
 
 import xiangqi.common.*;
-import xiangqi.studentyliu17.version.XiangqiPieceImpl;
+import xiangqi.studentyliu17.XiangqiPieceImpl;
 
 /***************************************************************************************************
  * Gamma Xiàngqí is the first version that uses the standard board, including the river and the

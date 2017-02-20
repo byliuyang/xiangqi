@@ -1,14 +1,15 @@
 package xiangqi.studentyliu17.version.beta;
 
-import xiangqi.common.XiangqiColor;
 import xiangqi.common.XiangqiCoordinate;
 
 /**
- * Created by harryliu on 2/8/17.
+ * This class implement XiangqiCoordinte interface and provide coordinate utilities
+ * 
+ * @version Jan 28, 2017
  */
 public class CoordinateImpl implements XiangqiCoordinate {
-    private int rank;
-    private int file;
+    private int rank; // The rank of coordinate
+    private int file; // The file of coordinate
     
     private CoordinateImpl(int rank, int file) {
         this.rank = rank;
@@ -25,28 +26,6 @@ public class CoordinateImpl implements XiangqiCoordinate {
      */
     public static CoordinateImpl makeCoordinate(int rank, int file) {
         return new CoordinateImpl(rank, file);
-    }
-    
-    /**
-     /**
-     * Creation method for coordinates
-     *
-     * @param rank The rank of the coordinate
-     * @param file The file of the coordinate
-     * @param fromColor
-     * @param toColor
-     * @param boardWidth
-     * @param boardHeight
-     * @return The CoordinateImpl instance
-     */
-    public static CoordinateImpl makeCoordinate(int rank, int file, XiangqiColor fromColor,
-                                                XiangqiColor toColor, int boardWidth, int
-                                                        boardHeight) {
-        
-        return fromColor == toColor ? makeCoordinate(rank, file) : makeCoordinate(boardHeight + 1
-                                                                                  - rank,
-                                                                                  boardWidth + 1
-                                                                                  - file);
     }
     
     /**
@@ -142,10 +121,21 @@ public class CoordinateImpl implements XiangqiCoordinate {
         return file;
     }
     
+    /**
+     * Compare whether two coordinates are equal
+     */
     @Override
     public boolean equals(Object obj) {
         if (!(obj instanceof XiangqiCoordinate)) return false;
         XiangqiCoordinate coordinate = (XiangqiCoordinate) obj;
         return coordinate.getRank() == rank && coordinate.getFile() == file;
+    }
+    
+    /**
+     * Get the hash code of the coordinate
+     */
+    @Override
+    public int hashCode() {
+        return rank + file;
     }
 }

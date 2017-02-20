@@ -1,7 +1,7 @@
 package xiangqi.studentyliu17.version.alpha;
 
+import xiangqi.studentyliu17.XiangqiPieceImpl;
 import xiangqi.common.*;
-import xiangqi.studentyliu17.version.XiangqiPieceImpl;
 
 /*******************************************************************************
  * This files was developed for CS4233: Object-Oriented Analysis & Design.
@@ -18,11 +18,14 @@ import xiangqi.studentyliu17.version.XiangqiPieceImpl;
 /**
  * Alpha version of Xiangqi game
  *
- * @version Jan 28, 2016
+ * @version Jan 28, 2017
  */
 public class AlphaXiangqiGame implements XiangqiGame {
     private int moveCount;
     
+    /**
+     * Initialize alpha xiangqi game
+     */
     public AlphaXiangqiGame() {
         this.moveCount = 0;
     }
