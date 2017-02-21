@@ -148,6 +148,7 @@ public class ValidatorFactory {
                 break;
             case CHARIOT:
                 validators.add(orthogonalValidator);
+                validators.add(jumpOverNoPieceValidator);
                 break;
             default:
                 validators.add(differentColorValidator);
