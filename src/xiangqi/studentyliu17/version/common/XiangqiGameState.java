@@ -168,4 +168,9 @@ public class XiangqiGameState {
                                             XiangqiColor toColor) {
         return boardState.makeCoordinate(coordinate, fromColor, toColor);
     }
+    
+    public int numDiagonalPiecesInBetween(XiangqiCoordinate source, XiangqiCoordinate dest,
+                                          XiangqiColor player) {
+        return boardState.numDiagonalPiecesInBetween(source, dest, player);
+    }
 }
