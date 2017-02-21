@@ -170,6 +170,12 @@ public class GammaXiangqiTestCases {
                                                                                        1)));
     }
     
+    @Test // 23
+    public void redMoveChariotDiagonallyOneStep() {
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 1), makeCoordinate(2,
+                                                                                       2)));
+    }
+    
     private void redSoldierCrossTheRiver() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(4, 3), makeCoordinate(5,
                                                                                        3)));

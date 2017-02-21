@@ -66,10 +66,10 @@ public class XiangqiGameImpl implements XiangqiGame {
             moveMessage = "General will be under checkmate";
             return MoveResult.ILLEGAL;
         } else if (isGeneralCheckmated(otherPlayer)) {
-            moveMessage = "Win";
+            moveMessage = "Player wins";
             return win(currentPlayer);
         } else if (ruleSet.isDraw(gameState)) {
-            moveMessage = "Draw";
+            moveMessage = "Players are draw";
             return MoveResult.DRAW;
         }
         

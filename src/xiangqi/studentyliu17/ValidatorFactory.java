@@ -25,8 +25,7 @@ public class ValidatorFactory {
                                                             currentPlayer) -> c2.distanceTo(c1)
                                                                               == 1 ||
                                                                               (c2.isDiagonal(c1)
-                                                                               && c2.distanceTo
-                                                                                      (c1) == 2);
+                                                                               && c2.distanceTo(c1) == 2);
     
     private static Validator differentCoordinateValidator = (CoordinateImpl c1, CoordinateImpl
             c2, XiangqiGameState state, XiangqiColor currentPlayer) -> !c2.equals(c1);
