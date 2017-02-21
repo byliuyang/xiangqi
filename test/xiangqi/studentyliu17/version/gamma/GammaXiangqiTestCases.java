@@ -131,6 +131,12 @@ public class GammaXiangqiTestCases {
                                                                                             4)));
     }
     
+    @Test // 18
+    public void redMoveSoldierBackwardOneStep() {
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(4, 3), makeCoordinate(3,
+                                                                                            3)));
+    }
+    
     private void assertHasAdvisors(int rank, XiangqiColor color) {
         assertPiece(rank, 4, XiangqiColor.RED, XiangqiPieceType.ADVISOR, color);
         assertPiece(rank, 6, XiangqiColor.RED, XiangqiPieceType.ADVISOR, color);
