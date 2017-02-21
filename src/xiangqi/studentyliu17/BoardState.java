@@ -28,10 +28,11 @@ public class BoardState {
     // coordinate and XiangqiPiece pairs
     private       List<XiangqiCoordinate>                  coordinates; // Keep list of all
     // possible xiangqi coordinates
-    private PiecesInitializer initializer;
+    private PiecesInitializer initializer; // Initializer for setting up xiangqi pieces on the board
     
     
-    private BoardState(int boardWidth, int boardHeight, PiecesInitializer initializer) {
+    private BoardState(int boardWidth, int boardHeight, PiecesInitializer
+                       initializer) {
         this.boardWidth = boardWidth;
         this.boardHeight = boardHeight;
         this.initializer = initializer;
@@ -39,7 +40,7 @@ public class BoardState {
     
     public static BoardState makeBoardState(int boardWidth, int boardHeight, PiecesInitializer
             initializer) {
-        BoardState boardState = new BoardState(boardWidth, boardHeight, initializer);
+        BoardState boardState = new BoardState(boardWidth, boardHeight,  initializer);
         boardState.initialize();
         return boardState;
     }
@@ -211,9 +212,5 @@ public class BoardState {
         List<Map.Entry<XiangqiCoordinate, XiangqiPiece>> entries = new LinkedList<>();
         pieces.entrySet().forEach(entries::add);
         return entries;
-    }
-    
-    public HashMap<XiangqiCoordinate, XiangqiPiece> getPieces() {
-        return pieces;
     }
 }

@@ -13,6 +13,7 @@ import java.util.List;
  * @version Jan 28, 2017
  */
 public class ValidatorFactory {
+    private static int       GAMMA_RANK_OF_RIVER = 5;
     private static Validator orthogonalValidator = (CoordinateImpl c1, CoordinateImpl c2,
                                                     XiangqiGameState state, XiangqiColor
                                                             currentPlayer) -> c2.isOrthogonal(c1);
@@ -44,11 +45,22 @@ public class ValidatorFactory {
                                                   XiangqiGameState state, XiangqiColor
                                                           currentPlayer) -> c2.isVertical(c1);
     
-    private static Validator moveForwardValidator = (CoordinateImpl c1, CoordinateImpl c2,
-                                                     XiangqiGameState state, XiangqiColor
-                                                             currentPlayer) -> c2.isInFrontOf(c1);
-    private static Validator sameCoordinateValidator = (CoordinateImpl c1, CoordinateImpl c2,
-    XiangqiGameState state, XiangqiColor player)-> c1.equals(c2);
+    private static Validator moveForwardValidator                     = (CoordinateImpl c1,
+                                                                         CoordinateImpl c2,
+                                                                         XiangqiGameState state,
+                                                                         XiangqiColor
+                                                                                 currentPlayer)
+            -> c2.isInFrontOf(c1);
+    private static Validator moveForwardCrossRiverHorizontalValidator = (CoordinateImpl c1,
+                                                                         CoordinateImpl c2,
+                                                                         XiangqiGameState state,
+                                                                         XiangqiColor currentPlayer)
+            -> c2.isInFrontOf(c1) || (c1.getRank() > GAMMA_RANK_OF_RIVER && c2.isHorizontal(c1));
+    private static Validator sameCoordinateValidator                  = (CoordinateImpl c1,
+                                                                         CoordinateImpl c2,
+                                                                         XiangqiGameState state,
+                                                                         XiangqiColor player) ->
+            c1.equals(c2);
     
     /**
      * Creation method for xiangqi game validators
@@ -131,9 +143,9 @@ public class ValidatorFactory {
             case SOLDIER:
                 validators.add(differentColorValidator);
                 validators.add(differentCoordinateValidator);
-                validators.add(verticalValidator);
+                validators.add(orthogonalValidator);
                 validators.add(adjacentValidator);
-                validators.add(moveForwardValidator);
+                validators.add(moveForwardCrossRiverHorizontalValidator);
                 break;
             default:
                 validators.add(differentColorValidator);

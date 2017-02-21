@@ -4,7 +4,7 @@ import xiangqi.common.XiangqiCoordinate;
 
 /**
  * This class implement XiangqiCoordinte interface and provide coordinate utilities
- * 
+ *
  * @version Jan 28, 2017
  */
 public class CoordinateImpl implements XiangqiCoordinate {
@@ -36,7 +36,7 @@ public class CoordinateImpl implements XiangqiCoordinate {
      * @return true if the other coordinate is orthogonal to this coordinate, false otherwise
      */
     public boolean isOrthogonal(CoordinateImpl coordinate) {
-        return coordinate.rank == rank || coordinate.file == file;
+        return isHorizontal(coordinate) || isVertical(coordinate);
     }
     
     /**
@@ -60,6 +60,15 @@ public class CoordinateImpl implements XiangqiCoordinate {
     public boolean isVertical(CoordinateImpl coordinate) {
         return coordinate.file == file;
     }
+    
+    /**
+     * Check whether the other coordinate is horizontal to this coordinate
+     *
+     * @param coordinate The other coordinate
+     *
+     * @return true is the other coordinate is horizontal to this coordinate, false otherwise
+     */
+    public boolean isHorizontal(CoordinateImpl coordinate) { return coordinate.rank == rank;}
     
     /**
      * Return distance between this and the other coordinate
