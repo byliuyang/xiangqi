@@ -26,6 +26,10 @@ public class ValidatorFactory {
                                                                               == 1 ||
                                                                               (c2.isDiagonal(c1)
                                                                                && c2.distanceTo(c1) == 2);
+    private static Validator adjacentTwoRanksValidator = (CoordinateImpl c1, CoordinateImpl c2,
+                                                          XiangqiGameState state, XiangqiColor
+                                                                  currentPlayer) -> c2.isDiagonal
+            (c1) ? c2.distanceTo(c1) == 4 : c2.distanceTo(c1) == 2;
     
     private static Validator differentCoordinateValidator = (CoordinateImpl c1, CoordinateImpl
             c2, XiangqiGameState state, XiangqiColor currentPlayer) -> !c2.equals(c1);
@@ -151,6 +155,10 @@ public class ValidatorFactory {
                 validators.add(differentColorValidator);
                 validators.add(orthogonalValidator);
                 validators.add(jumpOverNoPieceValidator);
+                break;
+            case ELEPHANT:
+                validators.add(diagonalValidator);
+                validators.add(adjacentTwoRanksValidator);
                 break;
             default:
                 validators.add(differentColorValidator);
