@@ -21,28 +21,22 @@ import static xiangqi.common.XiangqiPieceType.*;
 public class GammaPiecesInitializer implements PiecesInitializer {
     @Override
     public void setupRedPieces(HashMap<XiangqiCoordinate, XiangqiPiece> pieces) {
-        pieces.put(CoordinateImpl.makeCoordinate(1, 1), XiangqiPieceImpl.makePiece
-                (CHARIOT, RED));
-        pieces.put(CoordinateImpl.makeCoordinate(1, 9), XiangqiPieceImpl.makePiece
-                (CHARIOT, RED));
+        pieces.put(CoordinateImpl.makeCoordinate(1, 1), XiangqiPieceImpl.makePiece(CHARIOT, RED));
+        pieces.put(CoordinateImpl.makeCoordinate(1, 9), XiangqiPieceImpl.makePiece(CHARIOT, RED));
         setupSoldiers(pieces, RED);
-        pieces.put(CoordinateImpl.makeCoordinate(1, 3), XiangqiPieceImpl.makePiece
-                (ELEPHANT, RED));
-        pieces.put(CoordinateImpl.makeCoordinate(1, 7), XiangqiPieceImpl.makePiece
-                (ELEPHANT, RED));
+        pieces.put(CoordinateImpl.makeCoordinate(1, 3), XiangqiPieceImpl.makePiece(ELEPHANT, RED));
+        pieces.put(CoordinateImpl.makeCoordinate(1, 7), XiangqiPieceImpl.makePiece(ELEPHANT, RED));
+        pieces.put(CoordinateImpl.makeCoordinate(1, 4), XiangqiPieceImpl.makePiece(ADVISOR, RED));
+        pieces.put(CoordinateImpl.makeCoordinate(1, 6), XiangqiPieceImpl.makePiece(ADVISOR, RED));
     }
     
     @Override
     public void setupBlackPieces(HashMap<XiangqiCoordinate, XiangqiPiece> pieces) {
-        pieces.put(CoordinateImpl.makeCoordinate(10, 1), XiangqiPieceImpl.makePiece
-                (CHARIOT, BLACK));
-        pieces.put(CoordinateImpl.makeCoordinate(10, 9), XiangqiPieceImpl.makePiece
-                (CHARIOT, BLACK));
+        pieces.put(CoordinateImpl.makeCoordinate(10, 1), XiangqiPieceImpl.makePiece(CHARIOT, BLACK));
+        pieces.put(CoordinateImpl.makeCoordinate(10, 9), XiangqiPieceImpl.makePiece(CHARIOT, BLACK));
         setupSoldiers(pieces, BLACK);
-        pieces.put(CoordinateImpl.makeCoordinate(10, 3), XiangqiPieceImpl.makePiece
-                (ELEPHANT, BLACK));
-        pieces.put(CoordinateImpl.makeCoordinate(10, 7), XiangqiPieceImpl.makePiece
-                (ELEPHANT, BLACK));
+        pieces.put(CoordinateImpl.makeCoordinate(10, 3), XiangqiPieceImpl.makePiece(ELEPHANT, BLACK));
+        pieces.put(CoordinateImpl.makeCoordinate(10, 7), XiangqiPieceImpl.makePiece(ELEPHANT, BLACK));
     }
     
     private void setupSoldiers(HashMap<XiangqiCoordinate, XiangqiPiece> pieces, XiangqiColor
