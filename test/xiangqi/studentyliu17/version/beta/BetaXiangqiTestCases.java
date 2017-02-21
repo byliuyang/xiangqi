@@ -111,7 +111,8 @@ public class BetaXiangqiTestCases {
     @Test // 11
     public void makeInvalidMoves() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(0, 1), makeCoordinate(1, 1)));
-        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(6, 1), makeCoordinate(1, 1)));
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(10, 1), makeCoordinate(1,
+                                                                                            1)));
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 0), makeCoordinate(1,
                                                                                             1)));
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 6), makeCoordinate(1,

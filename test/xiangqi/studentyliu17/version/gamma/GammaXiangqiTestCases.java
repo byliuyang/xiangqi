@@ -86,6 +86,17 @@ public class GammaXiangqiTestCases {
         assertPiece(10, 5, XiangqiColor.RED, XiangqiPieceType.GENERAL, XiangqiColor.BLACK);
     }
     
+    @Test // 12
+    public void makeMoveFromInvalidLocation() {
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(0, 1), makeCoordinate(1, 1)));
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(11, 1), makeCoordinate(1,
+                                                                                            1)));
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 0), makeCoordinate(1,
+                                                                                            1)));
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 10), makeCoordinate(1,
+                                                                                            1)));
+    }
+    
     private void assertHasAdvisors(int rank, XiangqiColor color) {
         assertPiece(rank, 4, XiangqiColor.RED, XiangqiPieceType.ADVISOR, color);
         assertPiece(rank, 6, XiangqiColor.RED, XiangqiPieceType.ADVISOR, color);
