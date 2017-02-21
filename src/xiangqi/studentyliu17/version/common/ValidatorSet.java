@@ -1,4 +1,4 @@
-package xiangqi.studentyliu17;
+package xiangqi.studentyliu17.version.common;
 
 import xiangqi.common.XiangqiPieceType;
 
@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * This class keep list of piece validators
  */
-public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validator>> {
+public abstract class ValidatorSet{
     private Hashtable<XiangqiPieceType, List<Validator>> validatorSet;
     
     public void initialize() {
@@ -24,7 +24,6 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      *
      * @return the number of key-value mappings in this map
      */
-    @Override
     public int size() {
         return validatorSet.size();
     }
@@ -34,7 +33,6 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      *
      * @return <tt>true</tt> if this map contains no key-value mappings
      */
-    @Override
     public boolean isEmpty() {
         return validatorSet.isEmpty();
     }
@@ -58,7 +56,6 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      *                              does not permit null keys
      *                              (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
      */
-    @Override
     public boolean containsKey(Object key) {
         return validatorSet.containsKey(key);
     }
@@ -83,7 +80,6 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      *                              map does not permit null values
      *                              (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
      */
-    @Override
     public boolean containsValue(Object value) {
         return validatorSet.containsValue(value);
     }
@@ -115,7 +111,6 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      *                              does not permit null keys
      *                              (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
      */
-    @Override
     public List<Validator> get(Object key) {
         return validatorSet.get(key);
     }
@@ -146,7 +141,6 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      * @throws IllegalArgumentException      if some property of the specified key
      *                                       or value prevents it from being stored in this map
      */
-    @Override
     public List<Validator> put(XiangqiPieceType key, List<Validator> value) {
         return validatorSet.put(key, value);
     }
@@ -183,46 +177,8 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      *                                       map does not permit null keys
      *                                       (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
      */
-    @Override
     public List<Validator> remove(Object key) {
         return validatorSet.remove(key);
-    }
-    
-    /**
-     * Copies all of the mappings from the specified map to this map
-     * (optional operation).  The effect of this call is equivalent to that
-     * of calling {@link #put(Object, Object) put(k, v)} on this map once
-     * for each mapping from key <tt>k</tt> to value <tt>v</tt> in the
-     * specified map.  The behavior of this operation is undefined if the
-     * specified map is modified while the operation is in progress.
-     *
-     * @param m mappings to be stored in this map
-     *
-     * @throws UnsupportedOperationException if the <tt>putAll</tt> operation
-     *                                       is not supported by this map
-     * @throws ClassCastException            if the class of a key or value in the
-     *                                       specified map prevents it from being stored in this map
-     * @throws NullPointerException          if the specified map is null, or if
-     *                                       this map does not permit null keys or values, and the
-     *                                       specified map contains null keys or values
-     * @throws IllegalArgumentException      if some property of a key or value in
-     *                                       the specified map prevents it from being stored in this map
-     */
-    @Override
-    public void putAll(Map<? extends XiangqiPieceType, ? extends List<Validator>> m) {
-        validatorSet.putAll(m);
-    }
-    
-    /**
-     * Removes all of the mappings from this map (optional operation).
-     * The map will be empty after this call returns.
-     *
-     * @throws UnsupportedOperationException if the <tt>clear</tt> operation
-     *                                       is not supported by this map
-     */
-    @Override
-    public void clear() {
-        this.validatorSet.clear();
     }
     
     /**
@@ -240,7 +196,6 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      *
      * @return a set view of the keys contained in this map
      */
-    @Override
     public Set<XiangqiPieceType> keySet() {
         return this.validatorSet.keySet();
     }
@@ -260,30 +215,8 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      *
      * @return a collection view of the values contained in this map
      */
-    @Override
     public Collection<List<Validator>> values() {
         return this.validatorSet.values();
-    }
-    
-    /**
-     * Returns a {@link Set} view of the mappings contained in this map.
-     * The set is backed by the map, so changes to the map are
-     * reflected in the set, and vice-versa.  If the map is modified
-     * while an iteration over the set is in progress (except through
-     * the iterator's own <tt>remove</tt> operation, or through the
-     * <tt>setValue</tt> operation on a map entry returned by the
-     * iterator) the results of the iteration are undefined.  The set
-     * supports element removal, which removes the corresponding
-     * mapping from the map, via the <tt>Iterator.remove</tt>,
-     * <tt>Set.remove</tt>, <tt>removeAll</tt>, <tt>retainAll</tt> and
-     * <tt>clear</tt> operations.  It does not support the
-     * <tt>add</tt> or <tt>addAll</tt> operations.
-     *
-     * @return a set view of the mappings contained in this map
-     */
-    @Override
-    public Set<Entry<XiangqiPieceType, List<Validator>>> entrySet() {
-        return this.validatorSet.entrySet();
     }
     
     public void addValidators(XiangqiPieceType pieceType, List<Validator> validators) {

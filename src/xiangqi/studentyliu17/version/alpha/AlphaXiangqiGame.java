@@ -1,7 +1,7 @@
 package xiangqi.studentyliu17.version.alpha;
 
-import xiangqi.studentyliu17.XiangqiPieceImpl;
 import xiangqi.common.*;
+import xiangqi.studentyliu17.version.common.XiangqiPieceImpl;
 
 /*******************************************************************************
  * This files was developed for CS4233: Object-Oriented Analysis & Design.

@@ -1,4 +1,4 @@
-package xiangqi.studentyliu17;
+package xiangqi.studentyliu17.version.common;
 
 import xiangqi.common.XiangqiColor;
 import xiangqi.common.XiangqiGameVersion;
@@ -159,6 +159,7 @@ public class ValidatorFactory {
             case ELEPHANT:
                 validators.add(diagonalValidator);
                 validators.add(adjacentTwoRanksValidator);
+                validators.add(makeNotCrossingRiverValidator(5));
                 break;
             default:
                 validators.add(differentColorValidator);
@@ -166,6 +167,11 @@ public class ValidatorFactory {
                 System.out.println("Not yet implemented!");
         }
         return validators;
+    }
+    
+    private static Validator makeNotCrossingRiverValidator(int rankOfRiver) {
+        return (CoordinateImpl c1, CoordinateImpl c2, XiangqiGameState state, XiangqiColor
+                currentPlayer) -> c2.getRank() <= rankOfRiver;
     }
     
     private static Validator makeRangeValidator(int fromRank, int toRank, int fromFile, int

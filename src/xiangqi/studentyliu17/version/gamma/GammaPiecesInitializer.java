@@ -3,9 +3,9 @@ package xiangqi.studentyliu17.version.gamma;
 import xiangqi.common.XiangqiColor;
 import xiangqi.common.XiangqiCoordinate;
 import xiangqi.common.XiangqiPiece;
-import xiangqi.studentyliu17.CoordinateImpl;
-import xiangqi.studentyliu17.PiecesInitializer;
-import xiangqi.studentyliu17.XiangqiPieceImpl;
+import xiangqi.studentyliu17.version.common.CoordinateImpl;
+import xiangqi.studentyliu17.version.common.PiecesInitializer;
+import xiangqi.studentyliu17.version.common.XiangqiPieceImpl;
 
 import java.util.HashMap;
 

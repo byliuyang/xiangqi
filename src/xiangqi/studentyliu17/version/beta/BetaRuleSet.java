@@ -1,7 +1,7 @@
 package xiangqi.studentyliu17.version.beta;
 
-import xiangqi.studentyliu17.RuleSet;
-import xiangqi.studentyliu17.XiangqiGameState;
+import xiangqi.studentyliu17.version.common.RuleSet;
+import xiangqi.studentyliu17.version.common.XiangqiGameState;
 
 /**
  * This class specify rule set for beta xiangqi game

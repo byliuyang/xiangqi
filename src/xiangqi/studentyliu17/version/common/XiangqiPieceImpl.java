@@ -1,4 +1,4 @@
-package xiangqi.studentyliu17;
+package xiangqi.studentyliu17.version.common;
 
 import xiangqi.common.XiangqiColor;
 import xiangqi.common.XiangqiPiece;
@@ -46,15 +46,15 @@ public class XiangqiPieceImpl implements XiangqiPiece {
         return this.pieceType;
     }
     
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof XiangqiPiece)) return false;
-        XiangqiPiece piece = (XiangqiPiece) obj;
-        return piece.getColor() == color && piece.getPieceType() == pieceType;
-    }
-    
-    @Override
-    public String toString() {
-        return String.format("%s %s", color, pieceType);
-    }
+//    @Override
+//    public boolean equals(Object obj) {
+//        if (!(obj instanceof XiangqiPiece)) return false;
+//        XiangqiPiece piece = (XiangqiPiece) obj;
+//        return piece.getColor() == color && piece.getPieceType() == pieceType;
+//    }
+//
+//    @Override
+//    public String toString() {
+//        return String.format("%s %s", color, pieceType);
+//    }
 }

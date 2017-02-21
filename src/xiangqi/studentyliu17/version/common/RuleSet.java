@@ -1,4 +1,4 @@
-package xiangqi.studentyliu17;
+package xiangqi.studentyliu17.version.common;
 
 /**
  * The interface specify ruleSets

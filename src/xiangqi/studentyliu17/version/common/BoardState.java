@@ -1,4 +1,4 @@
-package xiangqi.studentyliu17;
+package xiangqi.studentyliu17.version.common;
 
 import xiangqi.common.XiangqiColor;
 import xiangqi.common.XiangqiCoordinate;

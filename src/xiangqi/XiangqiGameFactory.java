@@ -14,14 +14,19 @@ package xiangqi;
 
 import xiangqi.common.XiangqiGame;
 import xiangqi.common.XiangqiGameVersion;
-import xiangqi.studentyliu17.*;
 import xiangqi.studentyliu17.version.alpha.AlphaXiangqiGame;
 import xiangqi.studentyliu17.version.beta.BetaPiecesInitializer;
 import xiangqi.studentyliu17.version.beta.BetaRuleSet;
 import xiangqi.studentyliu17.version.beta.BetaValidatorSet;
+import xiangqi.studentyliu17.version.common.BoardState;
 import xiangqi.studentyliu17.version.gamma.GammaPiecesInitializer;
 import xiangqi.studentyliu17.version.gamma.GammaRuleSet;
 import xiangqi.studentyliu17.version.gamma.GammaValidatorSet;
+import xiangqi.studentyliu17.version.common.PiecesInitializer;
+import xiangqi.studentyliu17.version.common.RuleSet;
+import xiangqi.studentyliu17.version.common.ValidatorSet;
+import xiangqi.studentyliu17.version.common.XiangqiGameImpl;
+import xiangqi.studentyliu17.version.common.XiangqiGameState;
 
 /**
  * A simple factory object that creates the appropriate instance of a XiangqiGame.

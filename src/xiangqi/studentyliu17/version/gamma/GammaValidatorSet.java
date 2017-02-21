@@ -1,7 +1,7 @@
 package xiangqi.studentyliu17.version.gamma;
 
-import xiangqi.studentyliu17.ValidatorFactory;
-import xiangqi.studentyliu17.ValidatorSet;
+import xiangqi.studentyliu17.version.common.ValidatorFactory;
+import xiangqi.studentyliu17.version.common.ValidatorSet;
 
 import static xiangqi.common.XiangqiGameVersion.GAMMA_XQ;
 import static xiangqi.common.XiangqiPieceType.*;

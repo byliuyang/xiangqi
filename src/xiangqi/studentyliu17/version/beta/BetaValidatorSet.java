@@ -1,10 +1,10 @@
 package xiangqi.studentyliu17.version.beta;
 
-import xiangqi.studentyliu17.ValidatorFactory;
-import xiangqi.studentyliu17.ValidatorSet;
-
 import static xiangqi.common.XiangqiGameVersion.BETA_XQ;
 import static xiangqi.common.XiangqiPieceType.*;
+
+import xiangqi.studentyliu17.version.common.ValidatorFactory;
+import xiangqi.studentyliu17.version.common.ValidatorSet;
 
 /**
  * Validator set for beta xiangqi game

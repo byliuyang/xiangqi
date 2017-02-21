@@ -1,4 +1,4 @@
-package xiangqi.studentyliu17;
+package xiangqi.studentyliu17.version.common;
 
 import xiangqi.common.*;
 
@@ -7,7 +7,7 @@ import java.util.Map;
 
 import static xiangqi.common.XiangqiColor.BLACK;
 import static xiangqi.common.XiangqiColor.RED;
-import static xiangqi.studentyliu17.BoardState.DEFAULT_COORD_COLOR;
+import static xiangqi.studentyliu17.version.common.BoardState.DEFAULT_COORD_COLOR;
 
 /**
  * The class implement a xiangqiGame
