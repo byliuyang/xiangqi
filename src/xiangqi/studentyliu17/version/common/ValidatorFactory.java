@@ -164,6 +164,7 @@ public class ValidatorFactory {
                 break;
             case ADVISOR:
                 validators.add(diagonalValidator);
+                validators.add(adjacentValidator);
                 break;
             default:
                 validators.add(differentColorValidator);
