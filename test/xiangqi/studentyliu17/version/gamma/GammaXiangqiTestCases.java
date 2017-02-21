@@ -2,9 +2,9 @@ package xiangqi.studentyliu17.version.gamma;
 
 import org.junit.Before;
 import org.junit.Test;
+import xiangqi.XiangqiGameFactory;
 import xiangqi.common.*;
 import xiangqi.studentyliu17.TestCoordinate;
-import xiangqi.XiangqiGameFactory;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
@@ -180,7 +180,7 @@ public class GammaXiangqiTestCases {
         assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
     }
     
-    @Test // 22
+    @Test // 23
     public void redMoveChariotForwardTwoSteps() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3,
                                                                                        1)));
@@ -188,7 +188,7 @@ public class GammaXiangqiTestCases {
         assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
     }
     
-    @Test // 23
+    @Test // 24
     public void redMoveChariotDiagonallyOneStep() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 1), makeCoordinate(2,
                                                                                        2)));
@@ -196,7 +196,7 @@ public class GammaXiangqiTestCases {
         assertPiece(2, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
     }
     
-    @Test // 24
+    @Test // 25
     public void redMoveChariotRightStep() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(2,
                                                                                             1)));
@@ -214,12 +214,51 @@ public class GammaXiangqiTestCases {
         assertPiece(2, 5, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
     }
     
-    @Test // 22
+    @Test // 26
     public void redMoveChariotCaptureRedElephantSteps() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 1), makeCoordinate(1,
                                                                                             3)));
         assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
         assertPiece(1, 3, XiangqiColor.RED, XiangqiPieceType.ELEPHANT, XiangqiColor.RED);
+    }
+    
+    @Test // 27
+    public void redSoldierCaptureBlackSoldier() {
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(4, 1), makeCoordinate(5, 1)));
+        assertPiece(4, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+        assertPiece(5, 1, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.RED);
+        
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(4, 5), makeCoordinate(5,
+                                                                                       5)));
+        assertPiece(4, 5, XiangqiColor.BLACK, XiangqiPieceType.NONE, XiangqiColor.NONE);
+        assertPiece(5, 5, XiangqiColor.BLACK, XiangqiPieceType.SOLDIER, XiangqiColor.BLACK);
+    
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(5, 1), makeCoordinate(6,
+                                                                                       1)));
+        assertPiece(5, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+        assertPiece(6, 1, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.RED);
+    }
+    
+    @Test // 28
+    public void blackChariotCaptureRedSoldier() {
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(4, 1), makeCoordinate(5, 1)));
+        assertPiece(4, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+        assertPiece(5, 1, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.RED);
+    
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(4, 9), makeCoordinate(5,
+                                                                                       9)));
+        assertPiece(7, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+        assertPiece(6, 1, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.BLACK);
+    
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(5, 1), makeCoordinate(6,
+                                                                                       1)));
+        assertPiece(5, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
+        assertPiece(6, 1, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.RED);
+
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 9), makeCoordinate(5,
+                                                                                       9)));
+        assertPiece(1, 9, XiangqiColor.BLACK, XiangqiPieceType.NONE, XiangqiColor.NONE);
+        assertPiece(5, 9, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
     }
     
     private void redSoldierCrossTheRiver() {
