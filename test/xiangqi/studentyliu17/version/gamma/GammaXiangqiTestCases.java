@@ -376,8 +376,15 @@ public class GammaXiangqiTestCases {
         assertPiece(2, 1, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
         
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(3, 5), makeCoordinate(5, 3)));
-        assertPiece(3, 5, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
-        assertPiece(5, 3, XiangqiColor.RED, XiangqiPieceType.ELEPHANT, XiangqiColor.RED);
+        assertPiece(3, 5, XiangqiColor.RED, XiangqiPieceType.ELEPHANT, XiangqiColor.RED);
+        assertPiece(5, 3, XiangqiColor.RED, XiangqiPieceType.SOLDIER, XiangqiColor.RED);
+    }
+    
+    @Test // 37
+    public void redAdvisorMoveForwardOneStep() {
+        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 4), makeCoordinate(2, 4)));
+        assertPiece(1, 4, XiangqiColor.RED, XiangqiPieceType.ADVISOR, XiangqiColor.RED);
+        assertPiece(2, 4, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
     }
     
     private void redSoldierCrossTheRiver() {

@@ -157,6 +157,7 @@ public class ValidatorFactory {
                 validators.add(jumpOverNoPieceValidator);
                 break;
             case ELEPHANT:
+                validators.add(differentColorValidator);
                 validators.add(diagonalValidator);
                 validators.add(adjacentTwoRanksValidator);
                 validators.add(makeNotCrossingRiverValidator(5));
