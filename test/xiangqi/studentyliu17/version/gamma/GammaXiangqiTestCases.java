@@ -217,7 +217,7 @@ public class GammaXiangqiTestCases {
     @Test // 22
     public void redMoveChariotCaptureRedElephantSteps() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 1), makeCoordinate(1,
-                                                                                       3)));
+                                                                                            3)));
         assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
         assertPiece(1, 3, XiangqiColor.RED, XiangqiPieceType.ELEPHANT, XiangqiColor.RED);
     }
