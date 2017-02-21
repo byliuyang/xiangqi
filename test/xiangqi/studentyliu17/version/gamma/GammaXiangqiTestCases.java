@@ -62,13 +62,18 @@ public class GammaXiangqiTestCases {
     }
     
     @Test // 7
-    public void blackHasElephants() throws Exception {
+    public void blackHasElephants() {
         assertHasElephants(10, XiangqiColor.BLACK);
     }
     
     @Test // 8
-    public void redHasAdvisors() throws Exception {
+    public void redHasAdvisors(){
         assertHasAdvisors(1, XiangqiColor.RED);
+    }
+    
+    @Test // 9
+    public void blackHasAdvisors() {
+        assertHasAdvisors(10, XiangqiColor.BLACK);
     }
     
     private void assertHasAdvisors(int rank, XiangqiColor color) {
