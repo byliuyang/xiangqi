@@ -162,6 +162,9 @@ public class ValidatorFactory {
                 validators.add(adjacentTwoRanksValidator);
                 validators.add(makeNotCrossingRiverValidator(5));
                 break;
+            case ADVISOR:
+                validators.add(diagonalValidator);
+                break;
             default:
                 validators.add(differentColorValidator);
                 validators.add(sameCoordinateValidator);
