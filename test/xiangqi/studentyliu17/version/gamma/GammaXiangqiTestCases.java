@@ -115,7 +115,7 @@ public class GammaXiangqiTestCases {
     }
     
     @Test // 15
-    public void redMoveSoldierForwardTwoStep() {
+    public void redMoveSoldierForwardTwoSteps() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(4, 3), makeCoordinate(6, 3)));
     }
     
@@ -161,6 +161,12 @@ public class GammaXiangqiTestCases {
     @Test // 22
     public void redMoveChariotForwardOneStep() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(2,
+                                                                                       1)));
+    }
+    
+    @Test // 22
+    public void redMoveChariotForwardTwoSteps() {
+        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(3,
                                                                                        1)));
     }
     
