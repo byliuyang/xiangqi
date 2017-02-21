@@ -76,6 +76,11 @@ public class GammaXiangqiTestCases {
         assertHasAdvisors(10, XiangqiColor.BLACK);
     }
     
+    @Test // 10
+    public void redHasGeneral(){
+        assertPiece(1, 5, XiangqiColor.RED, XiangqiPieceType.GENERAL, XiangqiColor.RED);
+    }
+    
     private void assertHasAdvisors(int rank, XiangqiColor color) {
         assertPiece(rank, 4, XiangqiColor.RED, XiangqiPieceType.ADVISOR, color);
         assertPiece(rank, 6, XiangqiColor.RED, XiangqiPieceType.ADVISOR, color);
