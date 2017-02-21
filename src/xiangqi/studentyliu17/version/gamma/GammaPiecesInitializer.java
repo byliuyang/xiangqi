@@ -40,6 +40,7 @@ public class GammaPiecesInitializer implements PiecesInitializer {
         pieces.put(CoordinateImpl.makeCoordinate(10, 7), XiangqiPieceImpl.makePiece(ELEPHANT, BLACK));
         pieces.put(CoordinateImpl.makeCoordinate(10, 4), XiangqiPieceImpl.makePiece(ADVISOR, BLACK));
         pieces.put(CoordinateImpl.makeCoordinate(10, 6), XiangqiPieceImpl.makePiece(ADVISOR, BLACK));
+        pieces.put(CoordinateImpl.makeCoordinate(10, 5), XiangqiPieceImpl.makePiece(GENERAL, BLACK));
     }
     
     private void setupSoldiers(HashMap<XiangqiCoordinate, XiangqiPiece> pieces, XiangqiColor
