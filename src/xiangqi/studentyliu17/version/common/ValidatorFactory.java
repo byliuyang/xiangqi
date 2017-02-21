@@ -165,6 +165,7 @@ public class ValidatorFactory {
             case ADVISOR:
                 validators.add(diagonalValidator);
                 validators.add(adjacentValidator);
+                validators.add(makeRangeValidator(1, 3,4,6));
                 break;
             default:
                 validators.add(differentColorValidator);
