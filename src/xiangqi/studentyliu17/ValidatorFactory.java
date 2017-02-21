@@ -147,6 +147,9 @@ public class ValidatorFactory {
                 validators.add(adjacentValidator);
                 validators.add(moveForwardCrossRiverHorizontalValidator);
                 break;
+            case CHARIOT:
+                validators.add(orthogonalValidator);
+                break;
             default:
                 validators.add(differentColorValidator);
                 validators.add(sameCoordinateValidator);
