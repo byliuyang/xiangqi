@@ -61,6 +61,11 @@ public class GammaXiangqiTestCases {
         assertHasElephants(1, XiangqiColor.RED);
     }
     
+    @Test // 7
+    public void blackHasElephants() throws Exception {
+        assertHasElephants(10, XiangqiColor.BLACK);
+    }
+    
     private void assertHasElephants(int rank, XiangqiColor color) {
         assertPiece(rank, 3, XiangqiColor.RED, XiangqiPieceType.ELEPHANT, color);
         assertPiece(rank, 7, XiangqiColor.RED, XiangqiPieceType.ELEPHANT, color);
