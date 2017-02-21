@@ -28,6 +28,7 @@ public class GammaPiecesInitializer implements PiecesInitializer {
         pieces.put(CoordinateImpl.makeCoordinate(1, 7), XiangqiPieceImpl.makePiece(ELEPHANT, RED));
         pieces.put(CoordinateImpl.makeCoordinate(1, 4), XiangqiPieceImpl.makePiece(ADVISOR, RED));
         pieces.put(CoordinateImpl.makeCoordinate(1, 6), XiangqiPieceImpl.makePiece(ADVISOR, RED));
+        pieces.put(CoordinateImpl.makeCoordinate(1, 5), XiangqiPieceImpl.makePiece(GENERAL, RED));
     }
     
     @Override
