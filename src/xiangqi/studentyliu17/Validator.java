@@ -1,6 +1,5 @@
-package xiangqi.studentyliu17.version.beta;
+package xiangqi.studentyliu17;
 
-import xiangqi.studentyliu17.XiangqiGameState;
 import xiangqi.common.XiangqiColor;
 
 /**

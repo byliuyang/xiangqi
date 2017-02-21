@@ -1,4 +1,4 @@
-package xiangqi.studentyliu17.version.beta;
+package xiangqi.studentyliu17;
 
 import xiangqi.common.XiangqiCoordinate;
 

@@ -1,7 +1,7 @@
-package xiangqi.studentyliu17.version.beta;
+package xiangqi.studentyliu17;
 
-import xiangqi.studentyliu17.XiangqiGameState;
 import xiangqi.common.XiangqiColor;
+import xiangqi.common.XiangqiGameVersion;
 import xiangqi.common.XiangqiPieceType;
 
 import java.util.LinkedList;
@@ -9,32 +9,31 @@ import java.util.List;
 
 /**
  * Validator factory
- * 
+ *
  * @version Jan 28, 2017
  */
 public class ValidatorFactory {
     private static Validator orthogonalValidator = (CoordinateImpl c1, CoordinateImpl c2,
                                                     XiangqiGameState state, XiangqiColor
-                                                            currentPlayer) ->
-            c2.isOrthogonal(c1);
+                                                            currentPlayer) -> c2.isOrthogonal(c1);
     private static Validator diagonalValidator   = (CoordinateImpl c1, CoordinateImpl c2,
                                                     XiangqiGameState state, XiangqiColor
                                                             currentPlayer) -> c2.isDiagonal(c1);
     private static Validator adjacentValidator   = (CoordinateImpl c1, CoordinateImpl c2,
                                                     XiangqiGameState state, XiangqiColor
                                                             currentPlayer) -> c2.distanceTo(c1)
-                                                                               == 1 ||
-                                                                               (c2.isDiagonal(c1)
-                                                                                && c2.distanceTo
-                                                                                       (c1) == 2);
+                                                                              == 1 ||
+                                                                              (c2.isDiagonal(c1)
+                                                                               && c2.distanceTo
+                                                                                      (c1) == 2);
     
     private static Validator differentCoordinateValidator = (CoordinateImpl c1, CoordinateImpl
-            c2, XiangqiGameState state, XiangqiColor
-            currentPlayer) -> !c2.equals(c1);
+            c2, XiangqiGameState state, XiangqiColor currentPlayer) -> !c2.equals(c1);
     
     private static Validator differentColorValidator = (CoordinateImpl c1, CoordinateImpl c2,
                                                         XiangqiGameState state, XiangqiColor
-                                                                currentPlayer) -> state.getPieceAt(c1, currentPlayer).getColor() != state.getPieceAt(c2, currentPlayer).getColor();
+                                                                currentPlayer) ->
+            state.getPieceAt(c1, currentPlayer).getColor() != state.getPieceAt(c2, currentPlayer).getColor();
     
     private static Validator jumpOverNoPieceValidator = (CoordinateImpl c1, CoordinateImpl c2,
                                                          XiangqiGameState state, XiangqiColor
@@ -48,13 +47,37 @@ public class ValidatorFactory {
     private static Validator moveForwardValidator = (CoordinateImpl c1, CoordinateImpl c2,
                                                      XiangqiGameState state, XiangqiColor
                                                              currentPlayer) -> c2.isInFrontOf(c1);
+    
     /**
-     * Creation method for validators
-     * 
+     * Creation method for xiangqi game validators
+     *
      * @param pieceType The XiangqiPieceType to generate validator for
+     * @param version   The XiangqiGameVersion
+     *
      * @return list of validators for the given XiangqiPieceType
      */
-    public static List<Validator> makeValidators(XiangqiPieceType pieceType) {
+    public static List<Validator> makeValidators(XiangqiPieceType pieceType, XiangqiGameVersion
+            version) {
+        
+        switch (version) {
+            case BETA_XQ:
+                return makeBetaValidators(pieceType);
+            default:
+                System.out.println("Not yet implemented!");
+        }
+        
+        return null;
+    }
+    
+    /**
+     * Creation method for beta xiangqi g
+     * ame validators
+     *
+     * @param pieceType The XiangqiPieceType to generate validator for
+     *
+     * @return list of validators for the given XiangqiPieceType
+     */
+    private static List<Validator> makeBetaValidators(XiangqiPieceType pieceType) {
         
         List<Validator> validators = new LinkedList<>();
         switch (pieceType) {
@@ -93,7 +116,6 @@ public class ValidatorFactory {
     private static Validator makeRangeValidator(int fromRank, int toRank, int fromFile, int
             toFile) {
         return (CoordinateImpl c1, CoordinateImpl c2, XiangqiGameState state, XiangqiColor
-                currentPlayer) -> c2.isInRange
-                (fromRank, toRank, fromFile, toFile);
+                currentPlayer) -> c2.isInRange(fromRank, toRank, fromFile, toFile);
     }
 }

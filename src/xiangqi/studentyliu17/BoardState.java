@@ -4,72 +4,80 @@ import xiangqi.common.XiangqiColor;
 import xiangqi.common.XiangqiCoordinate;
 import xiangqi.common.XiangqiPiece;
 import xiangqi.common.XiangqiPieceType;
-import xiangqi.studentyliu17.version.beta.CoordinateImpl;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
-import static xiangqi.common.XiangqiColor.BLACK;
 import static xiangqi.common.XiangqiColor.RED;
-import static xiangqi.common.XiangqiPieceType.*;
+import static xiangqi.common.XiangqiPieceType.GENERAL;
+import static xiangqi.common.XiangqiPieceType.NONE;
 
 /**
  * Board state for Xiangqi game
- * 
+ *
  * @version Jan 28, 2017
  */
 public class BoardState {
-    public static final  XiangqiColor DEFAULT_COORD_COLOR = XiangqiColor.RED; // Default color of xiangqiboard for storage
-    private static final int          BOARD_WIDTH         = 5; // Width of xiangqi board
-    private static final int          BOARD_HEIGHT        = 5; // Height of xiangqi board
-    private HashMap<XiangqiCoordinate, XiangqiPiece> pieces; // Keep list of Xiangqi coordinate and XiangqiPiece pairs
-    private List<XiangqiCoordinate> coordinates; // Keep list of all possible xiangqi coordinates
+    public static final XiangqiColor DEFAULT_COORD_COLOR = XiangqiColor.RED; // Default color of
+    // xiangqiboard for storage
+    private final int                                      boardWidth; // Width of xiangqi board
+    private final int                                      boardHeight; // Height of xiangqi board
+    private       HashMap<XiangqiCoordinate, XiangqiPiece> pieces; // Keep list of Xiangqi
+    // coordinate and XiangqiPiece pairs
+    private       List<XiangqiCoordinate>                  coordinates; // Keep list of all
+    // possible xiangqi coordinates
+    private PiecesInitializer initializer;
     
-    /**
-     * Creation method for Xuangqi board state
-     * 
-     * @return a Xiangqi BoardState
-     */
-    public static BoardState makeBoardState() {
-        BoardState boardState = new BoardState();
+    
+    private BoardState(int boardWidth, int boardHeight, PiecesInitializer initializer) {
+        this.boardWidth = boardWidth;
+        this.boardHeight = boardHeight;
+        this.initializer = initializer;
+    }
+    
+    public static BoardState makeBoardState(int boardWidth, int boardHeight, PiecesInitializer
+            initializer) {
+        BoardState boardState = new BoardState(boardWidth, boardHeight, initializer);
         boardState.initialize();
         return boardState;
     }
     
     /**
      * Convert xiangqi coordinate to target player's perspective
-     * 
+     *
      * @param coordinate The source coordinate
-     * @param fromColor The player perspective for source coordinate 
-     * @param toColor The player perspective for target coordinate
-     * 
-     * @return XiangqiCoordinate for in target player's perspective 
+     * @param fromColor  The player perspective for source coordinate
+     * @param toColor    The player perspective for target coordinate
+     *
+     * @return XiangqiCoordinate for in target player's perspective
      */
-    public static XiangqiCoordinate makeCoordinate(XiangqiCoordinate coordinate, XiangqiColor
-            fromColor, XiangqiColor toColor) {
+    public XiangqiCoordinate makeCoordinate(XiangqiCoordinate coordinate, XiangqiColor fromColor,
+                                            XiangqiColor toColor) {
         int rank = coordinate.getRank();
         int file = coordinate.getFile();
         return fromColor == toColor ? CoordinateImpl.makeCoordinate(rank, file) : CoordinateImpl
-                .makeCoordinate(BOARD_HEIGHT + 1 - rank, BOARD_WIDTH + 1 - file);
+                .makeCoordinate(boardHeight + 1 - rank, boardWidth + 1 - file);
     }
     
     private void initialize() {
         pieces = new HashMap<>();
-        setupRedPieces();
-        setupBlackPieces();
-    
+        setupPieces();
+        
         coordinates = new LinkedList<>();
-        for (int rank = 1; rank <= BOARD_HEIGHT; rank++) {
-            for (int file = 1; file <= BOARD_WIDTH;file++)
+        for (int rank = 1; rank <= boardHeight; rank++) {
+            for (int file = 1; file <= boardWidth; file++)
                 coordinates.add(CoordinateImpl.makeCoordinate(rank, file));
         }
     }
     
     /**
      * Get the piece at given location
-     * 
-     * @param where The given location
+     *
+     * @param where  The given location
      * @param aspect The player's perspective of given location
-     * 
+     *
      * @return the piece at given location
      */
     public XiangqiPiece getPieceAt(XiangqiCoordinate where, XiangqiColor aspect) {
@@ -83,11 +91,11 @@ public class BoardState {
     
     /**
      * Get the number of pieces are located in between two orthogonal locations
-     * 
-     * @param source The starting location
-     * @param dest The ending location
+     *
+     * @param source        The starting location
+     * @param dest          The ending location
      * @param currentPlayer The player's perspective of locations
-     * 
+     *
      * @return the number of pieces are located in between two orthogonal locations
      */
     public int numOrthogonalPiecesInBetween(XiangqiCoordinate source, XiangqiCoordinate dest,
@@ -123,40 +131,27 @@ public class BoardState {
     private int getRankRespectToRed(XiangqiCoordinate where, XiangqiColor aspect) {
         int rank = where.getRank();
         if (aspect == RED) return rank;
-        else return BOARD_HEIGHT + 1 - rank;
+        else return boardHeight + 1 - rank;
     }
     
     private int getFileRespectToRed(XiangqiCoordinate where, XiangqiColor aspect) {
         int file = where.getFile();
         if (aspect == RED) return file;
-        else return BOARD_WIDTH + 1 - file;
+        else return boardWidth + 1 - file;
     }
     
-    private void setupRedPieces() {
-        pieces.put(CoordinateImpl.makeCoordinate(1, 1), XiangqiPieceImpl.makePiece(CHARIOT, RED));
-        pieces.put(CoordinateImpl.makeCoordinate(1, 2), XiangqiPieceImpl.makePiece(ADVISOR, RED));
-        pieces.put(CoordinateImpl.makeCoordinate(1, 3), XiangqiPieceImpl.makePiece(GENERAL, RED));
-        pieces.put(CoordinateImpl.makeCoordinate(1, 4), XiangqiPieceImpl.makePiece(ADVISOR, RED));
-        pieces.put(CoordinateImpl.makeCoordinate(1, 5), XiangqiPieceImpl.makePiece(CHARIOT, RED));
-        pieces.put(CoordinateImpl.makeCoordinate(2, 3), XiangqiPieceImpl.makePiece(SOLDIER, RED));
+    public void setupPieces() {
+        initializer.setupRedPieces(pieces);
+        initializer.setupBlackPieces(pieces);
     }
     
-    private void setupBlackPieces() {
-        pieces.put(CoordinateImpl.makeCoordinate(5, 1), XiangqiPieceImpl.makePiece(CHARIOT, BLACK));
-        pieces.put(CoordinateImpl.makeCoordinate(5, 2), XiangqiPieceImpl.makePiece(ADVISOR, BLACK));
-        pieces.put(CoordinateImpl.makeCoordinate(5, 3), XiangqiPieceImpl.makePiece(GENERAL, BLACK));
-        pieces.put(CoordinateImpl.makeCoordinate(5, 4), XiangqiPieceImpl.makePiece(ADVISOR, BLACK));
-        pieces.put(CoordinateImpl.makeCoordinate(5, 5), XiangqiPieceImpl.makePiece(CHARIOT, BLACK));
-        pieces.put(CoordinateImpl.makeCoordinate(4, 3), XiangqiPieceImpl.makePiece(SOLDIER, BLACK));
-    }
-    
-   /**
-    * Move a piece from source location to target location
-    * 
-    * @param source The source location of the piece
-    * @param destination The target location of the piece
-    * @param aspect The player's perspective of the locations
-    */
+    /**
+     * Move a piece from source location to target location
+     *
+     * @param source      The source location of the piece
+     * @param destination The target location of the piece
+     * @param aspect      The player's perspective of the locations
+     */
     public void movePiece(XiangqiCoordinate source, XiangqiCoordinate destination, XiangqiColor
             aspect) {
         XiangqiCoordinate sourceCoord = makeCoordinate(source, aspect, DEFAULT_COORD_COLOR);
@@ -167,10 +162,10 @@ public class BoardState {
     
     /**
      * Put a piece into a target location
-     * 
-     * @param piece The piece to put
+     *
+     * @param piece       The piece to put
      * @param destination The target location on the board
-     * @param aspect The player's perspective of target location
+     * @param aspect      The player's perspective of target location
      */
     public void putPiece(XiangqiPiece piece, XiangqiCoordinate destination, XiangqiColor aspect) {
         
@@ -181,7 +176,7 @@ public class BoardState {
     
     /**
      * Get all possible xiangqi coordinates
-     * 
+     *
      * @return all possible xiangqi coordinates
      */
     public List<XiangqiCoordinate> allPossibleCoordinates() {
@@ -190,16 +185,16 @@ public class BoardState {
     
     /**
      * Get general location for target player
-     * 
+     *
      * @param color The player who own the general
-     * 
+     *
      * @return general location for target player
      */
     public XiangqiCoordinate getGeneralLocation(XiangqiColor color) {
-        for(Map.Entry<XiangqiCoordinate, XiangqiPiece> entry: coordinatesAndPieces()) {
+        for (Map.Entry<XiangqiCoordinate, XiangqiPiece> entry : coordinatesAndPieces()) {
             XiangqiPiece piece = entry.getValue();
-            if(piece.getColor() == color && piece.getPieceType() == GENERAL) {
-                XiangqiCoordinate coordinate  = entry.getKey();
+            if (piece.getColor() == color && piece.getPieceType() == GENERAL) {
+                XiangqiCoordinate coordinate = entry.getKey();
                 return makeCoordinate(coordinate, DEFAULT_COORD_COLOR, color);
             }
         }
@@ -209,12 +204,16 @@ public class BoardState {
     
     /**
      * Get all coordinates and pieces on the board
-     * 
+     *
      * @return all coordinates and pieces on the board
      */
     public List<Map.Entry<XiangqiCoordinate, XiangqiPiece>> coordinatesAndPieces() {
         List<Map.Entry<XiangqiCoordinate, XiangqiPiece>> entries = new LinkedList<>();
         pieces.entrySet().forEach(entries::add);
         return entries;
+    }
+    
+    public HashMap<XiangqiCoordinate, XiangqiPiece> getPieces() {
+        return pieces;
     }
 }

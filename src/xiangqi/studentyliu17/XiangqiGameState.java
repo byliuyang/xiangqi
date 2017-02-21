@@ -21,12 +21,23 @@ public class XiangqiGameState {
     private int          turns; // Keep track of the number of turns passed
     
     /**
-     * Creation method of GameState
-     * 
-     * @return a Xiangqi GameState
+     * Constructor for XiangqiGameState
+     *
+     * @param boardState The boardState
      */
-    public static XiangqiGameState makeGameState() {
-        XiangqiGameState gameState = new XiangqiGameState();
+    private XiangqiGameState(BoardState boardState) {
+        this.boardState  = boardState;
+    }
+    
+    /**
+     * Creation method of GameState
+     *
+     * @param boardState The boardState
+     * 
+     * @return a instance of XiangqiGameState
+     */
+    public static XiangqiGameState makeGameState(BoardState boardState) {
+        XiangqiGameState gameState = new XiangqiGameState(boardState);
         gameState.initialize();
         return gameState;
     }
@@ -34,7 +45,6 @@ public class XiangqiGameState {
     private void initialize() {
         currentPlayer = XiangqiColor.RED;
         turns = 0;
-        boardState = BoardState.makeBoardState();
     }
     
     /**
@@ -54,7 +64,7 @@ public class XiangqiGameState {
      * 
      * @param source The starting location
      * @param dest The ending location
-     * @param currentPlayer The player's perspective of locations
+     * @param player The player's perspective of locations
      * 
      * @return the number of pieces are located in between two orthogonal locations
      */
@@ -109,7 +119,7 @@ public class XiangqiGameState {
      * Put a piece into a target location
      * 
      * @param piece The piece to put
-     * @param destination The target location on the board
+     * @param coordinate The target location on the board
      * @param aspect The player's perspective of target location
      */
     public void putPiece(XiangqiPiece piece, XiangqiCoordinate coordinate, XiangqiColor aspect) {
@@ -143,5 +153,19 @@ public class XiangqiGameState {
      */
     public List<XiangqiCoordinate> allPossibleCoordinates() {
         return boardState.allPossibleCoordinates();
+    }
+    
+    /**
+     * Convert xiangqi coordinate to target player's perspective
+     *
+     * @param coordinate The source coordinate
+     * @param fromColor  The player perspective for source coordinate
+     * @param toColor    The player perspective for target coordinate
+     *
+     * @return XiangqiCoordinate for in target player's perspective
+     */
+    public XiangqiCoordinate makeCoordinate(XiangqiCoordinate coordinate, XiangqiColor fromColor,
+                                            XiangqiColor toColor) {
+        return boardState.makeCoordinate(coordinate, fromColor, toColor);
     }
 }

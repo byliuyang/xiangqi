@@ -14,9 +14,14 @@ package xiangqi;
 
 import xiangqi.common.XiangqiGame;
 import xiangqi.common.XiangqiGameVersion;
+import xiangqi.studentyliu17.*;
 import xiangqi.studentyliu17.version.alpha.AlphaXiangqiGame;
-import xiangqi.studentyliu17.version.beta.BetaXiangqiGame;
-import xiangqi.studentyliu17.version.gamma.GammaXiangqiGame;
+import xiangqi.studentyliu17.version.beta.BetaPiecesInitializer;
+import xiangqi.studentyliu17.version.beta.BetaRuleSet;
+import xiangqi.studentyliu17.version.beta.BetaValidatorSet;
+import xiangqi.studentyliu17.version.gamma.GammaPiecesInitializer;
+import xiangqi.studentyliu17.version.gamma.GammaRuleSet;
+import xiangqi.studentyliu17.version.gamma.GammaValidatorSet;
 
 /**
  * A simple factory object that creates the appropriate instance of a XiangqiGame.
@@ -24,6 +29,12 @@ import xiangqi.studentyliu17.version.gamma.GammaXiangqiGame;
  * @version Dec 26, 2016
  */
 public class XiangqiGameFactory {
+    private static final int BETA_BOARD_WIDTH  = 5;
+    private static final int BETA_BOARD_HEIGHT = 5;
+    
+    private static final int GAMMA_BOARD_WIDTH  = 9;
+    private static final int GAMMA_BOARD_HEIGHT = 10;
+    
     /**
      * Factory method that returns an instance of the requested game.
      *
@@ -32,21 +43,36 @@ public class XiangqiGameFactory {
      * @return the instance of the requested game
      */
     public static XiangqiGame makeXiangqiGame(XiangqiGameVersion version) {
-        XiangqiGame game = null;
+    
+        XiangqiGame game;
+        PiecesInitializer initializer;
+        BoardState boardState;
+        ValidatorSet validatorSet;
+        RuleSet ruleSet;
         switch (version) {
             case ALPHA_XQ:
-                game = new AlphaXiangqiGame();
-                break;
+                return new AlphaXiangqiGame();
             case BETA_XQ:
-                game = new BetaXiangqiGame();
-                game.initialize();
+                initializer = new BetaPiecesInitializer();
+                boardState = BoardState.makeBoardState(BETA_BOARD_WIDTH, BETA_BOARD_HEIGHT,
+                                                       initializer);
+                validatorSet = new BetaValidatorSet();
+                ruleSet = new BetaRuleSet();
                 break;
             case GAMMA_XQ:
-                game = new GammaXiangqiGame();
-                game.initialize();
+                initializer = new GammaPiecesInitializer();
+                boardState = BoardState.makeBoardState(GAMMA_BOARD_WIDTH, GAMMA_BOARD_HEIGHT,
+                                                       initializer);
+                validatorSet = new GammaValidatorSet();
+                ruleSet = new GammaRuleSet();
                 break;
+            default:
+                System.out.println("Not implemented yet!");
+                return null;
         }
-        
+        XiangqiGameState gameState = XiangqiGameState.makeGameState(boardState);
+        validatorSet.initialize();
+        game = XiangqiGameImpl.makeXiangqiGame(ruleSet, validatorSet, gameState);
         return game;
     }
 }
