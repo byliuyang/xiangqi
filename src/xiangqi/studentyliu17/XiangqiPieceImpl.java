@@ -45,4 +45,16 @@ public class XiangqiPieceImpl implements XiangqiPiece {
     public XiangqiPieceType getPieceType() {
         return this.pieceType;
     }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof XiangqiPiece)) return false;
+        XiangqiPiece piece = (XiangqiPiece) obj;
+        return piece.getColor() == color && piece.getPieceType() == pieceType;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("%s %s", color, pieceType);
+    }
 }

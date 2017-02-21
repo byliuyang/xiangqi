@@ -109,7 +109,7 @@ public class GammaXiangqiTestCases {
                                                                                            10)));
     }
     
-    @Test
+    @Test // 14
     public void redMoveSoldierForwardOneStep() {
         assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(4, 3), makeCoordinate(5, 3)));
     }

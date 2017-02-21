@@ -8,9 +8,14 @@ import java.util.*;
  * This class keep list of piece validators
  */
 public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validator>> {
-    private Hashtable<XiangqiPieceType, List<Validator>> validators;
+    private Hashtable<XiangqiPieceType, List<Validator>> validatorSet;
     
-    public abstract void initialize();
+    public void initialize() {
+        validatorSet = new Hashtable<>();
+        setupValidators();
+    }
+    
+    public abstract void setupValidators();
     
     /**
      * Returns the number of key-value mappings in this map.  If the
@@ -21,7 +26,7 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      */
     @Override
     public int size() {
-        return validators.size();
+        return validatorSet.size();
     }
     
     /**
@@ -31,7 +36,7 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      */
     @Override
     public boolean isEmpty() {
-        return validators.isEmpty();
+        return validatorSet.isEmpty();
     }
     
     /**
@@ -55,7 +60,7 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      */
     @Override
     public boolean containsKey(Object key) {
-        return validators.containsKey(key);
+        return validatorSet.containsKey(key);
     }
     
     /**
@@ -80,7 +85,7 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      */
     @Override
     public boolean containsValue(Object value) {
-        return validators.containsValue(value);
+        return validatorSet.containsValue(value);
     }
     
     /**
@@ -112,7 +117,7 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      */
     @Override
     public List<Validator> get(Object key) {
-        return validators.get(key);
+        return validatorSet.get(key);
     }
     
     /**
@@ -143,7 +148,7 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      */
     @Override
     public List<Validator> put(XiangqiPieceType key, List<Validator> value) {
-        return validators.put(key, value);
+        return validatorSet.put(key, value);
     }
     
     /**
@@ -180,7 +185,7 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      */
     @Override
     public List<Validator> remove(Object key) {
-        return validators.remove(key);
+        return validatorSet.remove(key);
     }
     
     /**
@@ -205,7 +210,7 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      */
     @Override
     public void putAll(Map<? extends XiangqiPieceType, ? extends List<Validator>> m) {
-        validators.putAll(m);
+        validatorSet.putAll(m);
     }
     
     /**
@@ -217,7 +222,7 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      */
     @Override
     public void clear() {
-        this.validators.clear();
+        this.validatorSet.clear();
     }
     
     /**
@@ -237,7 +242,7 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      */
     @Override
     public Set<XiangqiPieceType> keySet() {
-        return this.validators.keySet();
+        return this.validatorSet.keySet();
     }
     
     /**
@@ -257,7 +262,7 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      */
     @Override
     public Collection<List<Validator>> values() {
-        return this.validators.values();
+        return this.validatorSet.values();
     }
     
     /**
@@ -278,10 +283,10 @@ public abstract class ValidatorSet implements Map<XiangqiPieceType, List<Validat
      */
     @Override
     public Set<Entry<XiangqiPieceType, List<Validator>>> entrySet() {
-        return this.validators.entrySet();
+        return this.validatorSet.entrySet();
     }
     
-    public void setValidators(Hashtable<XiangqiPieceType, List<Validator>> validators) {
-        this.validators = validators;
+    public void addValidators(XiangqiPieceType pieceType, List<Validator> validators) {
+        put(pieceType, validators);
     }
 }

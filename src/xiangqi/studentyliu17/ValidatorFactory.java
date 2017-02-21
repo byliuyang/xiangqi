@@ -47,6 +47,8 @@ public class ValidatorFactory {
     private static Validator moveForwardValidator = (CoordinateImpl c1, CoordinateImpl c2,
                                                      XiangqiGameState state, XiangqiColor
                                                              currentPlayer) -> c2.isInFrontOf(c1);
+    private static Validator sameCoordinateValidator = (CoordinateImpl c1, CoordinateImpl c2,
+    XiangqiGameState state, XiangqiColor player)-> c1.equals(c2);
     
     /**
      * Creation method for xiangqi game validators
@@ -62,16 +64,16 @@ public class ValidatorFactory {
         switch (version) {
             case BETA_XQ:
                 return makeBetaValidators(pieceType);
+            case GAMMA_XQ:
+                return makeGammaValidators(pieceType);
             default:
                 System.out.println("Not yet implemented!");
+                return null;
         }
-        
-        return null;
     }
     
     /**
-     * Creation method for beta xiangqi g
-     * ame validators
+     * Creation method for beta xiangqi game validators
      *
      * @param pieceType The XiangqiPieceType to generate validator for
      *
@@ -108,6 +110,34 @@ public class ValidatorFactory {
                 validators.add(moveForwardValidator);
                 break;
             default:
+                validators.add(differentColorValidator);
+                validators.add(sameCoordinateValidator);
+                System.out.println("Not yet implemented!");
+        }
+        return validators;
+    }
+    
+    /**
+     * Creation method for gamma xiangqi game validators
+     *
+     * @param pieceType The XiangqiPieceType to generate validator for
+     *
+     * @return list of validators for the given XiangqiPieceType
+     */
+    private static List<Validator> makeGammaValidators(XiangqiPieceType pieceType) {
+        
+        List<Validator> validators = new LinkedList<>();
+        switch (pieceType) {
+            case SOLDIER:
+                validators.add(differentColorValidator);
+                validators.add(differentCoordinateValidator);
+                validators.add(verticalValidator);
+                validators.add(adjacentValidator);
+                validators.add(moveForwardValidator);
+                break;
+            default:
+                validators.add(differentColorValidator);
+                validators.add(sameCoordinateValidator);
                 System.out.println("Not yet implemented!");
         }
         return validators;

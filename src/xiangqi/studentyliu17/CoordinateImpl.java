@@ -138,4 +138,9 @@ public class CoordinateImpl implements XiangqiCoordinate {
     public int hashCode() {
         return rank + file;
     }
+    
+    @Override
+    public String toString() {
+        return String.format("(%d, %d)", rank, file);
+    }
 }
