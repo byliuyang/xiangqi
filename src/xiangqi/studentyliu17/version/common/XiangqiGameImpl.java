@@ -60,15 +60,17 @@ public class XiangqiGameImpl implements XiangqiGame {
         
         XiangqiColor otherPlayer = currentPlayer == RED ? BLACK : RED;
         XiangqiCoordinate currentPlayerGeneralLoc = gameState.getGeneralLocation(currentPlayer);
-        if (isGeneralUnderAttack(source, destination, currentPlayerGeneralLoc, currentPlayer,
-                                 currentPlayer)) {
+    
+        if (isGeneralUnderAttack(source, destination, currentPlayerGeneralLoc.equals(source) ?
+                                                      destination : currentPlayerGeneralLoc,
+                                 currentPlayer, currentPlayer)) {
             moveMessage = Message.GENERAL_IN_CHECK;
             return MoveResult.ILLEGAL;
         }
     
         gameState.movePiece(source, destination, gameState.getCurrentPlayer());
         gameState.nextTurn();
-    
+        
         if (isGeneralCheckmated(otherPlayer)) {
             moveMessage = String.format(Message.PLAYER_WIN, gameState.getCurrentPlayer());
             return win(currentPlayer);
