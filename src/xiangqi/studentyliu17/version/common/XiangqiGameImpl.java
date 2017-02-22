@@ -52,26 +52,32 @@ public class XiangqiGameImpl implements XiangqiGame {
      */
     @Override
     public MoveResult makeMove(XiangqiCoordinate source, XiangqiCoordinate destination) {
-        if (!isValidMove(source, destination, gameState.getCurrentPlayer())) {
+        XiangqiColor currentPlayer = gameState.getCurrentPlayer();
+        if (!isValidMove(source, destination, currentPlayer)) {
             moveMessage = Message.INVALID_MOVE;
             return MoveResult.ILLEGAL;
         }
         
+        
+        
+        XiangqiColor otherPlayer = currentPlayer == RED ? BLACK : RED;
+        XiangqiCoordinate currentPlayerGeneralLoc = gameState.getGeneralLocation(currentPlayer);
+        if(isGeneralUnderAttack(currentPlayer, currentPlayerGeneralLoc) &&
+           isGeneralUnderAttack(source, destination, currentPlayerGeneralLoc, currentPlayer,
+                                currentPlayer))
+            return MoveResult.ILLEGAL;
+    
         gameState.movePiece(source, destination, gameState.getCurrentPlayer());
         gameState.nextTurn();
-        
-        XiangqiColor currentPlayer = gameState.getCurrentPlayer();
-        XiangqiColor otherPlayer = currentPlayer == RED ? BLACK : RED;
-        if (isGeneralCheckmated(currentPlayer)) {
-            moveMessage = Message.GENERAL_IN_CHECK;
-            return MoveResult.ILLEGAL;
-        } else if (isGeneralCheckmated(otherPlayer)) {
+    
+        if (isGeneralCheckmated(otherPlayer)) {
             moveMessage = String.format(Message.PLAYER_WIN, gameState.getCurrentPlayer());
             return win(currentPlayer);
         } else if (ruleSet.isDraw(gameState)) {
             moveMessage = Message.GAME_IS_DRAW;
             return MoveResult.DRAW;
         }
+        
         
         gameState.switchPlayer();
         
@@ -180,10 +186,8 @@ public class XiangqiGameImpl implements XiangqiGame {
     
     private boolean isGeneralCheckmated(XiangqiColor color) {
         XiangqiCoordinate generalLocation = gameState.getGeneralLocation(color);
-        if (generalLocation == null) return false;
-        
-        return isGeneralUnderAttack(color, generalLocation) && !canGeneralMoveOutOfCheck(color,
-                                                                                         generalLocation) && !checkCanBeBlocked(color, generalLocation);
+        if (generalLocation == null) return true;
+        return !canGeneralMoveOutOfCheck(color, generalLocation) && !checkCanBeBlocked(color, generalLocation);
     }
     
     private boolean isGeneralUnderAttack(XiangqiCoordinate source, XiangqiCoordinate destination,
