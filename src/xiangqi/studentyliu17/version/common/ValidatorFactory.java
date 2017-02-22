@@ -174,6 +174,9 @@ public class ValidatorFactory {
                 validators.add(jumpOverNoPieceDiagonallyValidator);
                 validators.add(makeRangeValidator(1, 3,4,6));
                 break;
+            case GENERAL:
+                validators.add(orthogonalValidator);
+                break;
             default:
                 validators.add(differentColorValidator);
                 validators.add(sameCoordinateValidator);
