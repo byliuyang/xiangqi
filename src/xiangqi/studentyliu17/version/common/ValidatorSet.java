@@ -15,27 +15,10 @@ public abstract class ValidatorSet{
         setupValidators();
     }
     
+    /**
+     * This method create and put pieces on the board
+     */
     public abstract void setupValidators();
-    
-    /**
-     * Returns the number of key-value mappings in this map.  If the
-     * map contains more than <tt>Integer.MAX_VALUE</tt> elements, returns
-     * <tt>Integer.MAX_VALUE</tt>.
-     *
-     * @return the number of key-value mappings in this map
-     */
-    public int size() {
-        return validatorSet.size();
-    }
-    
-    /**
-     * Returns <tt>true</tt> if this map contains no key-value mappings.
-     *
-     * @return <tt>true</tt> if this map contains no key-value mappings
-     */
-    public boolean isEmpty() {
-        return validatorSet.isEmpty();
-    }
     
     /**
      * Returns <tt>true</tt> if this map contains a mapping for the specified
@@ -58,30 +41,6 @@ public abstract class ValidatorSet{
      */
     public boolean containsKey(Object key) {
         return validatorSet.containsKey(key);
-    }
-    
-    /**
-     * Returns <tt>true</tt> if this map maps one or more keys to the
-     * specified value.  More formally, returns <tt>true</tt> if and only if
-     * this map contains at least one mapping to a value <tt>v</tt> such that
-     * <tt>(value==null ? v==null : value.equals(v))</tt>.  This operation
-     * will probably require time linear in the map size for most
-     * implementations of the <tt>Map</tt> interface.
-     *
-     * @param value value whose presence in this map is to be tested
-     *
-     * @return <tt>true</tt> if this map maps one or more keys to the
-     * specified value
-     *
-     * @throws ClassCastException   if the value is of an inappropriate type for
-     *                              this map
-     *                              (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
-     * @throws NullPointerException if the specified value is null and this
-     *                              map does not permit null values
-     *                              (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
-     */
-    public boolean containsValue(Object value) {
-        return validatorSet.containsValue(value);
     }
     
     /**
@@ -143,80 +102,6 @@ public abstract class ValidatorSet{
      */
     public List<Validator> put(XiangqiPieceType key, List<Validator> value) {
         return validatorSet.put(key, value);
-    }
-    
-    /**
-     * Removes the mapping for a key from this map if it is present
-     * (optional operation).   More formally, if this map contains a mapping
-     * from key <tt>k</tt> to value <tt>v</tt> such that
-     * <code>(key==null ?  k==null : key.equals(k))</code>, that mapping
-     * is removed.  (The map can contain at most one such mapping.)
-     *
-     * <p>Returns the value to which this map previously associated the key,
-     * or <tt>null</tt> if the map contained no mapping for the key.
-     *
-     * <p>If this map permits null values, then a return value of
-     * <tt>null</tt> does not <i>necessarily</i> indicate that the map
-     * contained no mapping for the key; it's also possible that the map
-     * explicitly mapped the key to <tt>null</tt>.
-     *
-     * <p>The map will not contain a mapping for the specified key once the
-     * call returns.
-     *
-     * @param key key whose mapping is to be removed from the map
-     *
-     * @return the previous value associated with <tt>key</tt>, or
-     * <tt>null</tt> if there was no mapping for <tt>key</tt>.
-     *
-     * @throws UnsupportedOperationException if the <tt>remove</tt> operation
-     *                                       is not supported by this map
-     * @throws ClassCastException            if the key is of an inappropriate type for
-     *                                       this map
-     *                                       (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
-     * @throws NullPointerException          if the specified key is null and this
-     *                                       map does not permit null keys
-     *                                       (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
-     */
-    public List<Validator> remove(Object key) {
-        return validatorSet.remove(key);
-    }
-    
-    /**
-     * Returns a {@link Set} view of the keys contained in this map.
-     * The set is backed by the map, so changes to the map are
-     * reflected in the set, and vice-versa.  If the map is modified
-     * while an iteration over the set is in progress (except through
-     * the iterator's own <tt>remove</tt> operation), the results of
-     * the iteration are undefined.  The set supports element removal,
-     * which removes the corresponding mapping from the map, via the
-     * <tt>Iterator.remove</tt>, <tt>Set.remove</tt>,
-     * <tt>removeAll</tt>, <tt>retainAll</tt>, and <tt>clear</tt>
-     * operations.  It does not support the <tt>add</tt> or <tt>addAll</tt>
-     * operations.
-     *
-     * @return a set view of the keys contained in this map
-     */
-    public Set<XiangqiPieceType> keySet() {
-        return this.validatorSet.keySet();
-    }
-    
-    /**
-     * Returns a {@link Collection} view of the values contained in this map.
-     * The collection is backed by the map, so changes to the map are
-     * reflected in the collection, and vice-versa.  If the map is
-     * modified while an iteration over the collection is in progress
-     * (except through the iterator's own <tt>remove</tt> operation),
-     * the results of the iteration are undefined.  The collection
-     * supports element removal, which removes the corresponding
-     * mapping from the map, via the <tt>Iterator.remove</tt>,
-     * <tt>Collection.remove</tt>, <tt>removeAll</tt>,
-     * <tt>retainAll</tt> and <tt>clear</tt> operations.  It does not
-     * support the <tt>add</tt> or <tt>addAll</tt> operations.
-     *
-     * @return a collection view of the values contained in this map
-     */
-    public Collection<List<Validator>> values() {
-        return this.validatorSet.values();
     }
     
     public void addValidators(XiangqiPieceType pieceType, List<Validator> validators) {

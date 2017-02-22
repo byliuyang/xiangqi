@@ -19,7 +19,7 @@ public class XiangqiGameImpl implements XiangqiGame {
     private ValidatorSet     validatorSet; // Keep collection of
     // validators
     private String           moveMessage; // Keep current move message
-    private RuleSet          ruleSet;
+    private RuleSet          ruleSet; // Keep the rule set
     
     private XiangqiGameImpl(RuleSet ruleSet, ValidatorSet validatorSet, XiangqiGameState
             gameState) {
@@ -68,7 +68,7 @@ public class XiangqiGameImpl implements XiangqiGame {
             return MoveResult.ILLEGAL;
         }
     
-        gameState.movePiece(source, destination, gameState.getCurrentPlayer());
+        gameState.movePiece(source, destination, currentPlayer);
         gameState.nextTurn();
         
         if (isGeneralCheckmated(otherPlayer)) {
@@ -185,8 +185,9 @@ public class XiangqiGameImpl implements XiangqiGame {
     
     private boolean isGeneralCheckmated(XiangqiColor color) {
         XiangqiCoordinate generalLocation = gameState.getGeneralLocation(color);
-        if (generalLocation == null) return true;
-        return !canGeneralMoveOutOfCheck(color, generalLocation) && !checkCanBeBlocked(color, generalLocation);
+        return generalLocation == null || (isGeneralUnderAttack(color, generalLocation) &&
+                                           !canGeneralMoveOutOfCheck(color, generalLocation) &&
+                                           !checkCanBeBlocked(color, generalLocation));
     }
     
     private boolean isGeneralUnderAttack(XiangqiCoordinate source, XiangqiCoordinate destination,

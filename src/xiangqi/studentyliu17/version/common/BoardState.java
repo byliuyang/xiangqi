@@ -177,6 +177,9 @@ public class BoardState {
         else return boardWidth + 1 - file;
     }
     
+    /**
+     * Create and place pieces on the board
+     */
     public void setupPieces() {
         initializer.setupRedPieces(pieces);
         initializer.setupBlackPieces(pieces);

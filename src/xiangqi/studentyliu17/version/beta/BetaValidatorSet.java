@@ -2,9 +2,15 @@ package xiangqi.studentyliu17.version.beta;
 
 import static xiangqi.common.XiangqiGameVersion.BETA_XQ;
 import static xiangqi.common.XiangqiPieceType.*;
+import static xiangqi.studentyliu17.version.common.ValidatorFactory.*;
 
+import xiangqi.common.XiangqiPieceType;
+import xiangqi.studentyliu17.version.common.Validator;
 import xiangqi.studentyliu17.version.common.ValidatorFactory;
 import xiangqi.studentyliu17.version.common.ValidatorSet;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Validator set for beta xiangqi game
@@ -14,9 +20,50 @@ import xiangqi.studentyliu17.version.common.ValidatorSet;
 public class BetaValidatorSet extends ValidatorSet {
     @Override
     public void setupValidators() {
-        addValidators(CHARIOT, ValidatorFactory.makeValidators(CHARIOT, BETA_XQ));
-        addValidators(ADVISOR, ValidatorFactory.makeValidators(ADVISOR, BETA_XQ));
-        addValidators(GENERAL, ValidatorFactory.makeValidators(GENERAL, BETA_XQ));
-        addValidators(SOLDIER, ValidatorFactory.makeValidators(SOLDIER, BETA_XQ));
+        addValidators(CHARIOT, makeBetaValidators(CHARIOT));
+        addValidators(ADVISOR, makeBetaValidators(ADVISOR));
+        addValidators(GENERAL, makeBetaValidators(GENERAL));
+        addValidators(SOLDIER, makeBetaValidators(SOLDIER));
+    }
+    
+    /**
+     * Creation method for beta xiangqi game validators
+     *
+     * @param pieceType The XiangqiPieceType to generate validator for
+     *
+     * @return list of validators for the given XiangqiPieceType
+     */
+    private static List<Validator> makeBetaValidators(XiangqiPieceType pieceType) {
+        
+        List<Validator> validators = new LinkedList<>();
+        switch (pieceType) {
+            case CHARIOT:
+                validators.add(differentColorValidator);
+                validators.add(differentCoordinateValidator);
+                validators.add(orthogonalValidator);
+                validators.add(jumpOverNoPieceValidator);
+                break;
+            case ADVISOR:
+                validators.add(differentColorValidator);
+                validators.add(differentCoordinateValidator);
+                validators.add(diagonalValidator);
+                validators.add(adjacentValidator);
+                break;
+            case GENERAL:
+                validators.add(differentColorValidator);
+                validators.add(differentCoordinateValidator);
+                validators.add(orthogonalValidator);
+                validators.add(makeRangeValidator(1, 1, 2, 4));
+                validators.add(adjacentValidator);
+                break;
+            case SOLDIER:
+                validators.add(differentColorValidator);
+                validators.add(differentCoordinateValidator);
+                validators.add(verticalValidator);
+                validators.add(adjacentValidator);
+                validators.add(moveForwardValidator);
+                break;
+        }
+        return validators;
     }
 }

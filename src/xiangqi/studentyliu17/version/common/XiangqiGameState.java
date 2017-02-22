@@ -169,6 +169,15 @@ public class XiangqiGameState {
         return boardState.makeCoordinate(coordinate, fromColor, toColor);
     }
     
+    /**
+     * Get the number of pieces are located in between two diagonal locations
+     * 
+     * @param source The starting location
+     * @param dest The ending location
+     * @param player The player's perspective of locations
+     * 
+     * @return the number of pieces are located in between two diagonal locations
+     */
     public int numDiagonalPiecesInBetween(XiangqiCoordinate source, XiangqiCoordinate dest,
                                           XiangqiColor player) {
         return boardState.numDiagonalPiecesInBetween(source, dest, player);
