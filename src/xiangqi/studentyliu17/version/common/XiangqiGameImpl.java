@@ -53,7 +53,7 @@ public class XiangqiGameImpl implements XiangqiGame {
     @Override
     public MoveResult makeMove(XiangqiCoordinate source, XiangqiCoordinate destination) {
         if (!isValidMove(source, destination, gameState.getCurrentPlayer())) {
-            moveMessage = "Invalid move";
+            moveMessage = Message.INVALID_MOVE;
             return MoveResult.ILLEGAL;
         }
         
@@ -63,13 +63,13 @@ public class XiangqiGameImpl implements XiangqiGame {
         XiangqiColor currentPlayer = gameState.getCurrentPlayer();
         XiangqiColor otherPlayer = currentPlayer == RED ? BLACK : RED;
         if (isGeneralCheckmated(currentPlayer)) {
-            moveMessage = "General will be under checkmate";
+            moveMessage = Message.GENERAL_IN_CHECK;
             return MoveResult.ILLEGAL;
         } else if (isGeneralCheckmated(otherPlayer)) {
-            moveMessage = "Player wins";
+            moveMessage = String.format(Message.PLAYER_WIN, gameState.getCurrentPlayer());
             return win(currentPlayer);
         } else if (ruleSet.isDraw(gameState)) {
-            moveMessage = "Players are draw";
+            moveMessage = Message.GAME_IS_DRAW;
             return MoveResult.DRAW;
         }
         

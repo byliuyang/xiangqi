@@ -6,6 +6,8 @@ import xiangqi.XiangqiGameFactory;
 import xiangqi.common.*;
 import xiangqi.studentyliu17.TestCoordinate;
 
+import java.util.concurrent.CompletionException;
+
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 
@@ -25,6 +27,11 @@ public class GammaXiangqiTestCases {
     @Test // 1
     public void createGammaXiangqiGame() {
         assertNotNull(game);
+    }
+    
+    @Test(expected = CompletionException.class) // 2
+    public void getPieceAtInvalidLocation(){
+        game.getPieceAt(makeCoordinate(0, 1), XiangqiColor.RED);
     }
     
     @Test // 2
@@ -86,13 +93,9 @@ public class GammaXiangqiTestCases {
         assertPiece(10, 5, XiangqiColor.RED, XiangqiPieceType.GENERAL, XiangqiColor.BLACK);
     }
     
-    @Test // 12
+    @Test(expected = CompletionException.class) // 12
     public void makeMoveFromInvalidLocation() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(0, 1), makeCoordinate(1, 1)));
-        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(11, 1), makeCoordinate(1,
-                                                                                             1)));
-        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 0), makeCoordinate(1, 1)));
-        assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(1, 10), makeCoordinate(1, 1)));
     }
     
     @Test // 13

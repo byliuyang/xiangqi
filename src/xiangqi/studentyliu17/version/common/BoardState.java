@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletionException;
 
 import static xiangqi.common.XiangqiColor.RED;
 import static xiangqi.common.XiangqiPieceType.GENERAL;
@@ -84,6 +85,9 @@ public class BoardState {
     public XiangqiPiece getPieceAt(XiangqiCoordinate where, XiangqiColor aspect) {
         int file = getFileRespectToRed(where, aspect);
         int rank = getRankRespectToRed(where, aspect);
+        
+        if(file < 1 || file > boardWidth || rank < 1 || rank > boardHeight)
+            throw new CompletionException(new Throwable(Message.GET_PIECE_INVALID));
         
         XiangqiCoordinate coordinate = CoordinateImpl.makeCoordinate(rank, file);
         XiangqiPiece piece = pieces.get(coordinate);
