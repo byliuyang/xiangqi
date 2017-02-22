@@ -151,7 +151,6 @@ public class ValidatorFactory {
         switch (pieceType) {
             case SOLDIER:
                 validators.add(differentColorValidator);
-                validators.add(differentCoordinateValidator);
                 validators.add(orthogonalValidator);
                 validators.add(adjacentValidator);
                 validators.add(moveForwardCrossRiverHorizontalValidator);
@@ -176,6 +175,7 @@ public class ValidatorFactory {
                 validators.add(inGeneralPalaceValidator);
                 break;
             case GENERAL:
+                validators.add(differentColorValidator);
                 validators.add(orthogonalValidator);
                 validators.add(adjacentValidator);
                 validators.add(inGeneralPalaceValidator);
