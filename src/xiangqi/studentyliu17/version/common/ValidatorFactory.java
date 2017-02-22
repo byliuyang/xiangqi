@@ -176,6 +176,7 @@ public class ValidatorFactory {
                 break;
             case GENERAL:
                 validators.add(orthogonalValidator);
+                validators.add(adjacentValidator);
                 break;
             default:
                 validators.add(differentColorValidator);
