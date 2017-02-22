@@ -69,6 +69,7 @@ public class ValidatorFactory {
                                                                          XiangqiGameState state,
                                                                          XiangqiColor player) ->
             c2.isDiagonal(c1) && state.numDiagonalPiecesInBetween(c1, c2, player) == 0;
+    private static Validator inGeneralPalaceValidator = makeRangeValidator(1, 3,4,6);
     
     /**
      * Creation method for xiangqi game validators
@@ -172,11 +173,12 @@ public class ValidatorFactory {
                 validators.add(diagonalValidator);
                 validators.add(adjacentValidator);
                 validators.add(jumpOverNoPieceDiagonallyValidator);
-                validators.add(makeRangeValidator(1, 3,4,6));
+                validators.add(inGeneralPalaceValidator);
                 break;
             case GENERAL:
                 validators.add(orthogonalValidator);
                 validators.add(adjacentValidator);
+                validators.add(inGeneralPalaceValidator);
                 break;
             default:
                 validators.add(differentColorValidator);
