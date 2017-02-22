@@ -58,13 +58,10 @@ public class XiangqiGameImpl implements XiangqiGame {
             return MoveResult.ILLEGAL;
         }
         
-        
-        
         XiangqiColor otherPlayer = currentPlayer == RED ? BLACK : RED;
         XiangqiCoordinate currentPlayerGeneralLoc = gameState.getGeneralLocation(currentPlayer);
         if(isGeneralUnderAttack(currentPlayer, currentPlayerGeneralLoc) &&
-           isGeneralUnderAttack(source, destination, currentPlayerGeneralLoc, currentPlayer,
-                                currentPlayer))
+           isGeneralUnderAttack(source, destination, currentPlayerGeneralLoc, currentPlayer, currentPlayer))
             return MoveResult.ILLEGAL;
     
         gameState.movePiece(source, destination, gameState.getCurrentPlayer());
@@ -78,9 +75,7 @@ public class XiangqiGameImpl implements XiangqiGame {
             return MoveResult.DRAW;
         }
         
-        
         gameState.switchPlayer();
-        
         moveMessage = null;
         return MoveResult.OK;
     }
