@@ -130,6 +130,11 @@ public class DeltaTestCases {
         assertEquals(blackSoldier, game.getPieceAt(c49, BLACK));
     }
     
+    @Test
+    public void queryAnEmptyLocation() {
+        assertEquals(noPiece, game.getPieceAt(c22, RED));
+    }
+    
     // Helpers
     
     private static XiangqiCoordinate makeCoordinate(int rank, int file) {
