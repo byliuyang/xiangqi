@@ -182,4 +182,15 @@ public class XiangqiGameState {
                                           XiangqiColor player) {
         return boardState.numDiagonalPiecesInBetween(source, dest, player);
     }
+    
+    /**
+     * Check whether the given coordinate is on the board
+     *
+     * @param coordinate The given coordinate
+     *
+     * @return true if the coordinate is on the board, false otherwise
+     */
+    public boolean isOnBoard(XiangqiCoordinate coordinate) {
+        return boardState.isOnBoard(coordinate);
+    }
 }

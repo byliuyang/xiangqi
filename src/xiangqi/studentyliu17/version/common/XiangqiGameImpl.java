@@ -7,6 +7,7 @@ import java.util.Map;
 
 import static xiangqi.common.XiangqiColor.BLACK;
 import static xiangqi.common.XiangqiColor.RED;
+import static xiangqi.common.XiangqiPieceType.GENERAL;
 import static xiangqi.studentyliu17.version.common.BoardState.DEFAULT_COORD_COLOR;
 
 /**
@@ -119,6 +120,7 @@ public class XiangqiGameImpl implements XiangqiGame {
      */
     private boolean isValidMove(XiangqiCoordinate xiangqiSource, XiangqiCoordinate xiangqiDest,
                                 XiangqiColor player) {
+        if(!gameState.isOnBoard(xiangqiSource) || !gameState.isOnBoard(xiangqiDest)) return false;
         CoordinateImpl source = CoordinateImpl.makeCoordinate(xiangqiSource.getRank(),
                                                               xiangqiSource.getFile());
         CoordinateImpl dest = CoordinateImpl.makeCoordinate(xiangqiDest.getRank(), xiangqiDest
@@ -204,8 +206,8 @@ public class XiangqiGameImpl implements XiangqiGame {
     
     private boolean canGeneralMoveOutOfCheck(XiangqiColor color, XiangqiCoordinate
             generalLocation) {
-        for (Map.Entry<XiangqiCoordinate, XiangqiPiece> entry : gameState.coordinatesAndPieces()) {
-            XiangqiCoordinate newLocation = gameState.makeCoordinate(entry.getKey(), RED, color);
+        for (XiangqiCoordinate coordinate : gameState.allPossibleCoordinates()) {
+            XiangqiCoordinate newLocation = gameState.makeCoordinate(coordinate, RED, color);
             if (isValidMove(generalLocation, newLocation, color)) {
                 if (!isGeneralUnderAttack(generalLocation, newLocation, newLocation, color, color))
                     return true;
@@ -236,6 +238,7 @@ public class XiangqiGameImpl implements XiangqiGame {
             XiangqiPiece piece = entry.getValue();
             XiangqiColor player = piece.getColor();
             if (player == color) {
+                if (piece.getPieceType() == GENERAL) continue;
                 XiangqiCoordinate pieceLocation = gameState.makeCoordinate(entry.getKey(),
                                                                            DEFAULT_COORD_COLOR,
                                                                            player);

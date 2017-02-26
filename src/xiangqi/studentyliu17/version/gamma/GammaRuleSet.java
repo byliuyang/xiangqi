@@ -18,6 +18,6 @@ public class GammaRuleSet implements RuleSet {
      */
     @Override
     public boolean isDraw(XiangqiGameState gameState) {
-        return gameState.getTurns() >= 20;
+        return gameState.getTurns() >= 25;
     }
 }

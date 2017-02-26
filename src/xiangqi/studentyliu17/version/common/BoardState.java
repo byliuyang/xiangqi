@@ -252,4 +252,16 @@ public class BoardState {
         pieces.entrySet().forEach(entries::add);
         return entries;
     }
+    
+    /**
+     * Check whether the given coordinate is on the board
+     *
+     * @param coordinate The given coordinate
+     *
+     * @return true if the coordinate is on the board, false otherwise
+     */
+    public boolean isOnBoard(XiangqiCoordinate coordinate) {
+        int rank = coordinate.getRank(), file = coordinate.getFile();
+        return rank > 0 && rank <= boardHeight && file > 0 && file <= boardWidth;
+    }
 }
