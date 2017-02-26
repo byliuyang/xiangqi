@@ -8,6 +8,7 @@ import xiangqi.studentyliu17.TestCoordinate;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
+import static xiangqi.common.MoveResult.ILLEGAL;
 import static xiangqi.common.XiangqiColor.BLACK;
 import static xiangqi.common.XiangqiColor.RED;
 import static xiangqi.common.XiangqiPieceType.*;
@@ -133,6 +134,12 @@ public class DeltaTestCases {
     @Test
     public void queryAnEmptyLocation() {
         assertEquals(noPiece, game.getPieceAt(c22, RED));
+    }
+    
+    @Test
+    public void makeMoveWithInvalidCoordinates() {
+        assertEquals(ILLEGAL, game.makeMove(makeCoordinate(0, 3), c14));
+        assertEquals(ILLEGAL, game.makeMove(c11, makeCoordinate(1, 11)));
     }
     
     // Helpers
