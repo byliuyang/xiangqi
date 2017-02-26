@@ -6,6 +6,8 @@ import xiangqi.XiangqiGameFactory;
 import xiangqi.common.*;
 import xiangqi.studentyliu17.TestCoordinate;
 
+import java.util.concurrent.CompletionException;
+
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static xiangqi.common.MoveResult.ILLEGAL;
@@ -92,6 +94,11 @@ public class DeltaTestCases {
     @Test // 1
     public void factoryProducesDeltaXiangqiGame () {
         assertNotNull(game);
+    }
+    
+    @Test(expected = CompletionException.class)
+    public void invalidCoordinateToGetPieceAt() {
+        game.getPieceAt(makeCoordinate(-5, -3), RED);
     }
     
     @Test
