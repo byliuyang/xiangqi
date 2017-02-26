@@ -149,6 +149,11 @@ public class DeltaTestCases {
         assertEquals(ILLEGAL, game.makeMove(c11, makeCoordinate(1, 11)));
     }
     
+    @Test
+    public void attemptToMoveOpponentPiece() {
+        assertEquals(ILLEGAL, game.makeMove(c109, c99));
+    }
+    
     // Helpers
     
     private static XiangqiCoordinate makeCoordinate(int rank, int file) {
