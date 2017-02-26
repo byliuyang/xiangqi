@@ -6,6 +6,7 @@ import xiangqi.XiangqiGameFactory;
 import xiangqi.common.*;
 import xiangqi.studentyliu17.TestCoordinate;
 
+import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static xiangqi.common.XiangqiColor.BLACK;
 import static xiangqi.common.XiangqiColor.RED;
@@ -90,6 +91,43 @@ public class DeltaTestCases {
     @Test // 1
     public void factoryProducesDeltaXiangqiGame () {
         assertNotNull(game);
+    }
+    
+    @Test
+    public void correctInitialPositions() {
+        assertEquals(redChariot, game.getPieceAt(c11, RED));
+        assertEquals(redHorse, game.getPieceAt(c12, RED));
+        assertEquals(redElephant, game.getPieceAt(c13, RED));
+        assertEquals(redAdvior, game.getPieceAt(c14, RED));
+        assertEquals(redGeneral, game.getPieceAt(c15, RED));
+        assertEquals(redAdvior, game.getPieceAt(c16, RED));
+        assertEquals(redElephant, game.getPieceAt(c17, RED));
+        assertEquals(redHorse, game.getPieceAt(c18, RED));
+        assertEquals(redChariot, game.getPieceAt(c19, RED));
+        assertEquals(redCannon, game.getPieceAt(c32, RED));
+        assertEquals(redCannon, game.getPieceAt(c38, RED));
+        assertEquals(redSoldier, game.getPieceAt(c41, RED));
+        assertEquals(redSoldier, game.getPieceAt(c43, RED));
+        assertEquals(redSoldier, game.getPieceAt(c45, RED));
+        assertEquals(redSoldier, game.getPieceAt(c47, RED));
+        assertEquals(redSoldier, game.getPieceAt(c49, RED));
+    
+        assertEquals(blackChariot, game.getPieceAt(c11, BLACK));
+        assertEquals(blackHorse, game.getPieceAt(c12, BLACK));
+        assertEquals(blackElephant, game.getPieceAt(c13, BLACK));
+        assertEquals(blackAdvior, game.getPieceAt(c14, BLACK));
+        assertEquals(blackGeneral, game.getPieceAt(c15, BLACK));
+        assertEquals(blackAdvior, game.getPieceAt(c16, BLACK));
+        assertEquals(blackElephant, game.getPieceAt(c17, BLACK));
+        assertEquals(blackHorse, game.getPieceAt(c18, BLACK));
+        assertEquals(blackChariot, game.getPieceAt(c19, BLACK));
+        assertEquals(blackCannon, game.getPieceAt(c32, BLACK));
+        assertEquals(blackCannon, game.getPieceAt(c38, BLACK));
+        assertEquals(blackSoldier, game.getPieceAt(c41, BLACK));
+        assertEquals(blackSoldier, game.getPieceAt(c43, BLACK));
+        assertEquals(blackSoldier, game.getPieceAt(c45, BLACK));
+        assertEquals(blackSoldier, game.getPieceAt(c47, BLACK));
+        assertEquals(blackSoldier, game.getPieceAt(c49, BLACK));
     }
     
     // Helpers
