@@ -1,11 +1,12 @@
 package xiangqi.studentyliu17.version.delta;
 
 import org.junit.Before;
+import org.junit.Test;
 import xiangqi.XiangqiGameFactory;
 import xiangqi.common.*;
-import xiangqi.common.XiangqiPieceType;
 import xiangqi.studentyliu17.TestCoordinate;
 
+import static junit.framework.TestCase.assertNotNull;
 import static xiangqi.common.XiangqiColor.BLACK;
 import static xiangqi.common.XiangqiColor.RED;
 import static xiangqi.common.XiangqiPieceType.*;
@@ -84,6 +85,11 @@ public class DeltaTestCases {
     @Before
     public void setup() {
         game = XiangqiGameFactory.makeXiangqiGame(XiangqiGameVersion.DELTA_XQ);
+    }
+    
+    @Test // 1
+    public void factoryProducesDeltaXiangqiGame () {
+        assertNotNull(game);
     }
     
     // Helpers
