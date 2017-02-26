@@ -154,6 +154,12 @@ public class DeltaTestCases {
         assertEquals(ILLEGAL, game.makeMove(c109, c99));
     }
     
+    @Test
+    public void attemptToCaptureOwnPiece()
+    {
+        assertEquals(ILLEGAL, game.makeMove(c11, c12));
+    }
+    
     // Helpers
     
     private static XiangqiCoordinate makeCoordinate(int rank, int file) {
