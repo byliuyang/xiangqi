@@ -10,6 +10,7 @@ import java.util.concurrent.CompletionException;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static xiangqi.common.MoveResult.ILLEGAL;
 import static xiangqi.common.XiangqiColor.BLACK;
 import static xiangqi.common.XiangqiColor.RED;
@@ -158,6 +159,13 @@ public class DeltaTestCases {
     public void attemptToCaptureOwnPiece()
     {
         assertEquals(ILLEGAL, game.makeMove(c11, c12));
+    }
+    
+    @Test
+    public void ensureMessageOnIllegalMove()
+    {
+        game.makeMove(c11, c13);
+        assertTrue(game.getMoveMessage().length() > 5);		// Minimum of 6 characters seems reasonable
     }
     
     // Helpers
