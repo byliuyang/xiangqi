@@ -19,6 +19,9 @@ import xiangqi.studentyliu17.version.beta.BetaPiecesInitializer;
 import xiangqi.studentyliu17.version.beta.BetaRuleSet;
 import xiangqi.studentyliu17.version.beta.BetaValidatorSet;
 import xiangqi.studentyliu17.version.common.BoardState;
+import xiangqi.studentyliu17.version.delta.DeltaPiecesInitializer;
+import xiangqi.studentyliu17.version.delta.DeltaRuleSet;
+import xiangqi.studentyliu17.version.delta.DeltaValidatorSet;
 import xiangqi.studentyliu17.version.gamma.GammaPiecesInitializer;
 import xiangqi.studentyliu17.version.gamma.GammaRuleSet;
 import xiangqi.studentyliu17.version.gamma.GammaValidatorSet;
@@ -39,6 +42,9 @@ public class XiangqiGameFactory {
     
     private static final int GAMMA_BOARD_WIDTH  = 9;
     private static final int GAMMA_BOARD_HEIGHT = 10;
+    
+    private static final int DELTA_BOARD_WIDTH  = 9;
+    private static final int DELTA_BOARD_HEIGHT = 10;
     
     /**
      * Factory method that returns an instance of the requested game.
@@ -70,6 +76,13 @@ public class XiangqiGameFactory {
                                                        initializer);
                 validatorSet = new GammaValidatorSet();
                 ruleSet = new GammaRuleSet();
+                break;
+            case DELTA_XQ:
+                initializer = new DeltaPiecesInitializer();
+                boardState = BoardState.makeBoardState(DELTA_BOARD_WIDTH, DELTA_BOARD_HEIGHT,
+                                                       initializer);
+                validatorSet = new DeltaValidatorSet();
+                ruleSet = new DeltaRuleSet();
                 break;
             default:
                 System.out.println("Not implemented yet!");
