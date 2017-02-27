@@ -55,6 +55,9 @@ public class ValidatorFactory {
                                                                          XiangqiColor player) ->
             c2.isDiagonal(c1) && state.numDiagonalPiecesInBetween(c1, c2, player) == 0;
     public static Validator inGeneralPalaceValidator = makeRangeValidator(1, 3,4,6);
+    public static Validator sameLocationValidator = (CoordinateImpl c1, CoordinateImpl c2,
+                                                     XiangqiGameState state, XiangqiColor player)
+            -> c2.equals(c1);
     
     /**
      * Creation method for moveForwardCrossRiverHorizontalValidator
