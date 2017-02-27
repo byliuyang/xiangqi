@@ -60,7 +60,12 @@ public class ValidatorFactory {
             -> c2.equals(c1);
     
     public static Validator crossTwoGridValidator = (CoordinateImpl c1, CoordinateImpl c2,
-    XiangqiGameState state, XiangqiColor player) -> c2.isRectangularDiagonal(c1, 1, 2);
+                                                     XiangqiGameState state, XiangqiColor player)
+            -> c2.isRectangularDiagonal(c1, 1, 2);
+    public static Validator noOrthogonalPieceInMoveDirectionValidator =
+            (CoordinateImpl c1, CoordinateImpl c2,XiangqiGameState state, XiangqiColor player)
+                    -> state.noPieceAt(c2.getOrthogonalCoordinateInMoveDirection(c1), player);
+    
     
     /**
      * Creation method for moveForwardCrossRiverHorizontalValidator

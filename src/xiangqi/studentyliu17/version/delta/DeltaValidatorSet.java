@@ -43,6 +43,7 @@ public class DeltaValidatorSet extends ValidatorSet {
                 validators.add(differentCoordinateValidator);
                 validators.add(differentColorValidator);
                 validators.add(crossTwoGridValidator);
+                validators.add(noOrthogonalPieceInMoveDirectionValidator);
                 break;
             default:
                 validators.add(sameLocationValidator);

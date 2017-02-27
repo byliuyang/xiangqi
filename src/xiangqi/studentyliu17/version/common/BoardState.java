@@ -253,6 +253,10 @@ public class BoardState {
         return entries;
     }
     
+    public boolean noPieceAt(CoordinateImpl coordinate, XiangqiColor aspect) {
+        return getPieceAt(coordinate, aspect).getPieceType() == NONE;
+    }
+    
     /**
      * Check whether the given coordinate is on the board
      *

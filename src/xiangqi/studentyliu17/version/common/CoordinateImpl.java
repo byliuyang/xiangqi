@@ -32,10 +32,30 @@ public class CoordinateImpl implements XiangqiCoordinate {
         int otherRank = coordinate.getRank();
         int otherFile = coordinate.getFile();
         int rankDiff = Math.abs(rank - otherRank);
-        int fileDiff = (file - otherFile);
+        int fileDiff = Math.abs(file - otherFile);
         
         return (rankDiff == width && fileDiff == height) || (rankDiff == height && fileDiff ==
                                                                                    width);
+    }
+    
+    /**
+     * @param coordinate
+     *
+     * @return
+     */
+    public CoordinateImpl getOrthogonalCoordinateInMoveDirection(CoordinateImpl coordinate) {
+        int otherRank = coordinate.getRank();
+        int otherFile = coordinate.getFile();
+        int rankDiff = rank - otherRank;
+        int fileDiff = file - otherFile;
+        
+        if (Math.abs(rankDiff) > Math.abs(fileDiff))
+            return rankDiff > 0 ?
+                   makeCoordinate(otherRank + 1, otherFile) :
+                   makeCoordinate(otherRank - 1, otherFile);
+        else return fileDiff > 0 ?
+                    makeCoordinate(otherRank, otherFile + 1) :
+                    makeCoordinate(otherRank, otherFile - 1);
     }
     
     /**
@@ -148,6 +168,11 @@ public class CoordinateImpl implements XiangqiCoordinate {
         if (!(obj instanceof XiangqiCoordinate)) return false;
         XiangqiCoordinate coordinate = (XiangqiCoordinate) obj;
         return coordinate.getRank() == rank && coordinate.getFile() == file;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("(%s, %s)", rank, file);
     }
     
     /**

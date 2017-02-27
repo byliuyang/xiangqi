@@ -183,6 +183,10 @@ public class XiangqiGameState {
         return boardState.numDiagonalPiecesInBetween(source, dest, player);
     }
     
+    public boolean noPieceAt(CoordinateImpl coordinate, XiangqiColor aspect) {
+        return boardState.noPieceAt(coordinate, aspect);
+    }
+    
     /**
      * Check whether the given coordinate is on the board
      *
