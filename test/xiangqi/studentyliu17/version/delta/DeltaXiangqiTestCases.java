@@ -22,7 +22,7 @@ import static xiangqi.common.XiangqiPieceType.*;
  *
  * @version Feb 25, 2017
  */
-public class DeltaTestCases {
+public class DeltaXiangqiTestCases {
     private XiangqiGame game;
     
     private static XiangqiCoordinate c11 = makeCoordinate(1, 1),
