@@ -12,6 +12,7 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static xiangqi.common.MoveResult.ILLEGAL;
+import static xiangqi.common.MoveResult.OK;
 import static xiangqi.common.XiangqiColor.BLACK;
 import static xiangqi.common.XiangqiColor.RED;
 import static xiangqi.common.XiangqiPieceType.*;
@@ -166,6 +167,13 @@ public class DeltaTestCases {
     {
         game.makeMove(c11, c13);
         assertTrue(game.getMoveMessage().length() > 5);		// Minimum of 6 characters seems reasonable
+    }
+    
+    @Test
+    public void makeValidChariotMove(){
+        assertEquals(OK, game.makeMove(c11, c21));
+        assertEquals(redChariot, game.getPieceAt(c21, RED));
+        assertEquals(noPiece, game.getPieceAt(c11, RED));
     }
     
     // Helpers
