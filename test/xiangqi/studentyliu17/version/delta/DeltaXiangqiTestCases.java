@@ -182,27 +182,33 @@ public class DeltaXiangqiTestCases {
     }
     
     @Test
-    public void validHorseMove() {
-        assertEquals(OK, game.makeMove(c12, c33));
+    public void tryToMoveChariotJumpOverAPiece() {
+        assertEquals(ILLEGAL, game.makeMove(c11, c71));
     }
     
     @Test
-    public void tryMoveHorseOrthogonally() {
+    public void validHorseMove() {
+        assertEquals(OK, game.makeMove(c12, c33));
+        assertEquals(noPiece, game.getPieceAt(c12, RED));
+    }
+    
+    @Test
+    public void tryToMoveHorseOrthogonally() {
         assertEquals(ILLEGAL, game.makeMove(c12, c22));
     }
     
     @Test
-    public void tryMoveHorseDiagonally() {
+    public void tryToMoveHorseDiagonally() {
         assertEquals(ILLEGAL, game.makeMove(c12, c23));
     }
     
     @Test
-    public void tryMoveHorseBlockByElephant() {
+    public void tryToMoveHorseBlockByElephant() {
         assertEquals(ILLEGAL, game.makeMove(c12, c24));
     }
     
     @Test
-    public void tryMoveHorseBlockBySoldier() {
+    public void tryToMoveHorseBlockBySoldier() {
         assertEquals(OK, game.makeMove(c12, c33));
         assertEquals(OK, game.makeMove(c11, c21));
         assertEquals(ILLEGAL, game.makeMove(c33, c54));
