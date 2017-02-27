@@ -16,6 +16,7 @@ import static xiangqi.studentyliu17.version.common.ValidatorFactory.*;
  * @version Feb 25, 2017
  */
 public class DeltaValidatorSet extends ValidatorSet {
+    private final int DELTA_RANK_OF_RIVER = 5;
     /**
      * This method create and put pieces on the board
      */
@@ -44,6 +45,13 @@ public class DeltaValidatorSet extends ValidatorSet {
                 validators.add(differentColorValidator);
                 validators.add(crossTwoGridValidator);
                 validators.add(noOrthogonalPieceInMoveDirectionValidator);
+                break;
+            case ELEPHANT:
+                validators.add(differentColorValidator);
+                validators.add(diagonalValidator);
+                validators.add(adjacentTwoRanksValidator);
+                validators.add(jumpOverNoPieceDiagonallyValidator);
+                validators.add(makeNotCrossingRiverValidator(DELTA_RANK_OF_RIVER));
                 break;
             default:
                 validators.add(sameLocationValidator);
