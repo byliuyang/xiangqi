@@ -182,17 +182,17 @@ public class DeltaXiangqiTestCases {
     }
     
     @Test
-    public void moveValidHorseMove() {
-        assertEquals(ILLEGAL, game.makeMove(c12, c23));
+    public void validHorseMove() {
+        assertEquals(OK, game.makeMove(c12, c33));
     }
     
     @Test
-    public void moveHorseOrthogonally() {
+    public void tryMoveHorseOrthogonally() {
         assertEquals(ILLEGAL, game.makeMove(c12, c22));
     }
     
     @Test
-    public void moveHorseDiagonally() {
+    public void tryMoveHorseDiagonally() {
         assertEquals(ILLEGAL, game.makeMove(c12, c23));
     }
     
