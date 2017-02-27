@@ -39,6 +39,11 @@ public class DeltaValidatorSet extends ValidatorSet {
                 validators.add(orthogonalValidator);
                 validators.add(jumpOverNoPieceValidator);
                 break;
+            case HORSE:
+                validators.add(differentCoordinateValidator);
+                validators.add(differentColorValidator);
+                validators.add(crossTwoGridValidator);
+                break;
             default:
                 validators.add(sameLocationValidator);
                 validators.add(differentColorValidator);

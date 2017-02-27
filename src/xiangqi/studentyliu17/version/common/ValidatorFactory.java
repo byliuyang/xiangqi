@@ -59,6 +59,9 @@ public class ValidatorFactory {
                                                      XiangqiGameState state, XiangqiColor player)
             -> c2.equals(c1);
     
+    public static Validator crossTwoGridValidator = (CoordinateImpl c1, CoordinateImpl c2,
+    XiangqiGameState state, XiangqiColor player) -> c2.isRectangularDiagonal(c1, 1, 2);
+    
     /**
      * Creation method for moveForwardCrossRiverHorizontalValidator
      * 

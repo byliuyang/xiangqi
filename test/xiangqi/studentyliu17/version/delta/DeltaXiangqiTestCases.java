@@ -185,6 +185,12 @@ public class DeltaXiangqiTestCases {
     public void moveValidHorseMove() {
         assertEquals(OK, game.makeMove(c12, c33));
     }
+    
+    @Test
+    public void moveHorseOrthogonally() {
+        assertEquals(ILLEGAL, game.makeMove(c12, c22));
+    }
+    
     // Helpers
     
     private static XiangqiCoordinate makeCoordinate(int rank, int file) {

@@ -28,6 +28,16 @@ public class CoordinateImpl implements XiangqiCoordinate {
         return new CoordinateImpl(rank, file);
     }
     
+    public boolean isRectangularDiagonal(CoordinateImpl coordinate, int width, int height) {
+        int otherRank = coordinate.getRank();
+        int otherFile = coordinate.getFile();
+        int rankDiff = Math.abs(rank - otherRank);
+        int fileDiff = (file - otherFile);
+        
+        return (rankDiff == width && fileDiff == height) || (rankDiff == height && fileDiff ==
+                                                                                   width);
+    }
+    
     /**
      * Check whether the other coordinate is orthogonal to this coordinate
      *
