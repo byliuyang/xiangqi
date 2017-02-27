@@ -58,7 +58,7 @@ public class GammaValidatorSet extends ValidatorSet {
                 validators.add(diagonalValidator);
                 validators.add(adjacentTwoRanksValidator);
                 validators.add(jumpOverNoPieceDiagonallyValidator);
-                validators.add(makeNotCrossingRiverValidator(5));
+                validators.add(makeNotCrossingRiverValidator(GAMMA_RANK_OF_RIVER));
                 break;
             case ADVISOR:
                 validators.add(diagonalValidator);
