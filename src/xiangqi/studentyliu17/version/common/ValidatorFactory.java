@@ -2,6 +2,8 @@ package xiangqi.studentyliu17.version.common;
 
 import xiangqi.common.XiangqiColor;
 
+import static xiangqi.common.XiangqiPieceType.GENERAL;
+
 /**
  * Validator factory
  *
@@ -66,7 +68,19 @@ public class ValidatorFactory {
     public static Validator jumpOverAtMostOnePieceOrthogonallyValidator =
             (CoordinateImpl c1, CoordinateImpl c2,XiangqiGameState state, XiangqiColor player)
                 -> c2.isOrthogonal(c1) && state.numOrthogonalPiecesInBetween(c1, c2, player) <= 1;
+    private static Validator flyingGeneralValidator = (CoordinateImpl c1, CoordinateImpl c2,
+                                                 XiangqiGameState state, XiangqiColor player)
+            -> (c2.isVertical(c1) &&
+                state.numOrthogonalPiecesInBetween(c1, c2, player) == 0 &&
+                state.getPieceAt(c2, player).getPieceType() == GENERAL);
+    private static Validator inPalaceOneStepValidator = (CoordinateImpl c1, CoordinateImpl c2,XiangqiGameState state, XiangqiColor player)
+    -> adjacentValidator.validate(c1, c2, state, player) &&
+       inGeneralPalaceValidator.validate(c1, c2, state, player);
     
+    public static Validator oneStepInPalaceOrFlyingGeneralValidator =
+            (CoordinateImpl c1, CoordinateImpl c2,XiangqiGameState state, XiangqiColor player)
+                -> inPalaceOneStepValidator.validate(c1, c2, state, player) ||
+                   flyingGeneralValidator.validate(c1, c2, state, player);
     
     /**
      * Creation method for moveForwardCrossRiverHorizontalValidator
