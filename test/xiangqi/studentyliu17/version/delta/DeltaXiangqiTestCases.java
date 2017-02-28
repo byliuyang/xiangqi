@@ -247,6 +247,8 @@ public class DeltaXiangqiTestCases {
     @Test
     public void validAdvisorMove() {
         assertEquals(OK, game.makeMove(c14, c25));
+        assertEquals(noPiece, game.getPieceAt(c14, RED));
+        assertEquals(redAdvior, game.getPieceAt(c25, RED));
     }
     
     // Helpers
