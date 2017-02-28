@@ -364,6 +364,11 @@ public class DeltaXiangqiTestCases {
     }
     
     @Test
+    public void cannonJumpNoPiece() {
+        assertEquals(ILLEGAL, game.makeMove(c32, c82));
+    }
+    
+    @Test
     public void cannonValidMoveJumpOverOnePiece() {
         assertEquals(OK, game.makeMove(c32, c102));
     }
@@ -404,6 +409,17 @@ public class DeltaXiangqiTestCases {
         assertEquals(OK, game.makeMove(c25, c35));
         assertEquals(OK, game.makeMove(c15, c14));
         assertEquals(ILLEGAL, game.makeMove(c35, c36));
+    }
+    
+    @Test
+    public void redInCheckByMoveAwayAnPiece() {
+        assertEquals(OK, game.makeMove(c15, c25));
+        assertEquals(OK, game.makeMove(c14, c25));
+        assertEquals(OK, game.makeMove(c32, c36));
+        assertEquals(OK, game.makeMove(c15, c14));
+        assertEquals(OK, game.makeMove(c25, c26));
+        assertEquals(OK, game.makeMove(c11, c21));
+        assertEquals(ILLEGAL, game.makeMove(c36, c32));
     }
     
     @Test

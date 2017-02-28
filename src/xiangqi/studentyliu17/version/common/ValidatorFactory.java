@@ -3,6 +3,7 @@ package xiangqi.studentyliu17.version.common;
 import xiangqi.common.XiangqiColor;
 
 import static xiangqi.common.XiangqiPieceType.GENERAL;
+import static xiangqi.common.XiangqiPieceType.NONE;
 
 /**
  * Validator factory
@@ -67,7 +68,13 @@ public class ValidatorFactory {
                     -> state.noPieceAt(c2.getOrthogonalCoordinateInMoveDirection(c1), player);
     public static Validator jumpOverAtMostOnePieceOrthogonallyValidator =
             (CoordinateImpl c1, CoordinateImpl c2,XiangqiGameState state, XiangqiColor player)
-                -> c2.isOrthogonal(c1) && state.numOrthogonalPiecesInBetween(c1, c2, player) <= 1;
+                -> {
+                    int numberPiecesInBetween = state.numOrthogonalPiecesInBetween(c1, c2, player);
+                    return c2.isOrthogonal(c1) &&
+                           (state.getPieceAt(c2, player).getPieceType() == NONE ?
+                            numberPiecesInBetween == 0 :
+                            numberPiecesInBetween == 1);
+            };
     private static Validator flyingGeneralValidator = (CoordinateImpl c1, CoordinateImpl c2,
                                                  XiangqiGameState state, XiangqiColor player)
             -> (c2.isVertical(c1) &&
