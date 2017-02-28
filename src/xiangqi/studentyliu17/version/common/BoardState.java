@@ -119,9 +119,9 @@ public class BoardState {
         int numInBetween = 0;
         for(int rank = smallerRank + 1; rank < greaterRank; rank++)
             for (int file = smallerFile + 1; file < greaterFile; file++)
-                if(rank == file &&
-                   getPieceAt(CoordinateImpl.makeCoordinate(rank, file),
-                              DEFAULT_COORD_COLOR).getPieceType() != XiangqiPieceType.NONE)
+                if (Math.abs(rank - sourceRank) == Math.abs(file - sourceFile) &&
+                    getPieceAt(CoordinateImpl.makeCoordinate(rank, file),
+                               DEFAULT_COORD_COLOR).getPieceType() != XiangqiPieceType.NONE)
                     numInBetween++;
         return numInBetween;
     }

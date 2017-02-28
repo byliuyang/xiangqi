@@ -255,6 +255,15 @@ public class DeltaXiangqiTestCases {
     }
     
     @Test
+    public void tryToMoveElephantWhenBlockingElephantEye() {
+        assertEquals(OK, game.makeMove(c11, c21));
+        assertEquals(OK, game.makeMove(c11, c21));
+        assertEquals(OK, game.makeMove(c21, c24));
+        assertEquals(OK, game.makeMove(c21, c22));
+        assertEquals(ILLEGAL, game.makeMove(c13, c35));
+    }
+    
+    @Test
     public void validAdvisorMove() {
         assertEquals(OK, game.makeMove(c14, c25));
         assertEquals(noPiece, game.getPieceAt(c14, RED));
