@@ -20,4 +20,14 @@ public class BetaRuleSet implements RuleSet {
     public boolean isDraw(XiangqiGameState gameState) {
         return gameState.getTurns() >= 10;
     }
+    
+    @Override
+    public boolean allowPerpetualCheck() {
+        return false;
+    }
+    
+    @Override
+    public int numRepetitions() {
+        return 0;
+    }
 }

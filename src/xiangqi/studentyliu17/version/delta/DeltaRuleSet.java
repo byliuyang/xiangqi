@@ -18,4 +18,14 @@ public class DeltaRuleSet implements RuleSet {
     public boolean isDraw(XiangqiGameState gameState) {
         return false;
     }
+    
+    @Override
+    public boolean allowPerpetualCheck() {
+        return true;
+    }
+    
+    @Override
+    public int numRepetitions() {
+        return 3;
+    }
 }

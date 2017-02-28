@@ -46,6 +46,16 @@ public class BoardState {
         return boardState;
     }
     
+    public static BoardState copyBoardState(BoardState boardState) {
+        BoardState newBoardState = new BoardState(boardState.boardWidth, boardState.boardHeight,
+                                                  boardState.initializer);
+        newBoardState.pieces = new HashMap<>();
+        for(Map.Entry<XiangqiCoordinate, XiangqiPiece> entry: boardState.pieces.entrySet())
+            newBoardState.pieces.put(entry.getKey(), entry.getValue());
+        newBoardState.coordinates = boardState.coordinates;
+        return newBoardState;
+    }
+    
     /**
      * Convert xiangqi coordinate to target player's perspective
      *
@@ -267,5 +277,13 @@ public class BoardState {
     public boolean isOnBoard(XiangqiCoordinate coordinate) {
         int rank = coordinate.getRank(), file = coordinate.getFile();
         return rank > 0 && rank <= boardHeight && file > 0 && file <= boardWidth;
+    }
+    
+    public boolean hasSameConfiguration(BoardState boardState) {
+        if (pieces.size() != boardState.pieces.size()) return false;
+        for(Map.Entry<XiangqiCoordinate, XiangqiPiece> entry: pieces.entrySet())
+            if(!boardState.pieces.get(entry.getKey()).equals(entry.getValue()))
+                return false;
+        return true;
     }
 }

@@ -73,12 +73,15 @@ public class XiangqiGameImpl implements XiangqiGame {
         gameState.nextTurn();
         
         if (isGeneralCheckmatedOrStalemated(otherPlayer)) {
-            moveMessage = String.format(Message.PLAYER_WIN, gameState.getCurrentPlayer());
+            moveMessage = String.format(Message.PLAYER_WIN, currentPlayer);
             return win(currentPlayer);
         } else if (ruleSet.isDraw(gameState)) {
             moveMessage = Message.GAME_IS_DRAW;
             return MoveResult.DRAW;
-        }
+        } else if(ruleSet.allowPerpetualCheck() &&
+                  isGeneralUnderAttack(otherPlayer, gameState.getGeneralLocation(otherPlayer)) &&
+                  gameState.isPerpetualCheck())
+            return win(otherPlayer);
         
         gameState.switchPlayer();
         moveMessage = null;

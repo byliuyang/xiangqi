@@ -6,6 +6,7 @@ import xiangqi.common.XiangqiPiece;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 import static xiangqi.common.XiangqiColor.BLACK;
 
@@ -15,18 +16,21 @@ import static xiangqi.common.XiangqiColor.BLACK;
  * @version Jan 28, 2017
  */
 public class XiangqiGameState {
-    
-    private BoardState   boardState; // Keep the board state
-    private XiangqiColor currentPlayer; // Keep track of the current player
-    private int          turns; // Keep track of the number of turns passed
+    private Stack<BoardState> boardStates;
+    private BoardState        boardState; // Keep the board state
+    private XiangqiColor      currentPlayer; // Keep track of the current player
+    private int               turns; // Keep track of the number of turns passed
+    private RuleSet ruleSet;
+    private static final int NUM_MOVES_BETWEEN_CHECKS = 4;
     
     /**
      * Constructor for XiangqiGameState
      *
      * @param boardState The boardState
      */
-    private XiangqiGameState(BoardState boardState) {
+    private XiangqiGameState(BoardState boardState, RuleSet ruleSet) {
         this.boardState  = boardState;
+        this.ruleSet = ruleSet;
     }
     
     /**
@@ -36,8 +40,8 @@ public class XiangqiGameState {
      * 
      * @return a instance of XiangqiGameState
      */
-    public static XiangqiGameState makeGameState(BoardState boardState) {
-        XiangqiGameState gameState = new XiangqiGameState(boardState);
+    public static XiangqiGameState makeGameState(BoardState boardState, RuleSet ruleSet) {
+        XiangqiGameState gameState = new XiangqiGameState(boardState, ruleSet);
         gameState.initialize();
         return gameState;
     }
@@ -45,6 +49,7 @@ public class XiangqiGameState {
     private void initialize() {
         currentPlayer = XiangqiColor.RED;
         turns = 0;
+        boardStates = new Stack<>();
     }
     
     /**
@@ -78,6 +83,7 @@ public class XiangqiGameState {
      */
     public void switchPlayer() {
         currentPlayer = currentPlayer == XiangqiColor.RED ? XiangqiColor.BLACK : XiangqiColor.RED;
+        boardStates.push(BoardState.copyBoardState(boardState));
     }
     
     /**
@@ -196,5 +202,25 @@ public class XiangqiGameState {
      */
     public boolean isOnBoard(XiangqiCoordinate coordinate) {
         return boardState.isOnBoard(coordinate);
+    }
+    
+    public boolean isPerpetualCheck() {
+        int numRepetitions = ruleSet.numRepetitions() - 1;
+        if(boardStates.size() < numRepetitions * NUM_MOVES_BETWEEN_CHECKS) return false;
+        
+        boolean sameBoardState = true;
+        
+        Stack<BoardState> tempBoardStates = new Stack<>();
+        for (int i = 0; i < numRepetitions; i++){
+            for(int j = 0; j < NUM_MOVES_BETWEEN_CHECKS; j++)
+                tempBoardStates.push(boardStates.pop());
+            if(!tempBoardStates.peek().hasSameConfiguration(boardState))
+                sameBoardState = false;
+        }
+        
+        while (!tempBoardStates.isEmpty())
+            boardStates.push(tempBoardStates.pop());
+        
+        return sameBoardState;
     }
 }

@@ -20,4 +20,13 @@ public class GammaRuleSet implements RuleSet {
     public boolean isDraw(XiangqiGameState gameState) {
         return gameState.getTurns() >= 25;
     }
+    
+    public boolean allowPerpetualCheck() {return false;}
+    
+    @Override
+    public int numRepetitions() {
+        return 0;
+    }
+    
+    
 }

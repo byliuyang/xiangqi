@@ -88,7 +88,7 @@ public class XiangqiGameFactory {
                 System.out.println("Not implemented yet!");
                 return null;
         }
-        XiangqiGameState gameState = XiangqiGameState.makeGameState(boardState);
+        XiangqiGameState gameState = XiangqiGameState.makeGameState(boardState, ruleSet);
         validatorSet.initialize();
         game = XiangqiGameImpl.makeXiangqiGame(ruleSet, validatorSet, gameState);
         return game;

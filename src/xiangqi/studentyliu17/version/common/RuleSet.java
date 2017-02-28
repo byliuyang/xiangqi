@@ -14,4 +14,7 @@ public interface RuleSet {
      * @return true if the game result is draw, false otherwise
      */
     boolean isDraw(XiangqiGameState gameState);
+    
+    boolean allowPerpetualCheck();
+    int numRepetitions();
 }
