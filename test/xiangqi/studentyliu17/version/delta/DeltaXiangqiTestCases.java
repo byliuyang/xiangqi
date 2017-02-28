@@ -415,7 +415,7 @@ public class DeltaXiangqiTestCases {
         
         blackCoordinates.add(c106);
         blackPieces.add(blackGeneral);
-        redCoordinates.add(c14);
+        redCoordinates.add(c15);
         redPieces.add(redGeneral);
         redCoordinates.add(c76);
         redPieces.add(redSoldier);
@@ -424,7 +424,7 @@ public class DeltaXiangqiTestCases {
         
         assertNotNull(game);
         assertEquals(blackGeneral, game.getPieceAt(c14, BLACK));
-        assertEquals(redGeneral, game.getPieceAt(c14, RED));
+        assertEquals(redGeneral, game.getPieceAt(c15, RED));
         assertEquals(redSoldier, game.getPieceAt(c76, RED));
         
         assertEquals(RED_WINS, game.makeMove(c76, c86));
