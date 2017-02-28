@@ -187,6 +187,14 @@ public class DeltaXiangqiTestCases {
     }
     
     @Test
+    public void makeValidMoveForEachPlayer() {
+        game.makeMove(c11, c31);
+        assertEquals(redChariot, game.getPieceAt(c31, RED));
+        assertEquals(OK, game.makeMove(c19, c39));
+        assertEquals(blackChariot, game.getPieceAt(c39, BLACK));
+    }
+    
+    @Test
     public void validHorseMove() {
         assertEquals(OK, game.makeMove(c12, c33));
         assertEquals(noPiece, game.getPieceAt(c12, RED));
