@@ -329,12 +329,18 @@ public class DeltaXiangqiTestCases {
         assertEquals(OK, game.makeMove(c51, c61));
         assertEquals(OK, game.makeMove(c51, c61));
         assertEquals(OK, game.makeMove(c61, c62));
+        assertEquals(noPiece, game.getPieceAt(c61, RED));
+        assertEquals(redSoldier, game.getPieceAt(c62, RED));
     }
     
     @Test
     public void cannonValidMoveOrthogonally() {
         assertEquals(OK, game.makeMove(c32, c31));
         assertEquals(OK, game.makeMove(c32, c42));
+        assertEquals(noPiece, game.getPieceAt(c32, RED));
+        assertEquals(redCannon, game.getPieceAt(c31, RED));
+        assertEquals(noPiece, game.getPieceAt(c32, BLACK));
+        assertEquals(blackCannon, game.getPieceAt(c42, BLACK));
     }
     
     @Test
