@@ -235,6 +235,15 @@ public class DeltaXiangqiTestCases {
         assertEquals(noPiece, game.getPieceAt(c24, RED));
     }
     
+    @Test
+    public void tryToMoveElephantCrossRiver() {
+        assertEquals(OK, game.makeMove(c13, c35));
+        assertEquals(OK, game.makeMove(c11, c21));
+        assertEquals(OK, game.makeMove(c35, c53));
+        assertEquals(OK, game.makeMove(c21, c24));
+        assertEquals(ILLEGAL, game.makeMove(c53, c75));
+    }
+    
     // Helpers
     
     private static XiangqiCoordinate makeCoordinate(int rank, int file) {
