@@ -347,6 +347,13 @@ public class DeltaXiangqiTestCases {
         assertEquals(ILLEGAL, game.makeMove(c32, c23));
     }
     
+    @Test
+    public void cannonTryMoveJumpOverTwoPiece() {
+        assertEquals(OK, game.makeMove(c32, c33));
+        assertEquals(OK, game.makeMove(c32, c33));
+        assertEquals(ILLEGAL, game.makeMove(c33, c103));
+    }
+    
     // Helpers
     
     private static XiangqiCoordinate makeCoordinate(int rank, int file) {
