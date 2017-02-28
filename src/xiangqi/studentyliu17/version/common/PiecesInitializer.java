@@ -6,7 +6,9 @@ import xiangqi.common.XiangqiPiece;
 import java.util.HashMap;
 
 /**
- * Created by harryliu on 2/20/17.
+ * This class initialize xiangqi pieces
+ *
+ * @version Feb 28, 2017
  */
 public interface PiecesInitializer {
 	/**

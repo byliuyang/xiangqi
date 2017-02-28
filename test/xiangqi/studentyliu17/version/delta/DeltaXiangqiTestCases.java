@@ -6,15 +6,17 @@ import xiangqi.XiangqiGameFactory;
 import xiangqi.common.*;
 import xiangqi.common.XiangqiPieceType;
 import xiangqi.studentyliu17.TestCoordinate;
+import xiangqi.studentyliu17.version.common.*;
 
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.concurrent.CompletionException;
 
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertTrue;
-import static xiangqi.common.MoveResult.ILLEGAL;
-import static xiangqi.common.MoveResult.OK;
-import static xiangqi.common.MoveResult.RED_WINS;
+import static xiangqi.common.MoveResult.*;
 import static xiangqi.common.XiangqiColor.BLACK;
 import static xiangqi.common.XiangqiColor.RED;
 import static xiangqi.common.XiangqiPieceType.*;
@@ -75,20 +77,22 @@ public class DeltaXiangqiTestCases {
             c109 = makeCoordinate(10, 9);
     
     private static XiangqiPiece noPiece = makePiece(XiangqiPieceType.NONE, XiangqiColor.NONE),
-    redChariot = makePiece(CHARIOT, RED),
-    redHorse = makePiece(HORSE, RED),
-    redElephant = makePiece(ELEPHANT, RED),
-    redAdvior = makePiece(ADVISOR, RED),
-    redGeneral = makePiece(GENERAL, RED),
-    redCannon = makePiece(CANNON, RED),
-    redSoldier = makePiece(SOLDIER, RED),
-    blackChariot = makePiece(CHARIOT, BLACK),
-    blackHorse = makePiece(HORSE, BLACK),
-    blackElephant = makePiece(ELEPHANT, BLACK),
-    blackAdvisor = makePiece(ADVISOR, BLACK),
-    blackGeneral = makePiece(GENERAL, BLACK),
-    blackCannon = makePiece(CANNON, BLACK),
-    blackSoldier = makePiece(SOLDIER, BLACK);
+            redChariot = makePiece(CHARIOT, RED),
+            redHorse = makePiece(HORSE, RED),
+            redElephant = makePiece(ELEPHANT, RED),
+            redAdvior = makePiece(ADVISOR, RED),
+            redGeneral = makePiece(GENERAL, RED),
+            redCannon = makePiece(CANNON, RED),
+            redSoldier = makePiece(SOLDIER, RED),
+            blackChariot = makePiece(CHARIOT, BLACK),
+            blackHorse = makePiece(HORSE, BLACK),
+            blackElephant = makePiece(ELEPHANT, BLACK),
+            blackAdvisor = makePiece(ADVISOR, BLACK),
+            blackGeneral = makePiece(GENERAL, BLACK),
+            blackCannon = makePiece(CANNON, BLACK),
+            blackSoldier = makePiece(SOLDIER, BLACK);
+    
+    private static int DELTA_BOARD_WIDTH = 9, DELTA_BOARD_HEIGHT = 10;
     
     @Before
     public void setup() {
@@ -402,6 +406,30 @@ public class DeltaXiangqiTestCases {
         assertEquals(ILLEGAL, game.makeMove(c35, c36));
     }
     
+    @Test
+    public void blackInStalemate() {
+        Queue<XiangqiCoordinate> redCoordinates = new LinkedList<>(),
+                blackCoordinates = new LinkedList<>();
+        Queue<XiangqiPiece> redPieces = new LinkedList<>(),
+                blackPieces = new LinkedList<>();
+        
+        blackCoordinates.add(c106);
+        blackPieces.add(blackGeneral);
+        redCoordinates.add(c14);
+        redPieces.add(redGeneral);
+        redCoordinates.add(c76);
+        redPieces.add(redSoldier);
+        
+        XiangqiGame game = makeXiangqiGame(redCoordinates, redPieces, blackCoordinates, blackPieces);
+        
+        assertNotNull(game);
+        assertEquals(blackGeneral, game.getPieceAt(c14, BLACK));
+        assertEquals(redGeneral, game.getPieceAt(c14, RED));
+        assertEquals(redSoldier, game.getPieceAt(c76, RED));
+        
+        assertEquals(RED_WINS, game.makeMove(c76, c86));
+    }
+    
     // Helpers
     
     private static XiangqiCoordinate makeCoordinate(int rank, int file) {
@@ -410,5 +438,28 @@ public class DeltaXiangqiTestCases {
     
     private static XiangqiPiece makePiece(XiangqiPieceType pieceType, XiangqiColor color) {
         return new DeltaTestPiece(pieceType, color);
+    }
+    
+    private static XiangqiGame makeXiangqiGame(Queue<XiangqiCoordinate> redCoordinates,
+                                               Queue<XiangqiPiece> redPieces,
+                                               Queue<XiangqiCoordinate> blackCoordinates,
+                                               Queue<XiangqiPiece> blackPieces) {
+        PiecesInitializer initializer = new PiecesInitializer() {
+            @Override
+            public void setupRedPieces(HashMap<XiangqiCoordinate, XiangqiPiece> pieces) {
+                while (!redCoordinates.isEmpty()) pieces.put(redCoordinates.poll(), redPieces.poll());
+            }
+        
+            @Override
+            public void setupBlackPieces(HashMap<XiangqiCoordinate, XiangqiPiece> pieces) {
+                while (!blackCoordinates.isEmpty()) pieces.put(blackCoordinates.poll(), blackPieces.poll());
+            }
+        };
+        BoardState boardState = BoardState.makeBoardState(DELTA_BOARD_WIDTH, DELTA_BOARD_HEIGHT, initializer);
+        ValidatorSet validatorSet = new DeltaValidatorSet();
+        RuleSet ruleSet = new DeltaRuleSet();
+        XiangqiGameState gameState = XiangqiGameState.makeGameState(boardState);
+        validatorSet.initialize();
+        return XiangqiGameImpl.makeXiangqiGame(ruleSet, validatorSet, gameState);
     }
 }

@@ -41,4 +41,27 @@ public class TestCoordinate implements XiangqiCoordinate{
     public static XiangqiCoordinate makeCoordinate(int rank, int file) {
         return new TestCoordinate(rank, file);
     }
+    
+    /**
+     * Compare whether two coordinates are equal
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof XiangqiCoordinate)) return false;
+        XiangqiCoordinate coordinate = (XiangqiCoordinate) obj;
+        return coordinate.getRank() == rank && coordinate.getFile() == file;
+    }
+    
+    @Override
+    public String toString() {
+        return String.format("(%s, %s)", rank, file);
+    }
+    
+    /**
+     * Get the hash code of the coordinate
+     */
+    @Override
+    public int hashCode() {
+        return rank + file;
+    }
 }
