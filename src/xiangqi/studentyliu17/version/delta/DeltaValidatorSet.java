@@ -59,6 +59,12 @@ public class DeltaValidatorSet extends ValidatorSet {
                 validators.add(jumpOverNoPieceDiagonallyValidator);
                 validators.add(inGeneralPalaceValidator);
                 break;
+            case GENERAL:
+                validators.add(differentColorValidator);
+                validators.add(orthogonalValidator);
+                validators.add(adjacentValidator);
+                validators.add(inGeneralPalaceValidator);
+                break;
             default:
                 validators.add(sameLocationValidator);
                 validators.add(differentColorValidator);
