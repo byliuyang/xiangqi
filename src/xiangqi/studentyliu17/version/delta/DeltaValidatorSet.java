@@ -53,6 +53,12 @@ public class DeltaValidatorSet extends ValidatorSet {
                 validators.add(jumpOverNoPieceDiagonallyValidator);
                 validators.add(makeNotCrossingRiverValidator(DELTA_RANK_OF_RIVER));
                 break;
+            case ADVISOR:
+                validators.add(diagonalValidator);
+                validators.add(adjacentValidator);
+                validators.add(jumpOverNoPieceDiagonallyValidator);
+                validators.add(inGeneralPalaceValidator);
+                break;
             default:
                 validators.add(sameLocationValidator);
                 validators.add(differentColorValidator);
