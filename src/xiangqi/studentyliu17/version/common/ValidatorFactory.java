@@ -33,7 +33,8 @@ public class ValidatorFactory {
                                                                 currentPlayer) ->
             state.getPieceAt(c1, currentPlayer).getColor() != state.getPieceAt(c2, currentPlayer).getColor();
     
-    public static Validator jumpOverNoPieceValidator = (CoordinateImpl c1, CoordinateImpl c2,
+    public static Validator jumpOverNoPieceOrthogonallyValidator = (CoordinateImpl c1,
+                                                                    CoordinateImpl c2,
                                                          XiangqiGameState state, XiangqiColor
                                                                  currentPlayer) ->
             c2.isOrthogonal(c1) && state.numOrthogonalPiecesInBetween(c1, c2, currentPlayer) == 0;
@@ -55,9 +56,6 @@ public class ValidatorFactory {
                                                                          XiangqiColor player) ->
             c2.isDiagonal(c1) && state.numDiagonalPiecesInBetween(c1, c2, player) == 0;
     public static Validator inGeneralPalaceValidator = makeRangeValidator(1, 3,4,6);
-    public static Validator sameLocationValidator = (CoordinateImpl c1, CoordinateImpl c2,
-                                                     XiangqiGameState state, XiangqiColor player)
-            -> c2.equals(c1);
     
     public static Validator crossTwoGridValidator = (CoordinateImpl c1, CoordinateImpl c2,
                                                      XiangqiGameState state, XiangqiColor player)
@@ -65,6 +63,9 @@ public class ValidatorFactory {
     public static Validator noOrthogonalPieceInMoveDirectionValidator =
             (CoordinateImpl c1, CoordinateImpl c2,XiangqiGameState state, XiangqiColor player)
                     -> state.noPieceAt(c2.getOrthogonalCoordinateInMoveDirection(c1), player);
+    public static Validator jumpOverAtMostOnePieceOrthogonallyValidator =
+            (CoordinateImpl c1, CoordinateImpl c2,XiangqiGameState state, XiangqiColor player)
+                -> c2.isOrthogonal(c1) && state.numOrthogonalPiecesInBetween(c1, c2, player) <= 1;
     
     
     /**

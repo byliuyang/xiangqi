@@ -1,16 +1,14 @@
 package xiangqi.studentyliu17.version.beta;
 
-import static xiangqi.common.XiangqiGameVersion.BETA_XQ;
-import static xiangqi.common.XiangqiPieceType.*;
-import static xiangqi.studentyliu17.version.common.ValidatorFactory.*;
-
 import xiangqi.common.XiangqiPieceType;
 import xiangqi.studentyliu17.version.common.Validator;
-import xiangqi.studentyliu17.version.common.ValidatorFactory;
 import xiangqi.studentyliu17.version.common.ValidatorSet;
 
 import java.util.LinkedList;
 import java.util.List;
+
+import static xiangqi.common.XiangqiPieceType.*;
+import static xiangqi.studentyliu17.version.common.ValidatorFactory.*;
 
 /**
  * Validator set for beta xiangqi game
@@ -41,7 +39,7 @@ public class BetaValidatorSet extends ValidatorSet {
                 validators.add(differentColorValidator);
                 validators.add(differentCoordinateValidator);
                 validators.add(orthogonalValidator);
-                validators.add(jumpOverNoPieceValidator);
+                validators.add(jumpOverNoPieceOrthogonallyValidator);
                 break;
             case ADVISOR:
                 validators.add(differentColorValidator);

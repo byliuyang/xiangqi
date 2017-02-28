@@ -51,7 +51,7 @@ public class GammaValidatorSet extends ValidatorSet {
                 validators.add(differentCoordinateValidator);
                 validators.add(differentColorValidator);
                 validators.add(orthogonalValidator);
-                validators.add(jumpOverNoPieceValidator);
+                validators.add(jumpOverNoPieceOrthogonallyValidator);
                 break;
             case ELEPHANT:
                 validators.add(differentColorValidator);
