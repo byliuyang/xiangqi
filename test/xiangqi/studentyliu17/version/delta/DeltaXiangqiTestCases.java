@@ -423,6 +423,15 @@ public class DeltaXiangqiTestCases {
     }
     
     @Test
+    public void redMustProtectGeneralWhenInCheck() {
+        assertEquals(OK, game.makeMove(c15, c25));
+        assertEquals(OK, game.makeMove(c11, c21));
+        assertEquals(OK, game.makeMove(c25, c26));
+        assertEquals(OK, game.makeMove(c21, c24));
+        assertEquals(ILLEGAL, game.makeMove(c11, c21));
+    }
+    
+    @Test
     public void blackInStalemate() {
         Queue<XiangqiCoordinate> redCoordinates = new LinkedList<>(),
                 blackCoordinates = new LinkedList<>();
