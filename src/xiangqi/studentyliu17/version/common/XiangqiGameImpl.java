@@ -72,7 +72,7 @@ public class XiangqiGameImpl implements XiangqiGame {
         gameState.movePiece(source, destination, currentPlayer);
         gameState.nextTurn();
         
-        if (isGeneralCheckmated(otherPlayer)) {
+        if (isGeneralCheckmatedOrStalemated(otherPlayer)) {
             moveMessage = String.format(Message.PLAYER_WIN, gameState.getCurrentPlayer());
             return win(currentPlayer);
         } else if (ruleSet.isDraw(gameState)) {
@@ -185,11 +185,10 @@ public class XiangqiGameImpl implements XiangqiGame {
         return isValidMove(from, generalLocRespectToPiece, player);
     }
     
-    private boolean isGeneralCheckmated(XiangqiColor color) {
+    private boolean isGeneralCheckmatedOrStalemated(XiangqiColor color) {
         XiangqiCoordinate generalLocation = gameState.getGeneralLocation(color);
-        return generalLocation == null || (isGeneralUnderAttack(color, generalLocation) &&
-                                           !canGeneralMoveOutOfCheck(color, generalLocation) &&
-                                           !checkCanBeBlocked(color, generalLocation));
+        return generalLocation == null || (!canGeneralMoveOutOfCheck(color, generalLocation) &&
+                                          !checkCanBeBlocked(color, generalLocation));
     }
     
     private boolean isGeneralUnderAttack(XiangqiCoordinate source, XiangqiCoordinate destination,
