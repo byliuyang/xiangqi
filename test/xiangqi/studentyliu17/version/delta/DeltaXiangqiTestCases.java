@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 import xiangqi.XiangqiGameFactory;
 import xiangqi.common.*;
+import xiangqi.common.XiangqiPieceType;
 import xiangqi.studentyliu17.TestCoordinate;
 
 import java.util.concurrent.CompletionException;
@@ -13,6 +14,7 @@ import static junit.framework.TestCase.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static xiangqi.common.MoveResult.ILLEGAL;
 import static xiangqi.common.MoveResult.OK;
+import static xiangqi.common.MoveResult.RED_WINS;
 import static xiangqi.common.XiangqiColor.BLACK;
 import static xiangqi.common.XiangqiColor.RED;
 import static xiangqi.common.XiangqiPieceType.*;
@@ -358,6 +360,23 @@ public class DeltaXiangqiTestCases {
         assertEquals(OK, game.makeMove(c32, c33));
         assertEquals(OK, game.makeMove(c32, c33));
         assertEquals(ILLEGAL, game.makeMove(c33, c103));
+    }
+    
+    @Test
+    public void completeGameRedWin() {
+        assertEquals(OK, game.makeMove(c11, c21));
+        assertEquals(OK, game.makeMove(c32, c22));
+        assertEquals(OK, game.makeMove(c21, c22));
+        assertEquals(OK, game.makeMove(c15, c25));
+        assertEquals(OK, game.makeMove(c22, c23));
+        assertEquals(OK, game.makeMove(c25, c24));
+        assertEquals(OK, game.makeMove(c23, c24));
+        assertEquals(OK, game.makeMove(c19, c29));
+        assertEquals(OK, game.makeMove(c24, c25));
+        assertEquals(OK, game.makeMove(c29, c25));
+        assertEquals(OK, game.makeMove(c25, c24));
+        assertEquals(OK, game.makeMove(c38, c28));
+        assertEquals(RED_WINS, game.makeMove(c24, c26));
     }
     
     // Helpers
