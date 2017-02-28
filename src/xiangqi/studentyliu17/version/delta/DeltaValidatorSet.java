@@ -65,6 +65,12 @@ public class DeltaValidatorSet extends ValidatorSet {
                 validators.add(adjacentValidator);
                 validators.add(inGeneralPalaceValidator);
                 break;
+            case SOLDIER:
+                validators.add(differentColorValidator);
+                validators.add(orthogonalValidator);
+                validators.add(adjacentValidator);
+                validators.add(moveForwardCrossRiverHorizontalValidator(DELTA_RANK_OF_RIVER));
+                break;
             default:
                 validators.add(sameLocationValidator);
                 validators.add(differentColorValidator);
