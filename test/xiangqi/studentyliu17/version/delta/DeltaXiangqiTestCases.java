@@ -393,6 +393,15 @@ public class DeltaXiangqiTestCases {
         assertEquals(RED_WINS, game.makeMove(c24, c26));
     }
     
+    @Test
+    public void redInCheckByFlyingGeneral() {
+        assertEquals(OK, game.makeMove(c15, c25));
+        assertEquals(OK, game.makeMove(c14, c25));
+        assertEquals(OK, game.makeMove(c25, c35));
+        assertEquals(OK, game.makeMove(c15, c14));
+        assertEquals(ILLEGAL, game.makeMove(c35, c36));
+    }
+    
     // Helpers
     
     private static XiangqiCoordinate makeCoordinate(int rank, int file) {
