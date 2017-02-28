@@ -95,7 +95,7 @@ public class GammaXiangqiTestCases {
         assertPiece(10, 5, XiangqiColor.RED, XiangqiPieceType.GENERAL, XiangqiColor.BLACK);
     }
     
-    @Test(expected = CompletionException.class) // 12
+    @Test // 12
     public void makeMoveFromInvalidLocation() {
         assertEquals(MoveResult.ILLEGAL, game.makeMove(makeCoordinate(0, 1), makeCoordinate(1, 1)));
         assertTrue(game.getMoveMessage().length() > 5);
@@ -492,7 +492,7 @@ public class GammaXiangqiTestCases {
     
     @Test
     public void gameDraw() {
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 12; i++) {
             assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(2, 1)));
             assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
             assertPiece(2, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
@@ -514,17 +514,9 @@ public class GammaXiangqiTestCases {
         assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
         assertPiece(2, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
         
-        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(1, 1), makeCoordinate(2, 1)));
+        assertEquals(MoveResult.DRAW, game.makeMove(makeCoordinate(1, 1), makeCoordinate(2, 1)));
         assertPiece(1, 1, XiangqiColor.BLACK, XiangqiPieceType.NONE, XiangqiColor.NONE);
         assertPiece(2, 1, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
-        
-        assertEquals(MoveResult.OK, game.makeMove(makeCoordinate(2, 1), makeCoordinate(1, 1)));
-        assertPiece(2, 1, XiangqiColor.RED, XiangqiPieceType.NONE, XiangqiColor.NONE);
-        assertPiece(1, 1, XiangqiColor.RED, XiangqiPieceType.CHARIOT, XiangqiColor.RED);
-        
-        assertEquals(MoveResult.DRAW, game.makeMove(makeCoordinate(2, 1), makeCoordinate(1, 1)));
-        assertPiece(2, 1, XiangqiColor.BLACK, XiangqiPieceType.NONE, XiangqiColor.NONE);
-        assertPiece(1, 1, XiangqiColor.BLACK, XiangqiPieceType.CHARIOT, XiangqiColor.BLACK);
     }
     
     @Test
