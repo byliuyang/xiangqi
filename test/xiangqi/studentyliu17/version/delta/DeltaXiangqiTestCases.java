@@ -334,6 +334,11 @@ public class DeltaXiangqiTestCases {
     }
     
     @Test
+    public void tryToMoveSoldierBackward() {
+        assertEquals(ILLEGAL, game.makeMove(c41, c31));
+    }
+    
+    @Test
     public void soldierMoveHorizontallyCrossedRiver() {
         assertEquals(OK, game.makeMove(c41, c51));
         assertEquals(OK, game.makeMove(c41, c51));
