@@ -85,7 +85,7 @@ public class DeltaXiangqiTestCases {
     blackChariot = makePiece(CHARIOT, BLACK),
     blackHorse = makePiece(HORSE, BLACK),
     blackElephant = makePiece(ELEPHANT, BLACK),
-    blackAdvior = makePiece(ADVISOR, BLACK),
+    blackAdvisor = makePiece(ADVISOR, BLACK),
     blackGeneral = makePiece(GENERAL, BLACK),
     blackCannon = makePiece(CANNON, BLACK),
     blackSoldier = makePiece(SOLDIER, BLACK);
@@ -127,9 +127,9 @@ public class DeltaXiangqiTestCases {
         assertEquals(blackChariot, game.getPieceAt(c11, BLACK));
         assertEquals(blackHorse, game.getPieceAt(c12, BLACK));
         assertEquals(blackElephant, game.getPieceAt(c13, BLACK));
-        assertEquals(blackAdvior, game.getPieceAt(c14, BLACK));
+        assertEquals(blackAdvisor, game.getPieceAt(c14, BLACK));
         assertEquals(blackGeneral, game.getPieceAt(c15, BLACK));
-        assertEquals(blackAdvior, game.getPieceAt(c16, BLACK));
+        assertEquals(blackAdvisor, game.getPieceAt(c16, BLACK));
         assertEquals(blackElephant, game.getPieceAt(c17, BLACK));
         assertEquals(blackHorse, game.getPieceAt(c18, BLACK));
         assertEquals(blackChariot, game.getPieceAt(c19, BLACK));
