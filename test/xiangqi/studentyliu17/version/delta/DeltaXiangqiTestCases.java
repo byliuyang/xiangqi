@@ -455,6 +455,22 @@ public class DeltaXiangqiTestCases {
         assertEquals(RED_WINS, game.makeMove(c76, c86));
     }
     
+    @Test
+    public void redUnderPerpetualAttack() {
+        assertEquals(OK, game.makeMove(c15, c25));
+        assertEquals(OK, game.makeMove(c11, c21));
+        assertEquals(OK, game.makeMove(c25, c26));
+        assertEquals(OK, game.makeMove(c21, c24));
+        assertEquals(OK, game.makeMove(c26, c25));
+        assertEquals(OK, game.makeMove(c24, c21));
+        assertEquals(OK, game.makeMove(c25, c26));
+        assertEquals(OK, game.makeMove(c21, c24));
+        assertEquals(OK, game.makeMove(c26, c25));
+        assertEquals(OK, game.makeMove(c24, c21));
+        assertEquals(OK, game.makeMove(c25, c26));
+        assertEquals(RED_WINS, game.makeMove(c21, c24));
+    }
+    
     // Helpers
     
     private static XiangqiCoordinate makeCoordinate(int rank, int file) {
@@ -483,7 +499,7 @@ public class DeltaXiangqiTestCases {
         BoardState boardState = BoardState.makeBoardState(DELTA_BOARD_WIDTH, DELTA_BOARD_HEIGHT, initializer);
         ValidatorSet validatorSet = new DeltaValidatorSet();
         RuleSet ruleSet = new DeltaRuleSet();
-        XiangqiGameState gameState = XiangqiGameState.makeGameState(boardState);
+        XiangqiGameState gameState = XiangqiGameState.makeGameState(boardState, ruleSet);
         validatorSet.initialize();
         return XiangqiGameImpl.makeXiangqiGame(ruleSet, validatorSet, gameState);
     }
