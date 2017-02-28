@@ -334,6 +334,7 @@ public class DeltaXiangqiTestCases {
     @Test
     public void cannonValidMoveOrthogonally() {
         assertEquals(OK, game.makeMove(c32, c31));
+        assertEquals(OK, game.makeMove(c32, c42));
     }
     
     // Helpers
