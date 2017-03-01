@@ -16,6 +16,9 @@ import static xiangqi.studentyliu17.version.common.ValidatorFactory.*;
  * @version Feb 20, 2017
  */
 public class BetaValidatorSet extends ValidatorSet {
+    /**
+     * This method create and put pieces on the board
+     */
     @Override
     public void setupValidators() {
         addValidators(CHARIOT, makeBetaValidators(CHARIOT));

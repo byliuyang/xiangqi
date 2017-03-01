@@ -5,6 +5,8 @@ import xiangqi.studentyliu17.version.common.XiangqiGameState;
 
 /**
  * Rule set of delta xiangqi game
+ *
+ * @version Feb 28, 2017
  */
 public class DeltaRuleSet implements RuleSet {
     /**
@@ -19,13 +21,18 @@ public class DeltaRuleSet implements RuleSet {
         return false;
     }
     
+    /**
+     * Check whether game allow perpetual check
+     *
+     * @return true if no perpetual check allowed, false otherwise
+     */
     @Override
-    public boolean allowPerpetualCheck() {
-        return true;
-    }
+    public boolean noPerpetualCheck() { return true; }
     
-    @Override
-    public int numRepetitions() {
-        return 3;
-    }
+    /**
+     * Get the maximum number of repetitions of perpetual check allowed
+     *
+     * @return the maximum number of repetitions of perpetual check allowed
+     */
+    public int numRepetitions() { return 3; }
 }

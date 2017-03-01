@@ -11,6 +11,12 @@ public class CoordinateImpl implements XiangqiCoordinate {
     private int rank; // The rank of coordinate
     private int file; // The file of coordinate
     
+    /**
+     * The constructor of CoordinateImpl
+     *
+     * @param rank The rank
+     * @param file The file
+     */
     private CoordinateImpl(int rank, int file) {
         this.rank = rank;
         this.file = file;
@@ -28,7 +34,16 @@ public class CoordinateImpl implements XiangqiCoordinate {
         return new CoordinateImpl(rank, file);
     }
     
-    public boolean isRectangularDiagonal(CoordinateImpl coordinate, int width, int height) {
+    /**
+     * Check whether the coordinates from a rectangle with given width and height
+     *
+     * @param coordinate The other coordinate
+     * @param width The width of expected rectangle
+     * @param height The height of expected rectangle
+     *
+     * @return true if coordinates from a rectangle with given width and height, false otherwise
+     */
+    public boolean isVertexOfRectangle(CoordinateImpl coordinate, int width, int height) {
         int otherRank = coordinate.getRank();
         int otherFile = coordinate.getFile();
         int rankDiff = Math.abs(rank - otherRank);
@@ -39,9 +54,11 @@ public class CoordinateImpl implements XiangqiCoordinate {
     }
     
     /**
-     * @param coordinate
+     * Get the orthogonal coordinate in front of source coordinate in direction of movement
      *
-     * @return
+     * @param coordinate The destination coordinate
+     *
+     * @return the orthogonal coordinate in front of source coordinate in direction of movement
      */
     public CoordinateImpl getOrthogonalCoordinateInMoveDirection(CoordinateImpl coordinate) {
         int otherRank = coordinate.getRank();
@@ -168,11 +185,6 @@ public class CoordinateImpl implements XiangqiCoordinate {
         if (!(obj instanceof XiangqiCoordinate)) return false;
         XiangqiCoordinate coordinate = (XiangqiCoordinate) obj;
         return coordinate.getRank() == rank && coordinate.getFile() == file;
-    }
-    
-    @Override
-    public String toString() {
-        return String.format("(%s, %s)", rank, file);
     }
     
     /**

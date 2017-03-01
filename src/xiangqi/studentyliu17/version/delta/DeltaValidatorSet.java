@@ -31,6 +31,13 @@ public class DeltaValidatorSet extends ValidatorSet {
         addValidators(SOLDIER, makeDeltaValidators(SOLDIER));
     }
     
+    /**
+     * Creation method for delta xiangqi game validators
+     *
+     * @param pieceType The XiangqiPieceType to generate validator for
+     *
+     * @return list of validators for the given XiangqiPieceType
+     */
     private List<Validator> makeDeltaValidators(XiangqiPieceType pieceType) {
         List<Validator> validators = new LinkedList<>();
         switch (pieceType){

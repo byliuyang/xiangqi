@@ -25,6 +25,12 @@ public class XiangqiPieceImpl implements XiangqiPiece {
         return new XiangqiPieceImpl(pieceType, color);
     }
     
+    /**
+     * Constructor of XiangqiPieceImpl
+     *
+     * @param pieceType The type of the piece
+     * @param color The color of the piece
+     */
     private XiangqiPieceImpl(XiangqiPieceType pieceType, XiangqiColor color) {
         this.color = color;
         this.pieceType = pieceType;
@@ -44,10 +50,5 @@ public class XiangqiPieceImpl implements XiangqiPiece {
     @Override
     public XiangqiPieceType getPieceType() {
         return this.pieceType;
-    }
-    
-    @Override
-    public String toString() {
-        return String.format("%s %s", color, pieceType);
     }
 }

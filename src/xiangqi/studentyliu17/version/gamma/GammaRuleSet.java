@@ -21,12 +21,19 @@ public class GammaRuleSet implements RuleSet {
         return gameState.getTurns() >= 25;
     }
     
-    public boolean allowPerpetualCheck() {return false;}
-    
+    /**
+     * Check whether game allow perpetual check
+     *
+     * @return true if no perpetual check allowed, false otherwise
+     */
     @Override
-    public int numRepetitions() {
-        return 0;
-    }
+    public boolean noPerpetualCheck() { return false; }
     
+    /**
+     * Get the maximum number of repetitions of perpetual check allowed
+     *
+     * @return the maximum number of repetitions of perpetual check allowed
+     */
+    public int numRepetitions() { return 0; }
     
 }

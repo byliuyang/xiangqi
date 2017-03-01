@@ -18,6 +18,11 @@ import static xiangqi.common.XiangqiPieceType.*;
  * @version Feb 20, 2017
  */
 public class BetaPiecesInitializer implements PiecesInitializer {
+    /**
+     * This method create player red's pieces and put them on to board
+     *
+     * @param pieces The board
+     */
     @Override
     public void setupRedPieces(HashMap<XiangqiCoordinate, XiangqiPiece> pieces) {
         
@@ -29,6 +34,11 @@ public class BetaPiecesInitializer implements PiecesInitializer {
         pieces.put(CoordinateImpl.makeCoordinate(2, 3), XiangqiPieceImpl.makePiece(SOLDIER, RED));
     }
     
+    /**
+     * This method create player black's pieces and put them on to board
+     *
+     * @param pieces The board
+     */
     @Override
     public void setupBlackPieces(HashMap<XiangqiCoordinate, XiangqiPiece> pieces) {
         pieces.put(CoordinateImpl.makeCoordinate(5, 1), XiangqiPieceImpl.makePiece(CHARIOT, BLACK));

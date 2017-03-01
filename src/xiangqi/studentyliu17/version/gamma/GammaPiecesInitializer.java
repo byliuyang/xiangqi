@@ -54,6 +54,12 @@ public class GammaPiecesInitializer implements PiecesInitializer {
         pieces.put(CoordinateImpl.makeCoordinate(10, 5), XiangqiPieceImpl.makePiece(GENERAL, BLACK));
     }
     
+    /**
+     * This method create soldiers for target player
+     *
+     * @param pieces The board
+     * @param color The player
+     */
     private void setupSoldiers(HashMap<XiangqiCoordinate, XiangqiPiece> pieces, XiangqiColor
             color) {
         for (int i = 1; i <= 10; i += 2)

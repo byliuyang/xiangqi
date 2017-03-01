@@ -15,6 +15,17 @@ public interface RuleSet {
      */
     boolean isDraw(XiangqiGameState gameState);
     
-    boolean allowPerpetualCheck();
+    /**
+     * Check whether game allow perpetual check
+     *
+     * @return true if no perpetual check allowed, false otherwise
+     */
+    boolean noPerpetualCheck();
+    
+    /**
+     * Get the maximum number of repetitions of perpetual check allowed
+     *
+     * @return the maximum number of repetitions of perpetual check allowed
+     */
     int numRepetitions();
 }

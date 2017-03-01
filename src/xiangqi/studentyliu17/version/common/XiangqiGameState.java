@@ -16,12 +16,13 @@ import static xiangqi.common.XiangqiColor.BLACK;
  * @version Jan 28, 2017
  */
 public class XiangqiGameState {
-    private Stack<BoardState> boardStates;
-    private BoardState        boardState; // Keep the board state
+    private Stack<BoardState> boardStates; // Keep track of all the board states
+    private BoardState        boardState; // Keep the current board state
     private XiangqiColor      currentPlayer; // Keep track of the current player
     private int               turns; // Keep track of the number of turns passed
-    private RuleSet ruleSet;
-    private static final int NUM_MOVES_BETWEEN_CHECKS = 4;
+    private RuleSet ruleSet; // Keep track of the rule set
+    private static final int NUM_MOVES_BETWEEN_CHECKS = 4; // The number of move between two
+    // consecutive checks
     
     /**
      * Constructor for XiangqiGameState
@@ -46,6 +47,9 @@ public class XiangqiGameState {
         return gameState;
     }
     
+    /**
+     * Initialize the game state
+     */
     private void initialize() {
         currentPlayer = XiangqiColor.RED;
         turns = 0;
@@ -189,6 +193,14 @@ public class XiangqiGameState {
         return boardState.numDiagonalPiecesInBetween(source, dest, player);
     }
     
+    /**
+     * Check whether there is no piece at the given coordinate
+     *
+     * @param coordinate The given coordinate
+     * @param aspect The player's perspective of the coordinate
+     *
+     * @return true if there is no piece at the given coordinate, false otherwise
+     */
     public boolean noPieceAt(CoordinateImpl coordinate, XiangqiColor aspect) {
         return boardState.noPieceAt(coordinate, aspect);
     }
@@ -204,12 +216,15 @@ public class XiangqiGameState {
         return boardState.isOnBoard(coordinate);
     }
     
+    /**
+     * Check whether the current player is doing perpetual check to the opponent
+     *
+     * @return true if the current player is doing perpetual check to the opponent, false otherwise
+     */
     public boolean isPerpetualCheck() {
         int numRepetitions = ruleSet.numRepetitions() - 1;
         if(boardStates.size() < numRepetitions * NUM_MOVES_BETWEEN_CHECKS) return false;
-        
         boolean sameBoardState = true;
-        
         Stack<BoardState> tempBoardStates = new Stack<>();
         for (int i = 0; i < numRepetitions; i++){
             for(int j = 0; j < NUM_MOVES_BETWEEN_CHECKS; j++)
@@ -217,10 +232,8 @@ public class XiangqiGameState {
             if(!tempBoardStates.peek().hasSameConfiguration(boardState))
                 sameBoardState = false;
         }
-        
         while (!tempBoardStates.isEmpty())
             boardStates.push(tempBoardStates.pop());
-        
         return sameBoardState;
     }
 }

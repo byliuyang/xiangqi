@@ -8,8 +8,12 @@ import java.util.*;
  * This class keep list of piece validators
  */
 public abstract class ValidatorSet{
-    private Hashtable<XiangqiPieceType, List<Validator>> validatorSet;
+    private Hashtable<XiangqiPieceType, List<Validator>> validatorSet; // Keep set of validators
+    // for xiangqi pieces
     
+    /**
+     * Initialize ValidatorSet
+     */
     public void initialize() {
         validatorSet = new Hashtable<>();
         setupValidators();
@@ -31,13 +35,6 @@ public abstract class ValidatorSet{
      *
      * @return <tt>true</tt> if this map contains a mapping for the specified
      * key
-     *
-     * @throws ClassCastException   if the key is of an inappropriate type for
-     *                              this map
-     *                              (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
-     * @throws NullPointerException if the specified key is null and this map
-     *                              does not permit null keys
-     *                              (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
      */
     public boolean containsKey(Object key) {
         return validatorSet.containsKey(key);
@@ -62,13 +59,6 @@ public abstract class ValidatorSet{
      *
      * @return the value to which the specified key is mapped, or
      * {@code null} if this map contains no mapping for the key
-     *
-     * @throws ClassCastException   if the key is of an inappropriate type for
-     *                              this map
-     *                              (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
-     * @throws NullPointerException if the specified key is null and this map
-     *                              does not permit null keys
-     *                              (<a href="{@docRoot}/java/util/Collection.html#optional-restrictions">optional</a>)
      */
     public List<Validator> get(Object key) {
         return validatorSet.get(key);
@@ -90,20 +80,17 @@ public abstract class ValidatorSet{
      * (A <tt>null</tt> return can also indicate that the map
      * previously associated <tt>null</tt> with <tt>key</tt>,
      * if the implementation supports <tt>null</tt> values.)
-     *
-     * @throws UnsupportedOperationException if the <tt>put</tt> operation
-     *                                       is not supported by this map
-     * @throws ClassCastException            if the class of the specified key or value
-     *                                       prevents it from being stored in this map
-     * @throws NullPointerException          if the specified key or value is null
-     *                                       and this map does not permit null keys or values
-     * @throws IllegalArgumentException      if some property of the specified key
-     *                                       or value prevents it from being stored in this map
      */
     public List<Validator> put(XiangqiPieceType key, List<Validator> value) {
         return validatorSet.put(key, value);
     }
     
+    /**
+     * Add a collection of validators for a xiangqi piece type
+     *
+     * @param pieceType The piece validators belong to
+     * @param validators The validators of the given xiangqi piece type
+     */
     public void addValidators(XiangqiPieceType pieceType, List<Validator> validators) {
         put(pieceType, validators);
     }

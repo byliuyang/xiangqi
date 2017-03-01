@@ -21,13 +21,18 @@ public class BetaRuleSet implements RuleSet {
         return gameState.getTurns() >= 10;
     }
     
+    /**
+     * Check whether game allow perpetual check
+     *
+     * @return true if no perpetual check allowed, false otherwise
+     */
     @Override
-    public boolean allowPerpetualCheck() {
-        return false;
-    }
+    public boolean noPerpetualCheck() { return false; }
     
-    @Override
-    public int numRepetitions() {
-        return 0;
-    }
+    /**
+     * Get the maximum number of repetitions of perpetual check allowed
+     *
+     * @return the maximum number of repetitions of perpetual check allowed
+     */
+    public int numRepetitions() { return 0; }
 }

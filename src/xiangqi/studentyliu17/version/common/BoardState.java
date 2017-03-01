@@ -31,7 +31,13 @@ public class BoardState {
     // possible xiangqi coordinates
     private PiecesInitializer initializer; // Initializer for setting up xiangqi pieces on the board
     
-    
+    /**
+     * Private constructor of BoardState
+     *
+     * @param boardWidth The width of the board
+     * @param boardHeight The height of the board
+     * @param initializer The xiangqi piece initializer
+     */
     private BoardState(int boardWidth, int boardHeight, PiecesInitializer
                        initializer) {
         this.boardWidth = boardWidth;
@@ -39,6 +45,15 @@ public class BoardState {
         this.initializer = initializer;
     }
     
+    /**
+     * Creation method for BoardState
+     *
+     * @param boardWidth The width of the board
+     * @param boardHeight The height of the board
+     * @param initializer The xiangqi piece initializer
+     *
+     * @return an instance of BoardState
+     */
     public static BoardState makeBoardState(int boardWidth, int boardHeight, PiecesInitializer
             initializer) {
         BoardState boardState = new BoardState(boardWidth, boardHeight,  initializer);
@@ -46,6 +61,13 @@ public class BoardState {
         return boardState;
     }
     
+    /**
+     * Copy pieces configuration of board
+     *
+     * @param boardState The BoardState to copy
+     *
+     * @return a new board having the same piece configuration as the source BoardState
+     */
     public static BoardState copyBoardState(BoardState boardState) {
         BoardState newBoardState = new BoardState(boardState.boardWidth, boardState.boardHeight,
                                                   boardState.initializer);
@@ -73,6 +95,9 @@ public class BoardState {
                 .makeCoordinate(boardHeight + 1 - rank, boardWidth + 1 - file);
     }
     
+    /**
+     * Initialize the board and put xiangqi pieces onto it
+     */
     private void initialize() {
         pieces = new HashMap<>();
         setupPieces();
@@ -175,6 +200,14 @@ public class BoardState {
         return numInBetween;
     }
     
+    /**
+     * Convert rank from player's perspective to board's perspective
+     *
+     * @param where The source coordinate
+     * @param aspect The player's perspective
+     *
+     * @return rank in board's perspective
+     */
     private int getRankRespectToRed(XiangqiCoordinate where, XiangqiColor aspect) {
         int rank = where.getRank();
         if (aspect == RED) return rank;
@@ -279,6 +312,13 @@ public class BoardState {
         return rank > 0 && rank <= boardHeight && file > 0 && file <= boardWidth;
     }
     
+    /**
+     * Check whether a board has same piece configuration as this BoardState
+     *
+     * @param boardState The board to compare with
+     *
+     * @return true if a board has same piece configuration as BoardState, false otherwise
+     */
     public boolean hasSameConfiguration(BoardState boardState) {
         if (pieces.size() != boardState.pieces.size()) return false;
         for(Map.Entry<XiangqiCoordinate, XiangqiPiece> entry: pieces.entrySet())

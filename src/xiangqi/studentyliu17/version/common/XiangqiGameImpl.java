@@ -17,11 +17,17 @@ import static xiangqi.studentyliu17.version.common.BoardState.DEFAULT_COORD_COLO
  */
 public class XiangqiGameImpl implements XiangqiGame {
     private XiangqiGameState gameState; // Keep the game state
-    private ValidatorSet     validatorSet; // Keep collection of
-    // validators
+    private ValidatorSet     validatorSet; // Keep collection of validators
     private String           moveMessage; // Keep current move message
     private RuleSet          ruleSet; // Keep the rule set
     
+    /**
+     * Constructor of XiangqiGameImpl
+     *
+     * @param ruleSet The rule set of the game
+     * @param validatorSet The validators of the game
+     * @param gameState The state of the game
+     */
     private XiangqiGameImpl(RuleSet ruleSet, ValidatorSet validatorSet, XiangqiGameState
             gameState) {
         this.validatorSet = validatorSet;
@@ -29,6 +35,15 @@ public class XiangqiGameImpl implements XiangqiGame {
         this.gameState = gameState;
     }
     
+    /**
+     * Creation method for XiangqiGameImpl
+     *
+     * @param ruleSet The rule set of the game
+     * @param validatorSet The validators of the game
+     * @param gameState The state of the game
+     *
+     * @return a instance of XiangqiGame
+     */
     public static XiangqiGameImpl makeXiangqiGame(RuleSet ruleSet, ValidatorSet validatorSet,
                                                   XiangqiGameState gameState) {
         XiangqiGameImpl game = new XiangqiGameImpl(ruleSet, validatorSet, gameState);
@@ -58,31 +73,26 @@ public class XiangqiGameImpl implements XiangqiGame {
             moveMessage = Message.INVALID_MOVE;
             return MoveResult.ILLEGAL;
         }
-        
         XiangqiColor otherPlayer = currentPlayer == RED ? BLACK : RED;
         XiangqiCoordinate currentPlayerGeneralLoc = gameState.getGeneralLocation(currentPlayer);
-    
         if (isGeneralUnderAttack(source, destination, currentPlayerGeneralLoc.equals(source) ?
-                                                      destination : currentPlayerGeneralLoc,
-                                 currentPlayer, currentPlayer)) {
+                                                      destination :
+                                                      currentPlayerGeneralLoc, currentPlayer, currentPlayer)) {
             moveMessage = Message.GENERAL_IN_CHECK;
             return MoveResult.ILLEGAL;
         }
-    
         gameState.movePiece(source, destination, currentPlayer);
         gameState.nextTurn();
-        
         if (isGeneralCheckmatedOrStalemated(otherPlayer)) {
             moveMessage = String.format(Message.PLAYER_WIN, currentPlayer);
             return win(currentPlayer);
         } else if (ruleSet.isDraw(gameState)) {
             moveMessage = Message.GAME_IS_DRAW;
             return MoveResult.DRAW;
-        } else if(ruleSet.allowPerpetualCheck() &&
+        } else if(ruleSet.noPerpetualCheck() &&
                   isGeneralUnderAttack(otherPlayer, gameState.getGeneralLocation(otherPlayer)) &&
                   gameState.isPerpetualCheck())
             return win(otherPlayer);
-        
         gameState.switchPlayer();
         moveMessage = null;
         return MoveResult.OK;
@@ -128,14 +138,11 @@ public class XiangqiGameImpl implements XiangqiGame {
                                                               xiangqiSource.getFile());
         CoordinateImpl dest = CoordinateImpl.makeCoordinate(xiangqiDest.getRank(), xiangqiDest
                 .getFile());
-        
         XiangqiPiece sourcePiece = getPieceAt(source, player);
         if (sourcePiece.getColor() != player) return false;
         XiangqiPieceType sourcePieceType = sourcePiece.getPieceType();
-        
         if (!validatorSet.containsKey(sourcePieceType)) return true;
         List<Validator> pieceValidators = validatorSet.get(sourcePieceType);
-        
         return pieceValidators.stream().allMatch((Validator validator) -> validator.validate
                 (source, dest, gameState, player));
     }
@@ -180,6 +187,16 @@ public class XiangqiGameImpl implements XiangqiGame {
         return false;
     }
     
+    /**
+     * Check whether the given opponent piece can attack the general of the given player
+     *
+     * @param from The the coordinate of the opponent's piece
+     * @param to The the coordinate of general
+     * @param piece The opponent's piece
+     * @param generalColor The given player
+     *
+     * @return true if the general of given player is under attack after the move
+     */
     private boolean canAttack(XiangqiCoordinate from, XiangqiCoordinate to, XiangqiPiece piece,
                               XiangqiColor generalColor) {
         XiangqiColor player = piece.getColor();
@@ -188,12 +205,30 @@ public class XiangqiGameImpl implements XiangqiGame {
         return isValidMove(from, generalLocRespectToPiece, player);
     }
     
+    /**
+     * Check whether the general of given is checkmated or statlemated
+     * @param color The given player
+     *
+     * @return true if the general of given is checkmated or statlemated, false otherwise
+     */
     private boolean isGeneralCheckmatedOrStalemated(XiangqiColor color) {
         XiangqiCoordinate generalLocation = gameState.getGeneralLocation(color);
         return generalLocation == null || (!canGeneralMoveOutOfCheck(color, generalLocation) &&
                                           !checkCanBeBlocked(color, generalLocation));
     }
     
+    /**
+     * Check whether the general of given player is still under attack after making a move
+     *
+     * @param source The source coordinate of the move
+     * @param destination The destination coordinate of the move
+     * @param generalLocation The location of the general
+     * @param player The opponent
+     * @param generalColor The given player
+     *
+     * @return true if the general of given player is still under attack after making a move,
+     * false otherwise
+     */
     private boolean isGeneralUnderAttack(XiangqiCoordinate source, XiangqiCoordinate destination,
                                          XiangqiCoordinate generalLocation, XiangqiColor player,
                                          XiangqiColor generalColor) {
@@ -206,6 +241,14 @@ public class XiangqiGameImpl implements XiangqiGame {
         return isUnderAttack;
     }
     
+    /**
+     * Check the whether the general can move out of check
+     *
+     * @param color The owner of the general
+     * @param generalLocation The coordinate of the general
+     *
+     * @return true if the general can move out of check, false otherwise
+     */
     private boolean canGeneralMoveOutOfCheck(XiangqiColor color, XiangqiCoordinate
             generalLocation) {
         for (XiangqiCoordinate coordinate : gameState.allPossibleCoordinates()) {
@@ -215,10 +258,19 @@ public class XiangqiGameImpl implements XiangqiGame {
                     return true;
             }
         }
-        
         return false;
     }
     
+    /**
+     * Check whether the check can be blocked by the given piece
+     * @param piece The player's piece
+     * @param pieceLocation The coordinate of the piece
+     * @param player The player
+     * @param generalColor The color of general
+     * @param generalLocation The coordinate of the general
+     *
+     * @return true if the check can be blocked by the given piece, false otherwise
+     */
     private boolean checkCanBeBlockedByPiece(XiangqiPiece piece, XiangqiCoordinate pieceLocation,
                                              XiangqiColor player, XiangqiColor generalColor,
                                              XiangqiCoordinate generalLocation) {
@@ -235,6 +287,13 @@ public class XiangqiGameImpl implements XiangqiGame {
         return false;
     }
     
+    /**
+     * Check whether the check can be block be any of the player's pieces
+     * @param color The player
+     * @param generalLocation The coordinate of general
+     *
+     * @return true if the check can be block be any of the player's pieces, false otherwise
+     */
     private boolean checkCanBeBlocked(XiangqiColor color, XiangqiCoordinate generalLocation) {
         for (Map.Entry<XiangqiCoordinate, XiangqiPiece> entry : gameState.coordinatesAndPieces()) {
             XiangqiPiece piece = entry.getValue();
@@ -249,7 +308,6 @@ public class XiangqiGameImpl implements XiangqiGame {
                     return true;
             }
         }
-        
         return false;
     }
 }
